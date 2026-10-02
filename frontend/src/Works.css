@@ -1,0 +1,67 @@
+.works-section {
+  font-family: 'Inter', sans-serif;
+}
+
+.works-section .project-slide {
+  will-change: transform;
+}
+
+.works-section .intro-right {
+  /* Using the same styles as Introduce for consistency */
+  width: 320px;
+  background-color: #f8f9fa;
+  color: #111;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 1px solid rgba(0,0,0,0.05);
+  flex-shrink: 0;
+}
+
+/* Because the works section is dark, maybe we want the sidebar dark? 
+   The original screenshot has a dark sidebar! Let's update it specifically for works */
+.works-section .intro-right {
+  background-color: #111111;
+  color: #ffffff;
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+
+.works-section .name-cream {
+  color: #ffffff;
+}
+
+.works-section .right-subtitle {
+  color: #999;
+}
+
+.works-section .icon-box {
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+.works-section .bio-text, .works-section .location-info {
+  color: #bbb;
+}
+
+.works-section .right-nav-menu ul li {
+  color: #bbb;
+}
+
+.works-section .right-nav-menu ul li:hover {
+  color: #fff;
+}
+
+.works-section .portrait-label {
+  background: #111;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.works-section .email-box {
+  background: rgba(255,255,255,0.05);
+}
+
+.works-section .email-icon {
+  background: rgba(255,255,255,0.1);
+}

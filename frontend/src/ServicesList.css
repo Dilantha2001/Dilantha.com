@@ -1,0 +1,129 @@
+.services-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff; /* Default background of the area */
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.service-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 60px 40px 60px 100px;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  background-color: transparent;
+  color: #111111;
+  cursor: pointer;
+}
+
+.service-row.active {
+  background-color: #df1b3f; /* Use brand red for active state */
+  color: #ffffff;
+}
+
+.service-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.service-title {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(32px, 4vw, 56px);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin: 0;
+  flex: 1;
+}
+
+.service-num {
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  color: #df1b3f;
+}
+
+.service-row.active .service-num {
+  color: #ffffff;
+}
+
+.service-desc {
+  flex: 1;
+  max-width: 500px;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.4;
+  transition: opacity 0.4s ease;
+}
+
+.service-row.active .service-desc {
+  opacity: 0.95;
+}
+
+/* Floating Image Wrapper (handles entry transition) */
+.service-image-wrapper {
+  position: absolute;
+  left: 50%; /* Center horizontally */
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 250px; /* Slightly larger since it's centered */
+  height: 300px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 5;
+}
+
+.service-image-wrapper.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  /* Fast linear transition for smooth mouse following while active */
+  transition: opacity 0.4s ease, transform 0.1s linear;
+}
+
+/* The actual frame that sways */
+.service-image-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 10px 20px 30px rgba(0,0,0,0.2);
+}
+
+.service-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes floatSway {
+  0% { transform: rotate(-4deg) translateX(-8px) translateY(-5px); }
+  50% { transform: rotate(4deg) translateX(8px) translateY(5px); }
+  100% { transform: rotate(-4deg) translateX(-8px) translateY(-5px); }
+}
+
+.service-row.active .service-image-frame {
+  animation: floatSway 3s ease-in-out infinite;
+}
+
+@media (max-width: 1024px) {
+  .service-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .service-row {
+    padding: 40px 20px 40px 60px;
+  }
+  .service-image-wrapper {
+    left: -10px;
+    width: 120px;
+    height: 150px;
+  }
+}
