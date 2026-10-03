@@ -64,6 +64,7 @@
   gap: 30px;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 .hero-main-nav li {
@@ -72,6 +73,46 @@
   font-weight: 700;
   letter-spacing: 2px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.nav-request-btn {
+  background: white;
+  border: 1px solid #111;
+  border-radius: 999px;
+  padding: 10px 24px;
+  color: #111;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-request-btn:hover {
+  background: #f1f1f1;
+  transform: translateY(-2px);
+}
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(-25deg); }
+  40% { transform: rotate(15deg); }
+  60% { transform: rotate(-15deg); }
+  80% { transform: rotate(15deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.waving-hand {
+  display: inline-block;
+  font-size: 16px;
+  animation: wave 1.5s infinite ease-in-out;
+  transform-origin: 70% 70%;
 }
 
 .hero-center-content {

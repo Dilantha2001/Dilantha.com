@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import './Introduce.css';
+import profile2 from './assets/profile2.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -186,8 +187,8 @@ function Introduce() {
           <div className="portrait-box">
             <div className="portrait-label">PORTRAIT / 01</div>
             <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" 
-              alt="Daniel Kiss Portrait" 
+              src={profile2} 
+              alt="Dilantha Portrait" 
             />
           </div>
 

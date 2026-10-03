@@ -33,12 +33,11 @@ export default function Footer() {
             <div className="footer-g-logo">d</div>
             <div className="footer-brand">
               <span className="brand-name">DILANTHA DEV</span>
-              <span className="brand-sub">ディランタ・デブ</span>
             </div>
           </div>
           
           <h2 className="footer-headline">
-            AN AWARD WINNING FREELANCE WEB DEVELOPER AND DESIGNER BASED IN HUNGARY. WEB DEVELOPMENT IS WHERE MY PASSION AND TALENT MEET.
+            AN AWARD WINNING FREELANCE WEB DEVELOPER AND DESIGNER. WEB DEVELOPMENT IS WHERE MY PASSION AND TALENT MEET.
           </h2>
         </div>
 
@@ -63,8 +62,8 @@ export default function Footer() {
           
           <div className="footer-col email-col">
             <h4>DROP ME A LINE</h4>
-            <a href="mailto:info@danielkiss.hu" className="footer-email">
-              INFO@DANIELKISS.HU
+            <a href="mailto:hello@dilantha.com" className="footer-email">
+              HELLO@DILANTHA.COM
             </a>
           </div>
         </div>
@@ -77,14 +76,14 @@ export default function Footer() {
           <p>© COPYRIGHT 2026 DILANTHA DEV. ALL RIGHTS RESERVED.</p>
         </div>
         <div className="fm-right">
-          <p>HUNGARY (UTC+1) : <span className="time-red">{time}</span></p>
+          <p>LOCAL TIME : <span className="time-red">{time}</span></p>
           <p>DEVELOPMENT AND DESIGN HANDCRAFTED WITH PASSION BY <span className="name-red">DILANTHA DEV</span>.</p>
         </div>
       </div>
 
       {/* Giant Bottom Text */}
       <div className="footer-giant-text">
-        ディランタ
+        DILANTHA
       </div>
 
       {/* Back to Top Button */}

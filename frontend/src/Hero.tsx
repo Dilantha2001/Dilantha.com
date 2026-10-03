@@ -3,6 +3,7 @@ import './Hero.css';
 import heroVideo1 from './assets/hero.mp4';
 import heroVideo2 from './assets/hero2.mp4';
 import heroVideo3 from './assets/hero3.mp4';
+import { MdWavingHand } from "react-icons/md";
 
 const videos = [heroVideo1, heroVideo2, heroVideo3];
 
@@ -45,13 +46,21 @@ function Hero() {
       <div className="hero-top-nav">
         <div className="hero-logo">Hero</div>
         <nav className="hero-main-nav">
-          <ul>
+          <ul style={{ display: 'flex', alignItems: 'center' }}>
             <li>HOME</li>
             <li>ABOUT</li>
             <li>SERVICES</li>
             <li>PORTFOLIO</li>
             <li>PAGES ▾</li>
             <li>CONTACT</li>
+            <li style={{ marginLeft: '10px' }}>
+              <button className="nav-request-btn">
+                <span className="waving-hand" style={{ color: '#df1b3f', display: 'flex', alignItems: 'center' }}>
+                  <MdWavingHand size={18} />
+                </span> 
+                REQUEST
+              </button>
+            </li>
           </ul>
         </nav>
       </div>

@@ -40,43 +40,38 @@ export default function Feedback() {
     if (!containerRef.current) return;
     const q = gsap.utils.selector(containerRef);
     
-    // Create the timeline for the section
-    const tl = gsap.timeline({
+    const gridItems = q('.grid-item');
+    
+    // 1. Simple staggered entrance
+    gsap.from(gridItems, {
+      y: 100,
+      opacity: 0,
+      duration: 1.5,
+      stagger: {
+        amount: 1,
+        from: "center"
+      },
+      ease: "power3.out",
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top top",
-        end: "+=1500", // pin for a while
-        pin: true,
-        scrub: 1, // scrub the falling images
-        refreshPriority: 0,
+        start: "top 75%",
       }
     });
 
-    // 1. Initial State: Images are randomly rotated, scaled, and scattered off-screen top/left/right
-    const gridItems = q('.grid-item');
-    
-    gridItems.forEach((item, i) => {
-      gsap.set(item, {
-        y: () => -window.innerHeight - Math.random() * 500, // way above screen
-        x: 0, // Fall straight down without random x spread
-        scale: () => 1.2 + Math.random(), // slightly larger initial scale
-        opacity: 0
-      });
-    });
-
-    // 2. Animate images falling into their proper CSS grid places
-    tl.to(gridItems, {
-      y: 0,
-      x: 0,
-      rotation: 0,
-      scale: 1,
-      opacity: 1, // Keep them fully visible
-      duration: 2,
-      stagger: {
-        amount: 1,
-        from: "random"
-      },
-      ease: "power2.out"
+    // 2. Add independent continuous floating animation
+    gridItems.forEach((item) => {
+      const inner = item.querySelector('.card-inner');
+      if (inner) {
+        gsap.to(inner, {
+          y: () => 10 + Math.random() * 15,
+          rotation: () => (Math.random() - 0.5) * 1.5,
+          duration: 2.5 + Math.random() * 2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: Math.random() * -2
+        });
+      }
     });
 
   }, { scope: containerRef });
@@ -85,30 +80,32 @@ export default function Feedback() {
     <section ref={containerRef} className="relative w-full h-screen bg-[#111] overflow-hidden flex items-center justify-center">
       
       {/* Background Feedback Grid */}
-      <div className="absolute inset-0 w-full h-full grid grid-cols-4 grid-rows-3 gap-6 pointer-events-none z-0 p-8">
+      <div className="absolute inset-0 w-full h-full grid grid-cols-4 grid-rows-3 gap-6 pointer-events-none z-0 p-8 perspective-[1500px]">
         {feedbacks.map((fb, i) => (
-          <div key={i} className="grid-item relative w-full h-full rounded-2xl shadow-2xl bg-[#181818]/90 backdrop-blur-md border border-white/5 flex flex-col overflow-hidden">
-            {fb.projectImage && (
-              <div className="h-[45%] w-full flex-shrink-0 border-b border-white/10 relative group overflow-hidden">
-                <img src={fb.projectImage} className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" alt="Project Design" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#181818]/90 via-[#181818]/10 to-transparent"></div>
-              </div>
-            )}
-            <div className={`flex flex-col flex-grow ${fb.projectImage ? 'p-4 gap-2' : 'p-6 gap-4'}`}>
-              <div className="flex text-[#df1b3f] text-xs md:text-sm">
-                {'★'.repeat(fb.rating || 5)}
-              </div>
-              <p className="text-white/80 text-[10px] md:text-xs lg:text-sm font-light italic overflow-hidden line-clamp-3">"{fb.text}"</p>
-              <div className="mt-auto flex items-center gap-3 pt-2">
-                <div className="relative w-8 h-8 lg:w-10 lg:h-10 rounded-full overflow-hidden border border-white/20 flex-shrink-0">
-                  <img src={fb.avatar} alt={fb.name} className="w-full h-full object-cover" />
+          <div key={i} className="grid-item relative w-full h-full flex items-center justify-center">
+            <div className="card-inner relative w-full h-full rounded-2xl shadow-2xl bg-[#181818]/90 backdrop-blur-md border border-white/5 flex flex-col overflow-hidden transition-colors duration-500 hover:border-white/20">
+              {fb.projectImage && (
+                <div className="h-[45%] w-full flex-shrink-0 border-b border-white/10 relative group overflow-hidden">
+                  <img src={fb.projectImage} className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" alt="Project Design" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#181818]/90 via-[#181818]/10 to-transparent"></div>
                 </div>
-                <div className="flex flex-col overflow-hidden">
-                  <div className="flex items-center gap-2">
-                    <h4 className="text-white font-bold tracking-wider text-[10px] md:text-xs truncate">{fb.name}</h4>
-                    <span className="text-[10px] md:text-xs flex-shrink-0" title="Country Flag">{fb.flag}</span>
+              )}
+              <div className={`flex flex-col flex-grow ${fb.projectImage ? 'p-4 gap-2' : 'p-6 gap-4'}`}>
+                <div className="flex text-[#df1b3f] text-xs md:text-sm">
+                  {'★'.repeat(fb.rating || 5)}
+                </div>
+                <p className="text-white/80 text-[10px] md:text-xs lg:text-sm font-light italic overflow-hidden line-clamp-3">"{fb.text}"</p>
+                <div className="mt-auto flex items-center gap-3 pt-2">
+                  <div className="relative w-8 h-8 lg:w-10 lg:h-10 rounded-full overflow-hidden border border-white/20 flex-shrink-0">
+                    <img src={fb.avatar} alt={fb.name} className="w-full h-full object-cover" />
                   </div>
-                  <span className="text-[8px] md:text-[10px] text-[#df1b3f] uppercase tracking-widest truncate">{fb.role}</span>
+                  <div className="flex flex-col overflow-hidden">
+                    <div className="flex items-center gap-2">
+                      <h4 className="text-white font-bold tracking-wider text-[10px] md:text-xs truncate">{fb.name}</h4>
+                      <span className="text-[10px] md:text-xs flex-shrink-0" title="Country Flag">{fb.flag}</span>
+                    </div>
+                    <span className="text-[8px] md:text-[10px] text-[#df1b3f] uppercase tracking-widest truncate">{fb.role}</span>
+                  </div>
                 </div>
               </div>
             </div>

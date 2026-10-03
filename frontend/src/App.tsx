@@ -6,48 +6,45 @@ import { useGSAP } from '@gsap/react';
 import Lenis from 'lenis';
 import Hero from './Hero';
 import Introduce from './Introduce';
+import Process from './Process';
 import FooterIntroduce from './FooterIntroduce';
 import Works from './Works';
+import Technologies from './Technologies';
 import Feedback from './Feedback';
+import Feedback2 from './Feedback2';
+import FAQ from './FAQ';
+import LetsChat from './LetsChat';
+import StatsSection from './StatsSection';
 import Footer from './Footer';
+import { PORTFOLIO_INFO } from './portfolioData';
 import './App.css';
 
 gsap.registerPlugin(Observer, ScrollTrigger);
 
-const projects = [
-  {
-    id: 1,
-    title: "Smokio Rapper Web",
-    subtitle: "PORTFOLIO • JAN 2024 • WEB DEV & DESIGN",
-    color: "#df1b3f", 
-    bgColor: "#111111", 
-    url: "https://wondrous-zuccutto-2cd2ce.netlify.app/"
-  },
-  {
-    id: 2,
-    title: "Photography Website",
-    subtitle: "GALLERY • AUG 2023 • UI/UX DESIGN",
-    color: "#0077b6", 
-    bgColor: "#e2ece9", 
-    url: "https://comfy-medovik-ee1f2a.netlify.app/"
-  },
-  {
-    id: 3,
-    title: "Interactive Preview 1",
-    subtitle: "INTERACTIVE • MAR 2023 • FRONTEND",
-    color: "#2a9d8f", 
-    bgColor: "#dcedc1", 
-    url: "https://ornate-monstera-997a7d.netlify.app/"
-  },
-  {
-    id: 4,
-    title: "Interactive Preview 2",
-    subtitle: "PREVIEW • DEC 2022 • EXPERIMENTAL",
-    color: "#e07a5f", 
-    bgColor: "#ffe5d9", 
-    url: "https://melodic-smakager-33f3b9.netlify.app/"
-  }
+const colorPalette = [
+  { color: "#df1b3f", bgColor: "#111111" },
+  { color: "#0077b6", bgColor: "#e2ece9" },
+  { color: "#2a9d8f", bgColor: "#dcedc1" },
+  { color: "#e07a5f", bgColor: "#ffe5d9" },
+  { color: "#9b5de5", bgColor: "#f1e3ff" },
+  { color: "#f15bb5", bgColor: "#ffe1f1" },
+  { color: "#00bbf9", bgColor: "#e1f8ff" },
+  { color: "#00f5d4", bgColor: "#d7fff9" },
 ];
+
+const projects = PORTFOLIO_INFO.projects.map((p, index) => {
+  const palette = colorPalette[index % colorPalette.length];
+  const dateStr = p.date || "RECENT";
+  return {
+    id: p.id || index,
+    title: p.title,
+    subtitle: `${p.tags[0]?.toUpperCase() || 'PROJECT'} • ${dateStr.toUpperCase()} • ${p.tags[1]?.toUpperCase() || 'DEV'}`,
+    color: palette.color,
+    bgColor: palette.bgColor,
+    url: p.href,
+    image: p.image
+  };
+});
 
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -190,6 +187,7 @@ function App() {
     <div className="main-wrapper">
       <Hero />
       <Introduce />
+      <Process />
       
       <div className="layout" style={{ color: currentColor, backgroundColor: currentBgColor }} ref={sliderContainerRef}>
         <header className="header">
@@ -245,14 +243,23 @@ function App() {
 
               <div className="project-showcase">
                 <div className="image-container image-wrapper" style={{ backgroundColor: project.color }}>
-                  <div className="iframe-scroller-container">
-                    <iframe 
-                      src=""
-                      className="scrolling-iframe" 
-                      title={project.title}
-                    />
+                  <div className="iframe-scroller-container flex items-center justify-center h-full w-full relative">
+                    {project.url !== "#" && project.url !== "" ? (
+                      <iframe 
+                        src={project.url}
+                        className="scrolling-iframe absolute inset-0 w-full h-full" 
+                        title={project.title}
+                      />
+                    ) : (
+                      <div className="text-white text-2xl font-bold opacity-50 p-8 text-center" style={{fontFamily: 'Instrument Serif'}}>
+                        {project.title}
+                        <div className="text-sm font-normal mt-2 tracking-widest uppercase font-sans">No live preview available</div>
+                      </div>
+                    )}
                   </div>
-                  <div className="explore-btn">EXPLORE</div>
+                  {project.url !== "#" && project.url !== "" && (
+                    <a href={project.url} target="_blank" rel="noreferrer" className="explore-btn z-10" style={{textDecoration: 'none'}}>EXPLORE</a>
+                  )}
                 </div>
               </div>
 
@@ -261,8 +268,12 @@ function App() {
         </div>
       </div>
       <Works />
-      <FooterIntroduce />
-      <Feedback />
+     
+      <Technologies />
+      <Feedback2 />
+      <FAQ />
+      <LetsChat />
+      <StatsSection />
       <Footer />
     </div>
   )
