@@ -40,18 +40,6 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ activeSection }) => {
         </ul>
       </nav>
 
-      <div className="portrait-box">
-        <div className="portrait-label">PORTRAIT / 01</div>
-        <img 
-          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" 
-          alt="Daniel Kiss Portrait" 
-        />
-      </div>
-
-      <div className="email-box">
-        <span>info@danielkiss.hu</span>
-        <span className="email-icon">✉</span>
-      </div>
     </div>
   );
 };

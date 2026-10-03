@@ -150,53 +150,7 @@ function Introduce() {
           </div>
         </div>
 
-        <div className="intro-right">
-          <div className="right-header">
-            <h2 className="right-name"><span className="name-cream">Dilantha</span> <span className="name-red">Dev</span></h2>
-            <div className="right-subtitle">CODE / MOTION / WEBGL</div>
-          </div>
 
-          <div className="social-icons">
-            <span className="icon-box">in</span>
-            <span className="icon-box">W</span>
-            <span className="icon-box">Be</span>
-            <span className="icon-box">🏀</span>
-            <span className="icon-box">P</span>
-          </div>
-
-          <p className="bio-text">
-            Frontend Developer | WordPress Developer<br/>
-            JavaScript, PHP, WebGL, GSAP, Three.js
-          </p>
-
-          <div className="location-info">
-            <span>📍 BASED IN HUNGARY</span>
-            <span>🌐 WORKING WORLDWIDE</span>
-          </div>
-
-          <nav className="right-nav-menu">
-            <ul>
-              <li><span className="nav-num">01</span> INTRODUCE</li>
-              <li><span className="nav-num">02</span> SKILLS</li>
-              <li><span className="nav-num">03</span> WORKS</li>
-              <li><span className="nav-num">04</span> AWARDS</li>
-              <li><span className="nav-num">05</span> CONTACT</li>
-            </ul>
-          </nav>
-
-          <div className="portrait-box">
-            <div className="portrait-label">PORTRAIT / 01</div>
-            <img 
-              src={profile2} 
-              alt="Dilantha Portrait" 
-            />
-          </div>
-
-          <div className="email-box">
-            <span>info@danielkiss.hu</span>
-            <span className="email-icon">✉</span>
-          </div>
-        </div>
       </div>
     </section>
   );

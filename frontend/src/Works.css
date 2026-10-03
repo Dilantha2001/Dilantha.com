@@ -22,46 +22,46 @@
 /* Because the works section is dark, maybe we want the sidebar dark? 
    The original screenshot has a dark sidebar! Let's update it specifically for works */
 .works-section .intro-right {
-  background-color: #111111;
-  color: #ffffff;
-  border-left: 1px solid rgba(255,255,255,0.1);
+  background-color: #ffffff;
+  color: #111111;
+  border-left: 1px solid rgba(0,0,0,0.1);
 }
 
 .works-section .name-cream {
-  color: #ffffff;
+  color: #111111;
 }
 
 .works-section .right-subtitle {
-  color: #999;
+  color: #666;
 }
 
 .works-section .icon-box {
-  border: 1px solid rgba(255,255,255,0.2);
-  color: #fff;
+  border: 1px solid rgba(0,0,0,0.2);
+  color: #111;
 }
 
 .works-section .bio-text, .works-section .location-info {
-  color: #bbb;
+  color: #555;
 }
 
 .works-section .right-nav-menu ul li {
-  color: #bbb;
+  color: #555;
 }
 
 .works-section .right-nav-menu ul li:hover {
-  color: #fff;
+  color: #111;
 }
 
 .works-section .portrait-label {
-  background: #111;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.2);
+  background: #ffffff;
+  color: #111;
+  border: 1px solid rgba(0,0,0,0.2);
 }
 
 .works-section .email-box {
-  background: rgba(255,255,255,0.05);
+  background: rgba(0,0,0,0.05);
 }
 
 .works-section .email-icon {
-  background: rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.1);
 }

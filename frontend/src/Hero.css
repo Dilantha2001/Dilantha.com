@@ -159,19 +159,35 @@
   font-family: 'Playfair Display', serif;
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(40px, 6vw, 70px);
+  font-size: clamp(30px, 6vw, 70px);
 }
 
 .sans-bold {
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
-  font-size: clamp(50px, 7vw, 80px);
+  font-size: clamp(35px, 7vw, 80px);
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
 .yellow-text {
   color: #e500ec; /* Bright yellow */
+}
+
+@media (max-width: 768px) {
+  .hero-top-nav {
+    padding: 20px;
+    justify-content: flex-end;
+  }
+  .hero-logo {
+    left: 20px;
+  }
+  .hero-main-nav li:not(:last-child) {
+    display: none !important;
+  }
+  .hero-headline {
+    padding: 0 20px;
+  }
 }
 
 .hero-action-row {

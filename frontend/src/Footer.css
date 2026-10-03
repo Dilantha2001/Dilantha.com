@@ -1,6 +1,6 @@
 .custom-footer {
-  background-color: #1b1b1b;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
   font-family: 'Inter', sans-serif;
   min-height: 100dvh;
   display: flex;
@@ -34,7 +34,7 @@
 .footer-g-logo {
   font-family: 'Anton', sans-serif;
   font-size: 2rem;
-  border: 2px solid white;
+  border: 2px solid black;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -67,7 +67,7 @@
   font-weight: 400;
   line-height: 1.2;
   text-transform: uppercase;
-  color: #d1d1d1;
+  color: #333333;
   max-width: 90%;
 }
 
@@ -95,7 +95,7 @@
 }
 
 .footer-col a {
-  color: #fff;
+  color: #000;
   text-decoration: none;
   font-size: 0.85rem;
   font-weight: 600;
@@ -117,7 +117,7 @@
   align-items: flex-end;
   font-size: 0.7rem;
   letter-spacing: 0.5px;
-  color: #a0a0a0;
+  color: #666666;
   margin-top: 4rem;
   z-index: 10;
 }
@@ -138,13 +138,14 @@
 /* Giant Bottom Text */
 .footer-giant-text {
   font-family: 'Anton', sans-serif;
-  font-size: 32vw;
+  font-size: 20vw;
   color: #df1b3f;
-  line-height: 0.75;
+  line-height: 1;
   white-space: nowrap;
-  letter-spacing: -2vw;
-  margin-left: -2vw;
-  margin-bottom: -4vw; /* Pull it down so it cuts off a bit at the bottom */
+  letter-spacing: 0.5vw;
+  text-align: center;
+  width: 100%;
+  margin-bottom: -1vw; 
   user-select: none;
   position: relative;
   z-index: 5;
@@ -157,8 +158,8 @@
   right: 4vw;
   width: 100px;
   height: 100px;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #000000;
+  color: #ffffff;
   border-radius: 50%;
   border: none;
   font-size: 0.6rem;
@@ -169,7 +170,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 .back-to-top:hover {

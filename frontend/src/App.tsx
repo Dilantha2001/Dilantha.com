@@ -5,7 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import Lenis from 'lenis';
 import Hero from './Hero';
-import Introduce from './Introduce';
+
+import AboutMe from './AboutMe';
 import Process from './Process';
 import FooterIntroduce from './FooterIntroduce';
 import Works from './Works';
@@ -186,7 +187,8 @@ function App() {
   return (
     <div className="main-wrapper">
       <Hero />
-      <Introduce />
+      <AboutMe />
+
       <Process />
       
       <div className="layout" style={{ color: currentColor, backgroundColor: currentBgColor }} ref={sliderContainerRef}>

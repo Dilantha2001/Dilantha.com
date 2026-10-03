@@ -72,14 +72,14 @@ export default function FAQ() {
   };
 
   return (
-    <section ref={containerRef} className="relative w-full bg-[#111] py-32 px-8 z-10 border-t border-white/5">
+    <section ref={containerRef} className="relative w-full bg-white py-32 px-8 z-10 border-t border-black/5">
       <div className="max-w-4xl mx-auto flex flex-col gap-16">
         
         <div className="text-center">
-          <h2 className="text-4xl md:text-6xl font-light text-white tracking-tight">
+          <h2 className="text-4xl md:text-6xl font-light text-black tracking-tight">
             Frequently Asked <span className="font-serif italic text-[#df1b3f]">Questions</span>
           </h2>
-          <p className="mt-4 text-white/50 text-sm md:text-base max-w-lg mx-auto">
+          <p className="mt-4 text-black/50 text-sm md:text-base max-w-lg mx-auto">
             Everything you need to know about my process and how we can work together.
           </p>
         </div>
@@ -90,16 +90,16 @@ export default function FAQ() {
             return (
               <div 
                 key={i} 
-                className="faq-item group cursor-pointer border-b border-white/10 pb-4 transition-colors hover:border-white/30"
+                className="faq-item group cursor-pointer border-b border-black/10 pb-4 transition-colors hover:border-black/30"
                 onClick={() => toggleFaq(i)}
               >
                 <div className="flex justify-between items-center py-6">
-                  <h3 className={`text-lg md:text-2xl transition-colors duration-300 ${isOpen ? 'text-[#df1b3f]' : 'text-white'}`}>
+                  <h3 className={`text-lg md:text-2xl transition-colors duration-300 ${isOpen ? 'text-[#df1b3f]' : 'text-black'}`}>
                     {faq.question}
                   </h3>
-                  <div className={`relative w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isOpen ? 'border-[#df1b3f] bg-[#df1b3f]/10' : 'border-white/20'}`}>
-                    <span className={`absolute w-3.5 h-[1.5px] bg-current transition-transform duration-500 ease-in-out ${isOpen ? 'rotate-180 text-[#df1b3f]' : 'text-white'}`}></span>
-                    <span className={`absolute w-3.5 h-[1.5px] bg-current transition-transform duration-500 ease-in-out ${isOpen ? 'rotate-180 text-[#df1b3f] opacity-0' : 'rotate-90 text-white'}`}></span>
+                  <div className={`relative w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isOpen ? 'border-[#df1b3f] bg-[#df1b3f]/10' : 'border-black/20'}`}>
+                    <span className={`absolute w-3.5 h-[1.5px] bg-current transition-transform duration-500 ease-in-out ${isOpen ? 'rotate-180 text-[#df1b3f]' : 'text-black'}`}></span>
+                    <span className={`absolute w-3.5 h-[1.5px] bg-current transition-transform duration-500 ease-in-out ${isOpen ? 'rotate-180 text-[#df1b3f] opacity-0' : 'rotate-90 text-black'}`}></span>
                   </div>
                 </div>
                 
@@ -107,7 +107,7 @@ export default function FAQ() {
                   ref={el => contentRefs.current[i] = el}
                   className="overflow-hidden h-0 opacity-0"
                 >
-                  <p className="text-white/60 font-light pb-6 pr-12 leading-relaxed text-sm md:text-base">
+                  <p className="text-black/60 font-light pb-6 pr-12 leading-relaxed text-sm md:text-base">
                     {faq.answer}
                   </p>
                 </div>

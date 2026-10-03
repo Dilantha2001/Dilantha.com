@@ -2,19 +2,19 @@ import React from 'react';
 
 export default function LetsChat() {
   return (
-    <section className="w-full bg-[#080808] py-24 px-6 md:px-12 flex justify-center items-center">
+    <section className="w-full bg-white py-24 px-6 md:px-12 flex justify-center items-center">
       <div className="w-full max-w-[1600px] flex flex-col items-center">
         
         {/* Title */}
         <h1 
-          className="text-[#ffecd1] text-[clamp(4rem,15vw,14rem)] uppercase leading-none text-center m-0" 
+          className="text-black text-[clamp(4rem,15vw,14rem)] uppercase leading-none text-center m-0" 
           style={{ fontFamily: "'Anton', sans-serif", letterSpacing: '-0.02em', transform: 'scaleY(1.1)' }}
         >
           Let's have a chat
         </h1>
 
         {/* Divider */}
-        <hr className="w-full border-t border-white/20 mt-12 mb-8" />
+        <hr className="w-full border-t border-black/20 mt-12 mb-8" />
 
         {/* Buttons */}
         <div className="w-full flex flex-col md:flex-row justify-between items-center gap-6">
@@ -22,13 +22,13 @@ export default function LetsChat() {
           <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
             <a 
               href="mailto:pramudithadilantha89@gmail.com" 
-              className="bg-[#181818] hover:bg-[#252525] text-white text-sm md:text-base font-medium py-4 px-8 rounded-full border border-white/10 transition-all hover:-translate-y-1 inline-flex items-center justify-center whitespace-nowrap"
+              className="bg-gray-100 hover:bg-gray-200 text-black text-sm md:text-base font-medium py-4 px-8 rounded-full border border-black/10 transition-all hover:-translate-y-1 inline-flex items-center justify-center whitespace-nowrap"
             >
               pramudithadilantha89@gmail.com
             </a>
             <a 
               href="tel:+94756813888" 
-              className="bg-[#181818] hover:bg-[#252525] text-white text-sm md:text-base font-medium py-4 px-8 rounded-full border border-white/10 transition-all hover:-translate-y-1 inline-flex items-center justify-center whitespace-nowrap"
+              className="bg-gray-100 hover:bg-gray-200 text-black text-sm md:text-base font-medium py-4 px-8 rounded-full border border-black/10 transition-all hover:-translate-y-1 inline-flex items-center justify-center whitespace-nowrap"
             >
               +94 75 681 3888
             </a>
@@ -36,7 +36,7 @@ export default function LetsChat() {
 
           <button 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
-            className="bg-transparent hover:bg-white/5 text-white text-sm md:text-base font-medium py-4 px-10 rounded-full border border-white/20 transition-all hover:-translate-y-1 flex items-center justify-center group gap-6 w-full md:w-auto"
+            className="bg-transparent hover:bg-black/5 text-black text-sm md:text-base font-medium py-4 px-10 rounded-full border border-black/20 transition-all hover:-translate-y-1 flex items-center justify-center group gap-6 w-full md:w-auto"
           >
             <div className="flex items-center opacity-40 group-hover:opacity-100 transition-opacity duration-300">
                <svg width="24" height="12" viewBox="0 0 24 12" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-[-4px]">
