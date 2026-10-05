@@ -1,0 +1,508 @@
+/* =========================================================================
+   HERO 2: IMPOSSIBLE OPTICAL ARCHITECTURE + FULLSCREEN SCROLL ZOOM
+   ========================================================================= */
+
+.hero2-scroll-container {
+  position: relative;
+  width: 100%;
+  height: 220vh;
+  background-color: #f2f2f4;
+}
+
+.hero2-wrapper {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #f2f2f4;
+  color: #111111;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  user-select: none;
+  z-index: 20;
+}
+
+/* Subtle Architectural Grid Overlay */
+.hero2-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Top Header */
+.hero2-header {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 36px 48px;
+  box-sizing: border-box;
+  will-change: transform, opacity;
+}
+
+.hero2-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.hero2-brand-name {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #101012;
+  text-transform: uppercase;
+}
+
+.hero2-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #4b5563;
+}
+
+.hero2-status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10b981;
+  animation: hero2Pulse 2s infinite ease-in-out;
+}
+
+@keyframes hero2Pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.hero2-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.hero2-nav-link {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #374151;
+  text-decoration: none;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.hero2-nav-link:hover {
+  color: #0052ff;
+  transform: translateY(-1px);
+}
+
+.hero2-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #111215;
+  color: #ffffff;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.hero2-nav-btn:hover {
+  background: #0052ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 82, 255, 0.35);
+}
+
+.hero2-hand-icon {
+  color: #ffb703;
+  font-size: 14px;
+}
+
+/* Center Giant Typographic Showcase Stage */
+.hero2-center-stage {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+  min-height: 520px;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.hero2-title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  line-height: 0.82;
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+  font-size: clamp(4.5rem, 17.5vw, 19.5rem);
+  white-space: nowrap;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.hero2-title-chunk {
+  display: inline-flex;
+  align-items: center;
+  will-change: transform, opacity, filter;
+}
+
+.hero2-im-text {
+  color: #0052ff;
+  display: inline-block;
+  text-shadow: 0 8px 32px rgba(0, 82, 255, 0.15);
+}
+
+.hero2-black-text {
+  color: #111216;
+  display: inline-block;
+  letter-spacing: -0.06em;
+}
+
+/* Center Square Video Box */
+.hero2-video-frame-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(160px, 15vw, 230px);
+  height: clamp(160px, 15vw, 230px);
+  margin-top: clamp(-80px, -7.5vw, -115px);
+  margin-left: clamp(-80px, -7.5vw, -115px);
+  z-index: 25;
+  cursor: pointer;
+  pointer-events: auto;
+  transform-style: preserve-3d;
+  will-change: width, height, top, left, margin, transform;
+}
+
+/* Ground Cast Shadow */
+.hero2-video-shadow {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  width: 85%;
+  height: 45px;
+  margin-left: -42.5%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(15, 17, 25, 0.45) 0%,
+    rgba(15, 17, 25, 0.15) 50%,
+    rgba(15, 17, 25, 0) 75%
+  );
+  filter: blur(14px);
+  pointer-events: none;
+  z-index: -1;
+  will-change: opacity;
+}
+
+/* Square Box Frame */
+.hero2-square-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0d0e12;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 
+    0 20px 45px -10px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  will-change: border-radius, box-shadow;
+}
+
+/* Actual Video */
+.hero2-center-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Bottom Left Philosophy / Quote */
+.hero2-bottom-left {
+  position: relative;
+  z-index: 20;
+  padding: 0 48px;
+  margin-bottom: 24px;
+  max-width: 600px;
+  will-change: transform, opacity;
+}
+
+.hero2-quote-primary {
+  font-size: clamp(14px, 1.4vw, 18px);
+  font-weight: 500;
+  color: #1f242e;
+  line-height: 1.45;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+
+.hero2-quote-secondary {
+  font-size: clamp(14px, 1.4vw, 18px);
+  font-style: italic;
+  font-weight: 500;
+  color: #0052ff;
+  line-height: 1.45;
+  margin-top: 4px;
+  letter-spacing: -0.015em;
+}
+
+/* Bottom Metadata Bar */
+.hero2-bottom-bar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 48px;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  box-sizing: border-box;
+  will-change: transform, opacity;
+}
+
+.hero2-tagline {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.hero2-scroll-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #111215;
+  font-family: inherit;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.hero2-scroll-indicator:hover {
+  color: #0052ff;
+  transform: translateY(2px);
+}
+
+.hero2-index {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #9ca3af;
+}
+
+.hero2-scroll-text {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero2-arrow {
+  font-size: 14px;
+  font-weight: 700;
+  animation: hero2ArrowBounce 1.8s infinite ease-in-out;
+}
+
+@keyframes hero2ArrowBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* Floating Right Dock Menu */
+.hero2-right-dock {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 99;
+  will-change: transform, opacity;
+}
+
+.hero2-dock-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #111215;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  font-size: 16px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero2-dock-btn:hover,
+.hero2-dock-btn.active {
+  background: #0052ff;
+  color: #ffffff;
+  transform: scale(1.1) translateX(-3px);
+  box-shadow: 0 10px 28px rgba(0, 82, 255, 0.45);
+}
+
+/* Bottom Cookie / Mission Banner */
+.hero2-cookie-banner {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+  padding: 12px 24px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 90vw;
+  animation: hero2BannerSlide 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes hero2BannerSlide {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.hero2-cookie-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: #374151;
+  letter-spacing: 0.01em;
+}
+
+.hero2-cookie-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero2-cookie-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.hero2-cookie-btn.decline {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #4b5563;
+}
+
+.hero2-cookie-btn.decline:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #111827;
+}
+
+.hero2-cookie-btn.accept {
+  background: #111215;
+  border: 1px solid #111215;
+  color: #ffffff;
+}
+
+.hero2-cookie-btn.accept:hover {
+  background: #0052ff;
+  border-color: #0052ff;
+}
+
+/* =========================================================================
+   RESPONSIVENESS
+   ========================================================================= */
+
+@media (max-width: 1024px) {
+  .hero2-header,
+  .hero2-bottom-bar,
+  .hero2-bottom-left {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .hero2-right-dock {
+    right: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero2-header {
+    padding: 24px 20px;
+  }
+
+  .hero2-status-pill {
+    display: none;
+  }
+
+  .hero2-nav .hero2-nav-link {
+    display: none;
+  }
+
+  .hero2-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px;
+  }
+
+  .hero2-bottom-left {
+    padding: 0 20px;
+    margin-bottom: 16px;
+  }
+
+  .hero2-right-dock {
+    display: none;
+  }
+
+  .hero2-cookie-banner {
+    width: 92%;
+    border-radius: 16px;
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    padding: 16px;
+  }
+}

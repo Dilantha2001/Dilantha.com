@@ -1,0 +1,132 @@
+/* =========================================================================
+   SERVICES LIST (SCOPED STYLES)
+   ========================================================================= */
+
+.services-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.services-container .service-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 60px 40px 60px 100px;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  background-color: transparent;
+  color: #111111;
+  cursor: pointer;
+}
+
+.services-container .service-row.active {
+  background-color: #df1b3f;
+  color: #ffffff;
+}
+
+.services-container .service-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.services-container .service-title {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(32px, 4vw, 56px);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin: 0;
+  flex: 1;
+}
+
+.services-container .service-num {
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  color: #df1b3f;
+}
+
+.services-container .service-row.active .service-num {
+  color: #ffffff;
+}
+
+.services-container .service-desc {
+  flex: 1;
+  max-width: 500px;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.4;
+  transition: opacity 0.4s ease;
+}
+
+.services-container .service-row.active .service-desc {
+  opacity: 0.95;
+}
+
+/* Floating Image Wrapper */
+.services-container .service-image-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 250px;
+  height: 300px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 5;
+}
+
+.services-container .service-image-wrapper.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity 0.4s ease, transform 0.1s linear;
+}
+
+/* Frame sway */
+.services-container .service-image-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 10px 20px 30px rgba(0,0,0,0.2);
+}
+
+.services-container .service-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes serviceFloatSway {
+  0% { transform: rotate(-4deg) translateX(-8px) translateY(-5px); }
+  50% { transform: rotate(4deg) translateX(8px) translateY(5px); }
+  100% { transform: rotate(-4deg) translateX(-8px) translateY(-5px); }
+}
+
+.services-container .service-row.active .service-image-frame {
+  animation: serviceFloatSway 3s ease-in-out infinite;
+}
+
+@media (max-width: 1024px) {
+  .services-container .service-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .services-container .service-row {
+    padding: 40px 20px 40px 60px;
+  }
+  .services-container .service-image-wrapper {
+    left: -10px;
+    width: 120px;
+    height: 150px;
+  }
+}

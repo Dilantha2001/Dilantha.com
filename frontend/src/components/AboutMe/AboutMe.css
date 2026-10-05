@@ -1,0 +1,383 @@
+/* =========================================================================
+   ABOUT ME: "MEET DILANTHA" CYBERNETIC EDITORIAL SECTION
+   ========================================================================= */
+
+.meet-about-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #08080a;
+  color: #ffffff;
+  font-family: 'Space Mono', monospace;
+  padding: 48px 64px 80px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  z-index: 20;
+}
+
+/* TOP HEADER BAR */
+.meet-about-section .meet-about-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 48px;
+}
+
+.meet-about-section .meet-about-brand-tag {
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.meet-about-section .brand-tag-row {
+  display: flex;
+  gap: 16px;
+}
+
+.meet-about-section .brand-tag-divider {
+  color: #9ca3af;
+}
+
+.meet-about-section .meet-about-nav-crumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.meet-about-section .crumb-dim {
+  color: #6b7280;
+}
+
+.meet-about-section .crumb-slash {
+  color: #4b5563;
+}
+
+.meet-about-section .crumb-active {
+  color: #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+
+/* MAIN BODY (3-COLUMN LAYOUT) */
+.meet-about-section .meet-about-body {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: clamp(400px, 34vw, 540px) 1.2fr 0.9fr;
+  gap: 48px;
+  align-items: start;
+  width: 100%;
+}
+
+/* Left Column: Portrait */
+.meet-about-section .meet-about-portrait-wrapper {
+  width: 100%;
+}
+
+.meet-about-section .meet-about-portrait-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.26;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #111216;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 
+    0 30px 70px -15px rgba(0, 0, 0, 0.95),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.meet-about-section .meet-about-portrait-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 35px 85px -10px rgba(0, 0, 0, 0.95);
+}
+
+.meet-about-section .meet-about-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  filter: none;
+  image-rendering: -webkit-optimize-contrast;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.meet-about-section .meet-about-portrait-card:hover .meet-about-portrait-img {
+  transform: scale(1.03);
+}
+
+/* Center Column: Content Blocks */
+.meet-about-section .meet-about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.meet-about-section .meet-about-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.meet-about-section .meet-about-subtag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  opacity: 0.9;
+}
+
+.meet-about-section .meet-about-hero-title {
+  font-family: 'Anton', 'Bebas Neue', sans-serif;
+  font-size: clamp(2.4rem, 4.4vw, 4.2rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0 0 16px 0;
+}
+
+.meet-about-section .meet-about-mono-desc {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(10.5px, 0.95vw, 12px);
+  line-height: 1.65;
+  color: #d1d5db;
+  margin: 0;
+  letter-spacing: -0.01em;
+  max-width: 580px;
+  text-align: justify;
+}
+
+.meet-about-section .meet-about-mono-subtext {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #9ca3af;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* Right Column: Title & Counters Deck */
+.meet-about-section .meet-about-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.meet-about-section .meet-about-big-title-col {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-top: 4px;
+}
+
+.meet-about-section .meet-about-big-title {
+  font-family: 'Anton', 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 5.2vw, 5.8rem);
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Stats Deck Container */
+.meet-about-section .meet-about-stats-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.meet-about-section .stats-deck-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meet-about-section .stats-deck-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00ff88;
+  box-shadow: 0 0 10px #00ff88;
+  display: inline-block;
+  animation: meetPulseDot 2s infinite ease-in-out;
+}
+
+@keyframes meetPulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.meet-about-section .stats-deck-title {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #9ca3af;
+  text-transform: uppercase;
+}
+
+/* 2x2 Counters Grid */
+.meet-about-section .meet-about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.meet-about-section .meet-stat-card {
+  position: relative;
+  background: rgba(18, 20, 26, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.meet-about-section .meet-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.meet-about-section .meet-stat-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.meet-about-section .meet-stat-index {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #6b7280;
+}
+
+.meet-about-section .meet-stat-corner-tag {
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #00ff88;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.25);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.meet-about-section .meet-stat-number-wrap {
+  margin-bottom: 6px;
+}
+
+.meet-about-section .meet-stat-number {
+  font-family: 'Anton', 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 3.2vw, 2.9rem);
+  font-weight: 900;
+  line-height: 1;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  display: inline-block;
+}
+
+.meet-about-section .meet-stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #f3f4f6;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.meet-about-section .meet-stat-desc {
+  font-size: 9px;
+  line-height: 1.35;
+  color: #9ca3af;
+  letter-spacing: 0.01em;
+}
+
+/* RESPONSIVENESS */
+@media (max-width: 1320px) {
+  .meet-about-section .meet-about-body {
+    grid-template-columns: clamp(340px, 28vw, 420px) 1.1fr 1fr;
+    gap: 36px;
+  }
+
+  .meet-about-section .meet-about-big-title {
+    font-size: 3.8rem;
+  }
+}
+
+@media (max-width: 1080px) {
+  .meet-about-section {
+    padding: 40px 32px 60px;
+  }
+
+  .meet-about-section .meet-about-body {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .meet-about-section .meet-about-portrait-card {
+    max-width: 380px;
+  }
+
+  .meet-about-section .meet-about-big-title-col {
+    justify-content: flex-start;
+  }
+
+  .meet-about-section .meet-about-big-title {
+    text-align: left;
+    white-space: normal;
+  }
+
+  .meet-about-section .meet-about-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 640px) {
+  .meet-about-section {
+    padding: 32px 20px 48px;
+  }
+
+  .meet-about-section .meet-about-hero-title {
+    font-size: 2.2rem;
+  }
+
+  .meet-about-section .meet-about-big-title {
+    font-size: 2.8rem;
+  }
+
+  .meet-about-section .meet-about-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

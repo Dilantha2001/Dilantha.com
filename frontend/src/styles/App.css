@@ -1,0 +1,8 @@
+/* App-level wrapper */
+.app-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background-color: #08080a;
+}
