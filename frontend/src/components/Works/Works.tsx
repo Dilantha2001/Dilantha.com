@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { PORTFOLIO_INFO } from '../../data/portfolioData';
+import RealisticSphere from './RealisticSphere';
 import './Works.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -80,9 +81,9 @@ export default function Works() {
       ease: "sine.inOut"
     }, 0.45);
 
-    // 2. Scrub animation
+    // 2. Scrub animation (Rolling faster leftwards)
     gsap.to('.works-section .floating-object', {
-      rotation: 720,
+      rotation: -1800,
       ease: "none",
       scrollTrigger: {
         trigger: container.current,
@@ -117,24 +118,20 @@ export default function Works() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="hidden md:block absolute left-10 bottom-[18%] z-20 font-['Caveat',cursive] text-2xl md:text-3xl text-black opacity-75 z-[100] pointer-events-none">
+        <div className="hidden md:block absolute left-6 md:left-10 bottom-6 md:bottom-8 z-20 font-['Caveat',cursive] text-2xl md:text-3xl text-black opacity-75 z-[100] pointer-events-none">
           SCROLL →
         </div>
 
         {/* Horizontal Scroll Area */}
-        <div className="relative w-full h-full flex items-center overflow-hidden">
-          <div ref={scrollWrapper} className="flex h-full w-max items-center">
+        <div className="relative w-full h-full flex items-center overflow-hidden pt-12 sm:pt-16 md:pt-20">
+          <div ref={scrollWrapper} className="flex h-full w-max items-center pl-[16vw] sm:pl-[24vw] md:pl-[32vw] lg:pl-[36vw] pr-[10vw]">
             
-            {/* Intro Text Slide (Responsive & Centered) */}
-            <div className="project-slide w-[90vw] sm:w-[78vw] md:w-[68vw] lg:w-[58vw] h-full flex items-center justify-center shrink-0 px-4 sm:px-8 md:px-12">
+            {/* Intro Text Slide (Positioned towards the right of center) */}
+            <div className="project-slide w-auto shrink-0 h-full flex items-center justify-start px-4 sm:px-8 md:px-12 mr-6 sm:mr-10 md:mr-16">
               
-              {/* Floating 3D Ball that rolls */}
-              <div className="floating-object w-28 h-28 sm:w-40 sm:h-40 md:w-52 md:h-52 rounded-full bg-[radial-gradient(circle_at_30%_30%,_#60a5fa,_#0052ff,_#002b80)] shadow-[10px_15px_30px_rgba(0,0,0,0.2),_inset_-10px_-10px_20px_rgba(0,0,0,0.2)] flex items-center justify-center z-20 shrink-0 mr-3 sm:mr-6 md:mr-8 relative overflow-hidden border-2 border-black/10">
-                 <div className="absolute w-full h-1 bg-white/40 top-1/2 -translate-y-1/2"></div>
-                 <div className="absolute h-full w-1 bg-white/40 left-1/2 -translate-x-1/2"></div>
-                 <div className="w-10 h-10 sm:w-14 sm:h-14 md:w-18 md:h-18 rounded-full border-[3px] md:border-[4px] border-white/60 bg-[#0052ff] shadow-inner flex items-center justify-center z-10">
-                    <div className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 bg-white rounded-full shadow-lg"></div>
-                 </div>
+              {/* Photorealistic 3D WebGL Sphere */}
+              <div className="floating-object w-28 h-28 sm:w-40 sm:h-40 md:w-52 md:h-52 shrink-0 mr-3 sm:mr-6 md:mr-8 relative z-20 flex items-center justify-center">
+                <RealisticSphere className="w-full h-full" />
               </div>
 
               {/* Text being pushed */}
@@ -148,42 +145,49 @@ export default function Works() {
             {projects.map((project, i) => (
               <div key={i} className="project-slide w-[85vw] sm:w-[55vw] md:w-[42vw] lg:w-[35vw] px-3 sm:px-4 md:px-6 h-full flex items-center justify-center relative shrink-0">
                 
-                <div className="relative group cursor-pointer w-full h-[52vh] sm:h-[58vh] md:h-[65vh] max-h-[580px]">
+                <div className="relative group cursor-pointer w-full flex flex-col">
                   
-                  {/* Badge */}
-                  <div className="absolute -top-3.5 -left-3.5 bg-black text-white text-xs font-bold px-3 py-1 flex items-center space-x-2 z-10 rounded-sm shadow-md">
-                    <span className="w-2 h-2 rounded-full bg-[#0052ff]"></span>
-                    <span>{project.id}</span>
-                  </div>
+                  {/* Card Media Container */}
+                  <div className="relative w-full h-[40vh] sm:h-[46vh] md:h-[50vh] max-h-[460px]">
+                    
+                    {/* Badge */}
+                    <div className="absolute -top-3.5 -left-3.5 bg-black text-white text-xs font-bold px-3 py-1 flex items-center space-x-2 z-10 rounded-sm shadow-md">
+                      <span className="w-2 h-2 rounded-full bg-[#0052ff]"></span>
+                      <span>{project.id}</span>
+                    </div>
 
-                  {/* Image/Video */}
-                  <div className="w-full h-full overflow-hidden shadow-xl border border-gray-200 rounded-xl bg-gray-100">
-                    {project.image.endsWith('.mp4') ? (
-                      <video 
-                        src={project.image} 
-                        autoPlay 
-                        loop 
-                        muted 
-                        playsInline
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-                      />
-                    ) : (
-                      <img 
-                        src={project.image} 
-                        alt={project.title} 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-                      />
-                    )}
+                    {/* Image/Video */}
+                    <div className="w-full h-full overflow-hidden shadow-xl border border-gray-200 rounded-xl bg-gray-100">
+                      {project.image.endsWith('.mp4') ? (
+                        <video 
+                          src={project.image} 
+                          autoPlay 
+                          loop 
+                          muted 
+                          playsInline
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                        />
+                      ) : (
+                        <img 
+                          src={project.image} 
+                          alt={project.title} 
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                        />
+                      )}
+                    </div>
+                    
+                    {/* Subtitle */}
+                    <div className="absolute top-4 right-4 text-[9px] md:text-[10px] font-bold tracking-widest uppercase bg-white/90 backdrop-blur-sm px-3 py-1 text-black border border-black/10 rounded-full shadow-sm">
+                      {project.subtitle}
+                    </div>
+
                   </div>
                   
-                  {/* Title Overlay */}
-                  <div className="absolute -bottom-5 left-3 sm:left-4 md:left-6 text-[clamp(1.3rem,2.6vw,2.4rem)] font-['Anton',sans-serif] text-black uppercase leading-none drop-shadow-sm">
-                    {project.title}
-                  </div>
-                  
-                  {/* Subtitle */}
-                  <div className="absolute top-4 right-4 text-[9px] md:text-[10px] font-bold tracking-widest uppercase bg-white/90 backdrop-blur-sm px-3 py-1 text-black border border-black/10 rounded-full shadow-sm">
-                    {project.subtitle}
+                  {/* Title Below Card */}
+                  <div className="mt-3.5 sm:mt-4 px-1">
+                    <h3 className="text-[clamp(1.2rem,2.2vw,2.2rem)] font-['Anton',sans-serif] text-black uppercase leading-tight tracking-wide group-hover:text-[#0052ff] transition-colors duration-300">
+                      {project.title}
+                    </h3>
                   </div>
 
                 </div>

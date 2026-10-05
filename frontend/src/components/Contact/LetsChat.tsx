@@ -33,18 +33,7 @@ export default function LetsChat() {
             </a>
           </div>
 
-          <button 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
-            className="bg-transparent hover:bg-black/5 text-black text-sm md:text-base font-medium py-4 px-10 rounded-full border border-black/20 transition-all hover:-translate-y-1 flex items-center justify-center group gap-6 w-full md:w-auto cursor-pointer"
-          >
-            <div className="flex items-center opacity-40 group-hover:opacity-100 transition-opacity duration-300">
-               <svg width="24" height="12" viewBox="0 0 24 12" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-[-4px]">
-                 <path d="M5.5 1L1 6L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                 <path d="M1 6H24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-               </svg>
-            </div>
-            Back to Top
-          </button>
+         
 
         </div>
       </div>

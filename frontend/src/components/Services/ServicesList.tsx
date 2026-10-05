@@ -3,6 +3,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import frontendVideo from '../../assets/frontend.mp4';
+import dbVideo from '../../assets/db.mp4';
+import cloudVideo from '../../assets/cloud.mp4';
+import threeDVideo from '../../assets/3d.mp4';
 import aiVideo from '../../assets/ai.mp4';
 import './ServicesList.css';
 
@@ -19,19 +22,19 @@ const services = [
     num: '02',
     title: 'Backend & API Architecture',
     desc: 'Designing resilient REST & GraphQL APIs, microservices, secure authentication, and high-throughput Node/Python backends.',
-    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80',
+    img: dbVideo,
   },
   {
     num: '03',
     title: 'Database & Cloud Systems',
     desc: 'Architecting scalable SQL/NoSQL databases, distributed caching with Redis, CI/CD pipelines, and AWS cloud deployments.',
-    img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
+    img: cloudVideo,
   },
   {
     num: '04',
     title: 'Creative Motion & WebGL',
     desc: 'Building immersive, high-performance web experiences using GSAP animations, Three.js 3D viewports, and custom shaders.',
-    img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
+    img: threeDVideo,
   },
   {
     num: '05',

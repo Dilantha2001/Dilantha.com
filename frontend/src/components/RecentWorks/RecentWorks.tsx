@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import smokioVideo from '../../assets/1003.mp4';
 import './RecentWorks.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -45,7 +46,7 @@ const featuredProjects = [
     date: "@2025",
     tags: ["WEB DEVELOPMENT", "GSAP · THREE.JS"],
     isWide: true,
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80",
+    image: smokioVideo,
     url: "https://wondrous-zuccutto-2cd2ce.netlify.app/",
   },
   {
@@ -158,13 +159,24 @@ export default function RecentWorks() {
             >
               {/* Media Container */}
               <div className="card-media-wrapper">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="card-media-img"
-                />
+                {project.image.includes('.mp4') ? (
+                  <video
+                    src={project.image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="card-media-img"
+                  />
+                ) : (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="card-media-img"
+                  />
+                )}
                 
                 {/* Floating Tags Pills */}
                 <div className="card-floating-tags">
