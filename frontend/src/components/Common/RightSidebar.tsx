@@ -30,11 +30,11 @@ export default function RightSidebar({ activeSection }: RightSidebarProps) {
 
       <nav className="right-nav-menu">
         <ul>
-          <li className={activeSection === 'INTRODUCE' ? 'text-[#df1b3f]' : ''}><span className={`nav-num ${activeSection === 'INTRODUCE' ? 'text-[#df1b3f]' : ''}`}>01</span> INTRODUCE</li>
-          <li className={activeSection === 'SKILLS' ? 'text-[#df1b3f]' : ''}><span className={`nav-num ${activeSection === 'SKILLS' ? 'text-[#df1b3f]' : ''}`}>02</span> SKILLS</li>
-          <li className={activeSection === 'WORKS' ? 'text-[#df1b3f]' : ''}><span className={`nav-num ${activeSection === 'WORKS' ? 'text-[#df1b3f]' : ''}`}>03</span> WORKS</li>
-          <li className={activeSection === 'AWARDS' ? 'text-[#df1b3f]' : ''}><span className={`nav-num ${activeSection === 'AWARDS' ? 'text-[#df1b3f]' : ''}`}>04</span> AWARDS</li>
-          <li className={activeSection === 'CONTACT' ? 'text-[#df1b3f]' : ''}><span className={`nav-num ${activeSection === 'CONTACT' ? 'text-[#df1b3f]' : ''}`}>05</span> CONTACT</li>
+          <li className={activeSection === 'INTRODUCE' ? 'text-[#0052ff]' : ''}><span className={`nav-num ${activeSection === 'INTRODUCE' ? 'text-[#0052ff]' : ''}`}>01</span> INTRODUCE</li>
+          <li className={activeSection === 'SKILLS' ? 'text-[#0052ff]' : ''}><span className={`nav-num ${activeSection === 'SKILLS' ? 'text-[#0052ff]' : ''}`}>02</span> SKILLS</li>
+          <li className={activeSection === 'WORKS' ? 'text-[#0052ff]' : ''}><span className={`nav-num ${activeSection === 'WORKS' ? 'text-[#0052ff]' : ''}`}>03</span> WORKS</li>
+          <li className={activeSection === 'AWARDS' ? 'text-[#0052ff]' : ''}><span className={`nav-num ${activeSection === 'AWARDS' ? 'text-[#0052ff]' : ''}`}>04</span> AWARDS</li>
+          <li className={activeSection === 'CONTACT' ? 'text-[#0052ff]' : ''}><span className={`nav-num ${activeSection === 'CONTACT' ? 'text-[#0052ff]' : ''}`}>05</span> CONTACT</li>
         </ul>
       </nav>
 

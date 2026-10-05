@@ -9,10 +9,42 @@ import profile2Img from '../../assets/profile2.png';
 gsap.registerPlugin(ScrollTrigger);
 
 const statsData = [
-  { id: 'exp', target: 4, prefix: '0', suffix: '+', label: 'YEARS EXPERIENCE', desc: 'Full-Stack & Systems' },
-  { id: 'proj', target: 35, prefix: '', suffix: '+', label: 'PROJECTS COMPLETED', desc: 'Web & Digital Apps' },
-  { id: 'sat', target: 99, prefix: '', suffix: '%', label: 'CLIENT SATISFACTION', desc: 'High Quality Delivery' },
-  { id: 'code', target: 100, prefix: '', suffix: '%', label: 'CODE INTEGRITY', desc: 'Scalable & Tested' },
+  { 
+    id: 'projects', 
+    target: 800, 
+    prefix: '', 
+    suffix: '+', 
+    isDecimal: false, 
+    line1: 'PROJECTS', 
+    line2: 'DELIVERED' 
+  },
+  { 
+    id: 'satisfaction', 
+    target: 99, 
+    prefix: '', 
+    suffix: '%', 
+    isDecimal: false, 
+    line1: 'CLIENT', 
+    line2: 'SATISFACTION RATE' 
+  },
+  { 
+    id: 'rating', 
+    target: 4.8, 
+    prefix: '', 
+    suffix: '*', 
+    isDecimal: true, 
+    line1: 'STAR AVERAGE', 
+    line2: 'RATING' 
+  },
+  { 
+    id: 'experience', 
+    target: 5, 
+    prefix: '0', 
+    suffix: '+', 
+    isDecimal: false, 
+    line1: 'YEARS OF', 
+    line2: 'EXPERIENCE' 
+  },
 ];
 
 export default function AboutMe() {
@@ -52,20 +84,21 @@ export default function AboutMe() {
       '-=0.8'
     )
     .fromTo(
-      statsDeckRef.current,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+      '.meet-about-section .editorial-stat-item',
+      { opacity: 0, y: 24 },
+      { opacity: 1, y: 0, duration: 0.75, stagger: 0.1, ease: 'power3.out' },
       '-=0.6'
     );
 
-    // Animate Number Counters
+    // Modern GSAP Number Counter Animations with ScrollTrigger
     statsData.forEach((stat, index) => {
       const el = statRefs.current[index];
       if (!el) return;
       const obj = { count: 0 };
+      
       gsap.to(obj, {
         count: stat.target,
-        duration: 2.0,
+        duration: 2.2,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: containerRef.current,
@@ -73,9 +106,13 @@ export default function AboutMe() {
           toggleActions: 'play none none none',
         },
         onUpdate: () => {
-          const val = Math.floor(obj.count);
-          const displayVal = stat.prefix && val < 10 ? `${stat.prefix}${val}` : `${val}`;
-          el.textContent = `${displayVal}${stat.suffix}`;
+          if (stat.isDecimal) {
+            el.textContent = `${obj.count.toFixed(1)}${stat.suffix}`;
+          } else {
+            const val = Math.floor(obj.count);
+            const displayVal = stat.prefix && val < 10 ? `${stat.prefix}${val}` : `${val}`;
+            el.textContent = `${displayVal}${stat.suffix}`;
+          }
         },
       });
     });
@@ -149,7 +186,7 @@ export default function AboutMe() {
           </div>
         </div>
 
-        {/* Right Column: Title & Futuristic Animated Counters */}
+        {/* Right Column: Title & Modern Editorial Counters Grid */}
         <div className="meet-about-right-col">
           <div className="meet-about-big-title-col">
             <h1 ref={bigTitleRef} className="meet-about-big-title">
@@ -163,25 +200,24 @@ export default function AboutMe() {
               <span className="stats-deck-title">// TRACK RECORD & METRICS</span>
             </div>
 
-            <div className="meet-about-stats-grid">
+            {/* Clean Modern Editorial 2x2 Stats Grid */}
+            <div className="editorial-stats-grid">
               {statsData.map((stat, idx) => (
-                <div key={stat.id} className="meet-stat-card">
-                  <div className="meet-stat-header-row">
-                    <span className="meet-stat-index">0{idx + 1}</span>
-                    <span className="meet-stat-corner-tag">LIVE</span>
-                  </div>
-                  <div className="meet-stat-number-wrap">
+                <div key={stat.id} className="editorial-stat-item">
+                  <div className="stat-num-wrap">
                     <span
                       ref={(el) => {
                         statRefs.current[idx] = el;
                       }}
-                      className="meet-stat-number"
+                      className="editorial-stat-number"
                     >
-                      {stat.prefix}0{stat.suffix}
+                      {stat.isDecimal ? `0.0${stat.suffix}` : `${stat.prefix}0${stat.suffix}`}
                     </span>
                   </div>
-                  <div className="meet-stat-label">{stat.label}</div>
-                  <div className="meet-stat-desc">{stat.desc}</div>
+                  <div className="stat-label-wrap">
+                    <span className="editorial-stat-label-line">{stat.line1}</span>
+                    <span className="editorial-stat-label-line">{stat.line2}</span>
+                  </div>
                 </div>
               ))}
             </div>

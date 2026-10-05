@@ -1,5 +1,5 @@
 /* =========================================================================
-   ABOUT ME: "MEET DILANTHA" CYBERNETIC EDITORIAL SECTION
+   ABOUT ME: "MEET DILANTHA" CYBERNETIC EDITORIAL SECTION (BALANCED BLUE ACCENTS)
    ========================================================================= */
 
 .meet-about-section {
@@ -69,7 +69,8 @@
 
 .meet-about-section .crumb-active {
   color: #ffffff;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: 1.5px solid #0052ff;
+  padding-bottom: 1px;
 }
 
 /* MAIN BODY (3-COLUMN LAYOUT) */
@@ -77,7 +78,7 @@
   position: relative;
   z-index: 10;
   display: grid;
-  grid-template-columns: clamp(400px, 34vw, 540px) 1.2fr 0.9fr;
+  grid-template-columns: clamp(380px, 32vw, 500px) 1.2fr 1.1fr;
   gap: 48px;
   align-items: start;
   width: 100%;
@@ -95,16 +96,14 @@
   border-radius: 12px;
   overflow: hidden;
   background: #111216;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: 
-    0 30px 70px -15px rgba(0, 0, 0, 0.95),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.95);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
 .meet-about-section .meet-about-portrait-card:hover {
   transform: translateY(-4px) scale(1.01);
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.35);
   box-shadow: 0 35px 85px -10px rgba(0, 0, 0, 0.95);
 }
 
@@ -139,10 +138,9 @@
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.14em;
-  color: #ffffff;
+  color: #9ca3af;
   text-transform: uppercase;
   margin-bottom: 12px;
-  opacity: 0.9;
 }
 
 .meet-about-section .meet-about-hero-title {
@@ -176,31 +174,31 @@
   letter-spacing: 0.02em;
 }
 
-/* Right Column: Title & Counters Deck */
+/* Right Column: Title & Editorial Counters Grid */
 .meet-about-section .meet-about-right-col {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 28px;
   width: 100%;
 }
 
 .meet-about-section .meet-about-big-title-col {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: flex-start;
   padding-top: 4px;
 }
 
 .meet-about-section .meet-about-big-title {
   font-family: 'Anton', 'Bebas Neue', sans-serif;
-  font-size: clamp(3rem, 5.2vw, 5.8rem);
+  font-size: clamp(2.8rem, 4.6vw, 5.2rem);
   font-weight: 900;
   line-height: 0.88;
   letter-spacing: 0.04em;
   color: #ffffff;
   text-transform: uppercase;
   margin: 0;
-  text-align: right;
+  text-align: left;
   white-space: nowrap;
 }
 
@@ -208,22 +206,24 @@
 .meet-about-section .meet-about-stats-deck {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   width: 100%;
+  margin-top: 8px;
 }
 
 .meet-about-section .stats-deck-header {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 4px;
 }
 
 .meet-about-section .stats-deck-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #00ff88;
-  box-shadow: 0 0 10px #00ff88;
+  background: #0052ff;
+  box-shadow: 0 0 8px #0052ff;
   display: inline-block;
   animation: meetPulseDot 2s infinite ease-in-out;
 }
@@ -234,104 +234,113 @@
 }
 
 .meet-about-section .stats-deck-title {
-  font-size: 9.5px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.16em;
   color: #9ca3af;
   text-transform: uppercase;
 }
 
-/* 2x2 Counters Grid */
-.meet-about-section .meet-about-stats-grid {
+/* =========================================================================
+   EDITORIAL 2x2 STATS GRID (MINIMAL & PRECISE)
+   ========================================================================= */
+
+.meet-about-section .editorial-stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 0;
   width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.meet-about-section .meet-stat-card {
+.meet-about-section .editorial-stat-item {
   position: relative;
-  background: rgba(18, 20, 26, 0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 16px 18px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  padding: 24px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Odd items have right divider border */
+.meet-about-section .editorial-stat-item:nth-child(odd) {
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  padding-left: 0;
+}
+
+/* Bottom row has no bottom border inside grid */
+.meet-about-section .editorial-stat-item:nth-child(3),
+.meet-about-section .editorial-stat-item:nth-child(4) {
+  border-bottom: none;
+}
+
+.meet-about-section .editorial-stat-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Number Container & Typography */
+.meet-about-section .stat-num-wrap {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.meet-about-section .editorial-stat-number {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(2.4rem, 3.5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  display: inline-block;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.meet-about-section .editorial-stat-item:hover .editorial-stat-number {
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+/* Label Container & Typography (2 stacked lines) */
+.meet-about-section .stat-label-wrap {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  justify-content: center;
+  gap: 2px;
 }
 
-.meet-about-section .meet-stat-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.28);
-  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
-}
-
-.meet-about-section .meet-stat-header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.meet-about-section .meet-stat-index {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: #6b7280;
-}
-
-.meet-about-section .meet-stat-corner-tag {
-  font-size: 7.5px;
+.meet-about-section .editorial-stat-label-line {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(8.5px, 0.72vw, 10px);
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #00ff88;
-  background: rgba(0, 255, 136, 0.1);
-  border: 1px solid rgba(0, 255, 136, 0.25);
-  padding: 1px 5px;
-  border-radius: 3px;
-}
-
-.meet-about-section .meet-stat-number-wrap {
-  margin-bottom: 6px;
-}
-
-.meet-about-section .meet-stat-number {
-  font-family: 'Anton', 'Bebas Neue', sans-serif;
-  font-size: clamp(2.2rem, 3.2vw, 2.9rem);
-  font-weight: 900;
-  line-height: 1;
-  color: #ffffff;
-  letter-spacing: 0.02em;
-  display: inline-block;
-}
-
-.meet-about-section .meet-stat-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: #f3f4f6;
-  text-transform: uppercase;
-  margin-bottom: 3px;
-}
-
-.meet-about-section .meet-stat-desc {
-  font-size: 9px;
-  line-height: 1.35;
   color: #9ca3af;
-  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  line-height: 1.25;
+  white-space: nowrap;
+  transition: color 0.3s ease;
 }
 
-/* RESPONSIVENESS */
+.meet-about-section .editorial-stat-item:hover .editorial-stat-label-line {
+  color: #ffffff;
+}
+
+/* =========================================================================
+   RESPONSIVENESS
+   ========================================================================= */
+
 @media (max-width: 1320px) {
   .meet-about-section .meet-about-body {
-    grid-template-columns: clamp(340px, 28vw, 420px) 1.1fr 1fr;
+    grid-template-columns: clamp(320px, 28vw, 400px) 1.1fr 1fr;
     gap: 36px;
   }
 
   .meet-about-section .meet-about-big-title {
-    font-size: 3.8rem;
+    font-size: 3.4rem;
   }
 }
 
@@ -358,7 +367,7 @@
     white-space: normal;
   }
 
-  .meet-about-section .meet-about-stats-grid {
+  .meet-about-section .editorial-stats-grid {
     grid-template-columns: repeat(2, 1fr);
     max-width: 600px;
   }
@@ -374,10 +383,19 @@
   }
 
   .meet-about-section .meet-about-big-title {
-    font-size: 2.8rem;
+    font-size: 2.6rem;
   }
 
-  .meet-about-section .meet-about-stats-grid {
+  .meet-about-section .editorial-stats-grid {
     grid-template-columns: 1fr;
+  }
+
+  .meet-about-section .editorial-stat-item:nth-child(odd) {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .meet-about-section .editorial-stat-item:nth-child(3) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
 }

@@ -1,63 +1,13 @@
 /* =========================================================================
-   WORKS SECTION (SCOPED STYLES)
+   WORKS SECTION (FULLSCREEN HORIZONTAL TIMELINE & BALL PUSH)
    ========================================================================= */
 
 .works-section {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  position: relative;
+  width: 100%;
 }
 
 .works-section .project-slide {
   will-change: transform;
-}
-
-.works-section .intro-right {
-  width: 320px;
-  background-color: #ffffff;
-  color: #111111;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-left: 1px solid rgba(0,0,0,0.1);
-  flex-shrink: 0;
-}
-
-.works-section .name-cream {
-  color: #111111;
-}
-
-.works-section .right-subtitle {
-  color: #666;
-}
-
-.works-section .icon-box {
-  border: 1px solid rgba(0,0,0,0.2);
-  color: #111;
-}
-
-.works-section .bio-text, 
-.works-section .location-info {
-  color: #555;
-}
-
-.works-section .right-nav-menu ul li {
-  color: #555;
-}
-
-.works-section .right-nav-menu ul li:hover {
-  color: #111;
-}
-
-.works-section .portrait-label {
-  background: #ffffff;
-  color: #111;
-  border: 1px solid rgba(0,0,0,0.2);
-}
-
-.works-section .email-box {
-  background: rgba(0,0,0,0.05);
-}
-
-.works-section .email-icon {
-  background: rgba(0,0,0,0.1);
 }

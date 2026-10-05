@@ -1,0 +1,175 @@
+/* =========================================================================
+   TECHNOLOGIES SECTION (OBSIDIAN DARK THEME)
+   ========================================================================= */
+
+.technologies-section {
+  position: relative;
+  width: 100%;
+  background-color: #08080a;
+  color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 100px 48px;
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 20;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.technologies-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+}
+
+/* Left Column */
+.technologies-left {
+  flex: 0 0 40%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tech-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tech-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #0052ff;
+  box-shadow: 0 0 8px #0052ff;
+  display: inline-block;
+}
+
+.tech-tag-text {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #0052ff;
+  text-transform: uppercase;
+}
+
+.tech-heading {
+  font-family: 'Anton', 'Inter', sans-serif;
+  font-size: clamp(2.6rem, 4vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.tech-heading-accent {
+  color: #0052ff;
+}
+
+.tech-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #9ca3af;
+  margin: 4px 0 0 0;
+  max-width: 400px;
+}
+
+/* Right Grid */
+.technologies-right {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 48px;
+  row-gap: 0;
+  width: 100%;
+}
+
+.tech-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 26px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e4e4e7;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+  position: relative;
+  border-radius: 8px;
+}
+
+.tech-item-row:hover {
+  background: rgba(255, 255, 255, 0.035);
+  color: #ffffff;
+  border-bottom-color: rgba(0, 82, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.tech-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a1a1aa;
+  transition: color 0.3s ease, transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.tech-item-row:hover .tech-icon-box {
+  color: #0052ff;
+  transform: scale(1.1);
+}
+
+.tech-name {
+  transition: color 0.3s ease;
+}
+
+.tech-item-row:hover .tech-name {
+  color: #ffffff;
+}
+
+/* =========================================================================
+   RESPONSIVENESS
+   ========================================================================= */
+
+@media (max-width: 1024px) {
+  .technologies-section {
+    padding: 70px 28px;
+  }
+
+  .technologies-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .technologies-left {
+    max-width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .technologies-right {
+    column-gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .technologies-section {
+    padding: 50px 18px;
+  }
+
+  .technologies-right {
+    grid-template-columns: 1fr;
+  }
+
+  .tech-item-row {
+    padding: 20px 8px;
+  }
+}

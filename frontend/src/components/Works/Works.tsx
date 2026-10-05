@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import RightSidebar from '../Common/RightSidebar';
 import { PORTFOLIO_INFO } from '../../data/portfolioData';
 import './Works.css';
 
@@ -31,7 +30,7 @@ export default function Works() {
   useGSAP(() => {
     if (!container.current || !scrollWrapper.current) return;
 
-    const getScrollAmount = () => -(scrollWrapper.current!.scrollWidth - window.innerWidth);
+    const getScrollAmount = () => -(scrollWrapper.current!.scrollWidth - container.current!.clientWidth);
     const scrollEnd = scrollWrapper.current.scrollWidth;
     
     gsap.to(scrollWrapper.current, {
@@ -66,20 +65,20 @@ export default function Works() {
 
     // Text slides in and bounces
     hitTl.from('.works-section .pushed-text', {
-      x: 800,
-      duration: 1.5,
+      x: 400,
+      duration: 1.2,
       ease: "bounce.out"
     }, 0);
 
     // Ball recoils/shakes right when the text slams into it
     hitTl.to('.works-section .floating-object', {
-      x: -30,
+      x: -25,
       rotation: -15,
       duration: 0.15,
       yoyo: true,
       repeat: 1,
       ease: "sine.inOut"
-    }, 0.55);
+    }, 0.45);
 
     // 2. Scrub animation
     gsap.to('.works-section .floating-object', {
@@ -102,81 +101,63 @@ export default function Works() {
     <section ref={container} className="works-section bg-white text-black flex w-full h-[100dvh] overflow-hidden relative z-50">
       
       {/* Left Area (Horizontal Scroll) */}
-      <div className="flex-1 flex flex-col relative h-full">
+      <div className="flex-1 flex flex-col relative h-full overflow-hidden">
         
         {/* Header */}
-        <div className="absolute top-6 left-6 md:top-12 md:left-12 z-20 flex flex-col z-[100] pointer-events-none">
-          <div className="text-gray-600 text-[10px] md:text-sm tracking-[0.2em] mb-1 md:mb-2 uppercase flex items-center">
-            DILANTHA DEV / 2018 <span className="mx-1 md:mx-2">→</span> <span className="text-[#df1b3f] font-bold">NOW</span>
+        <div className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-10 md:left-10 z-20 flex flex-col z-[100] pointer-events-none">
+          <div className="text-gray-600 text-[10px] sm:text-xs md:text-sm tracking-[0.2em] mb-1 uppercase flex items-center">
+            DILANTHA DEV / 2018 <span className="mx-1 md:mx-2">→</span> <span className="text-[#0052ff] font-bold">NOW</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold font-['Anton',sans-serif] uppercase tracking-wide leading-none md:leading-tight">
-            IT TOOK <span className="text-[#df1b3f]">MY TIME.</span>
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold font-['Anton',sans-serif] uppercase tracking-wide leading-none md:leading-tight">
+            IT TOOK <span className="text-[#0052ff]">MY TIME.</span>
           </h2>
-          <div className="mt-4 md:mt-8 text-2xl md:text-3xl font-bold font-['Anton',sans-serif]">
-            <span className="text-[#df1b3f] transition-all duration-300">{activeIndexStr}</span> <span className="text-gray-400">/ {totalProjectsStr}</span>
+          <div className="mt-2 sm:mt-4 md:mt-6 text-xl sm:text-2xl md:text-3xl font-bold font-['Anton',sans-serif]">
+            <span className="text-[#0052ff] transition-all duration-300">{activeIndexStr}</span> <span className="text-gray-400">/ {totalProjectsStr}</span>
           </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="hidden md:block absolute left-12 bottom-[20%] z-20 font-['Caveat',cursive] text-3xl text-black opacity-80 z-[100] pointer-events-none">
+        <div className="hidden md:block absolute left-10 bottom-[18%] z-20 font-['Caveat',cursive] text-2xl md:text-3xl text-black opacity-75 z-[100] pointer-events-none">
           SCROLL →
-        </div>
-
-        {/* Bottom Timeline */}
-        <div className="absolute bottom-4 left-6 right-6 md:bottom-8 md:left-12 md:right-12 z-20 flex justify-between text-[8px] md:text-xs text-gray-500 tracking-widest z-[100] pointer-events-none">
-          <div>
-            <div className="text-black mb-1">2022 → NOW</div>
-            <div className="font-bold text-gray-600 text-[10px] md:text-sm leading-none">SENIOR DEV</div>
-            <div className="text-[8px] md:text-[10px]">FULL STACK</div>
-          </div>
-          <div className="hidden sm:block">
-            <div className="text-black mb-1">2019 → 2022</div>
-            <div className="font-bold text-gray-600 text-[10px] md:text-sm leading-none">FREELANCE</div>
-            <div className="text-[8px] md:text-[10px]">WEB DEV</div>
-          </div>
-          <div>
-            <div className="text-black mb-1">2015 → 2019</div>
-            <div className="font-bold text-gray-600 text-[10px] md:text-sm leading-none">STUDENT</div>
-            <div className="text-[8px] md:text-[10px]">PROJECTS</div>
-          </div>
         </div>
 
         {/* Horizontal Scroll Area */}
         <div className="relative w-full h-full flex items-center overflow-hidden">
-          <div ref={scrollWrapper} className="flex h-full w-max">
+          <div ref={scrollWrapper} className="flex h-full w-max items-center">
             
-            {/* Intro Text Slide */}
-            <div className="project-slide w-[100vw] h-full flex flex-col md:flex-row items-center justify-center shrink-0 pl-6 pr-6 md:pl-[40vw] md:pr-32 pt-32 md:pt-0">
+            {/* Intro Text Slide (Responsive & Centered) */}
+            <div className="project-slide w-[90vw] sm:w-[78vw] md:w-[68vw] lg:w-[58vw] h-full flex items-center justify-center shrink-0 px-4 sm:px-8 md:px-12">
               
-              {/* Floating Object that rolls (pushes) */}
-              <div className="floating-object w-48 h-48 md:w-64 md:h-64 rounded-full bg-[radial-gradient(circle_at_30%_30%,_#ff4b6b,_#df1b3f,_#7a0e21)] shadow-[10px_15px_30px_rgba(0,0,0,0.2),_inset_-10px_-10px_20px_rgba(0,0,0,0.2)] flex items-center justify-center z-20 shrink-0 mr-2 lg:mr-4 relative overflow-hidden border-2 border-black/10">
+              {/* Floating 3D Ball that rolls */}
+              <div className="floating-object w-28 h-28 sm:w-40 sm:h-40 md:w-52 md:h-52 rounded-full bg-[radial-gradient(circle_at_30%_30%,_#60a5fa,_#0052ff,_#002b80)] shadow-[10px_15px_30px_rgba(0,0,0,0.2),_inset_-10px_-10px_20px_rgba(0,0,0,0.2)] flex items-center justify-center z-20 shrink-0 mr-3 sm:mr-6 md:mr-8 relative overflow-hidden border-2 border-black/10">
                  <div className="absolute w-full h-1 bg-white/40 top-1/2 -translate-y-1/2"></div>
                  <div className="absolute h-full w-1 bg-white/40 left-1/2 -translate-x-1/2"></div>
-                 <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-[4px] border-white/60 bg-[#df1b3f] shadow-inner flex items-center justify-center z-10">
-                    <div className="w-4 h-4 bg-white rounded-full shadow-lg"></div>
+                 <div className="w-10 h-10 sm:w-14 sm:h-14 md:w-18 md:h-18 rounded-full border-[3px] md:border-[4px] border-white/60 bg-[#0052ff] shadow-inner flex items-center justify-center z-10">
+                    <div className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 bg-white rounded-full shadow-lg"></div>
                  </div>
               </div>
 
               {/* Text being pushed */}
-              <h1 className="pushed-text text-[14vw] font-['Anton',sans-serif] whitespace-nowrap text-[#df1b3f] tracking-widest uppercase z-10 drop-shadow-sm leading-none pr-32">
-                DESIGNED <span className="text-transparent bg-clip-text bg-gradient-to-r from-black to-gray-400">FOR YOU.</span>
+              <h1 className="pushed-text text-[clamp(2rem,5.5vw,6.5rem)] font-['Anton',sans-serif] whitespace-nowrap text-[#0052ff] tracking-wide uppercase z-10 drop-shadow-sm leading-none">
+                DESIGNED <span className="text-transparent bg-clip-text bg-gradient-to-r from-black to-gray-500">FOR YOU.</span>
               </h1>
 
             </div>
 
+            {/* Projects Horizontal Slider Cards */}
             {projects.map((project, i) => (
-              <div key={i} className="project-slide w-[80vw] sm:w-[50vw] md:w-[40vw] lg:w-[35vw] px-4 h-full flex items-center justify-center relative shrink-0">
+              <div key={i} className="project-slide w-[85vw] sm:w-[55vw] md:w-[42vw] lg:w-[35vw] px-3 sm:px-4 md:px-6 h-full flex items-center justify-center relative shrink-0">
                 
-                <div className="relative group cursor-pointer w-full h-[60vh] md:h-[70vh]">
+                <div className="relative group cursor-pointer w-full h-[52vh] sm:h-[58vh] md:h-[65vh] max-h-[580px]">
                   
                   {/* Badge */}
-                  <div className="absolute -top-4 -left-4 bg-black text-white font-bold px-3 py-1 flex items-center space-x-2 z-10">
-                    <span className="w-2 h-2 rounded-full bg-[#df1b3f]"></span>
+                  <div className="absolute -top-3.5 -left-3.5 bg-black text-white text-xs font-bold px-3 py-1 flex items-center space-x-2 z-10 rounded-sm shadow-md">
+                    <span className="w-2 h-2 rounded-full bg-[#0052ff]"></span>
                     <span>{project.id}</span>
                   </div>
 
                   {/* Image/Video */}
-                  <div className="w-full h-full overflow-hidden shadow-lg border border-gray-200">
+                  <div className="w-full h-full overflow-hidden shadow-xl border border-gray-200 rounded-xl bg-gray-100">
                     {project.image.endsWith('.mp4') ? (
                       <video 
                         src={project.image} 
@@ -184,24 +165,24 @@ export default function Works() {
                         loop 
                         muted 
                         playsInline
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                       />
                     ) : (
                       <img 
                         src={project.image} 
                         alt={project.title} 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                       />
                     )}
                   </div>
                   
                   {/* Title Overlay */}
-                  <div className="absolute -bottom-6 left-6 text-[5vw] md:text-[3vw] font-['Anton',sans-serif] text-black uppercase leading-none drop-shadow-sm">
+                  <div className="absolute -bottom-5 left-3 sm:left-4 md:left-6 text-[clamp(1.3rem,2.6vw,2.4rem)] font-['Anton',sans-serif] text-black uppercase leading-none drop-shadow-sm">
                     {project.title}
                   </div>
                   
                   {/* Subtitle */}
-                  <div className="absolute top-4 right-4 text-[10px] md:text-xs tracking-widest uppercase bg-white/90 px-3 py-1 text-black border border-black/10 shadow-sm">
+                  <div className="absolute top-4 right-4 text-[9px] md:text-[10px] font-bold tracking-widest uppercase bg-white/90 backdrop-blur-sm px-3 py-1 text-black border border-black/10 rounded-full shadow-sm">
                     {project.subtitle}
                   </div>
 
@@ -213,9 +194,6 @@ export default function Works() {
         </div>
 
       </div>
-
-      {/* Right Sidebar */}
-      <RightSidebar activeSection="WORKS" />
 
     </section>
   );

@@ -77,7 +77,7 @@ export default function FAQ() {
         
         <div className="text-center">
           <h2 className="text-4xl md:text-6xl font-light text-black tracking-tight">
-            Frequently Asked <span className="font-serif italic text-[#df1b3f]">Questions</span>
+            Frequently Asked <span className="font-serif italic text-[#0052ff]">Questions</span>
           </h2>
           <p className="mt-4 text-black/50 text-sm md:text-base max-w-lg mx-auto">
             Everything you need to know about my process and how we can work together.
@@ -94,12 +94,12 @@ export default function FAQ() {
                 onClick={() => toggleFaq(i)}
               >
                 <div className="flex justify-between items-center py-6">
-                  <h3 className={`text-lg md:text-2xl transition-colors duration-300 ${isOpen ? 'text-[#df1b3f]' : 'text-black'}`}>
+                  <h3 className={`text-lg md:text-2xl transition-colors duration-300 ${isOpen ? 'text-[#0052ff]' : 'text-black'}`}>
                     {faq.question}
                   </h3>
-                  <div className={`relative w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isOpen ? 'border-[#df1b3f] bg-[#df1b3f]/10' : 'border-black/20'}`}>
-                    <span className={`absolute w-3.5 h-[1.5px] bg-current transition-transform duration-500 ease-in-out ${isOpen ? 'rotate-180 text-[#df1b3f]' : 'text-black'}`}></span>
-                    <span className={`absolute w-3.5 h-[1.5px] bg-current transition-transform duration-500 ease-in-out ${isOpen ? 'rotate-180 text-[#df1b3f] opacity-0' : 'rotate-90 text-black'}`}></span>
+                  <div className={`relative w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isOpen ? 'border-[#0052ff] bg-[#0052ff]/10' : 'border-black/20'}`}>
+                    <span className={`absolute w-3.5 h-[1.5px] bg-current transition-transform duration-500 ease-in-out ${isOpen ? 'rotate-180 text-[#0052ff]' : 'text-black'}`}></span>
+                    <span className={`absolute w-3.5 h-[1.5px] bg-current transition-transform duration-500 ease-in-out ${isOpen ? 'rotate-180 text-[#0052ff] opacity-0' : 'rotate-90 text-black'}`}></span>
                   </div>
                 </div>
                 

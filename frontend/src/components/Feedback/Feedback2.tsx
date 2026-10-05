@@ -76,13 +76,19 @@ const feedbacks = [
 
 export default function Feedback2() {
   return (
-    <section id="feedback" className="w-full bg-white py-28 overflow-hidden relative">
-      <div className="text-center mb-20 px-4">
-        <h2 className="text-black text-[3rem] md:text-[4.5rem] font-bold mb-4 leading-none" style={{ fontFamily: "'Anton', sans-serif", letterSpacing: '1px' }}>
-          Hear from our clients
+    <section id="feedback" className="w-full bg-[#08080a] text-white py-28 overflow-hidden relative border-t border-b border-white/[0.06]">
+      
+      {/* Section Header */}
+      <div className="text-center mb-16 px-4 flex flex-col items-center">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#0052ff] shadow-[0_0_8px_#0052ff]"></span>
+          <span className="text-[10px] font-bold tracking-[0.16em] text-[#0052ff] uppercase">CLIENT TESTIMONIALS</span>
+        </div>
+        <h2 className="text-white text-[3rem] md:text-[4.5rem] font-bold mb-3 leading-none uppercase" style={{ fontFamily: "'Anton', sans-serif", letterSpacing: '1px' }}>
+          Hear from our <span className="text-[#0052ff]">clients</span>
         </h2>
-        <p className="text-[#333333] text-lg md:text-xl font-medium max-w-2xl mx-auto">
-          See for yourself what others have to say about us.
+        <p className="text-gray-400 text-sm md:text-base font-normal max-w-xl mx-auto">
+          See for yourself what founders and product teams have to say about working together.
         </p>
       </div>
 
@@ -90,8 +96,8 @@ export default function Feedback2() {
       <div className="relative w-full flex overflow-x-hidden group">
         
         {/* Fading Edges for smooth entry/exit */}
-        <div className="absolute top-0 left-0 w-32 md:w-64 h-full bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute top-0 right-0 w-32 md:w-64 h-full bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute top-0 left-0 w-24 md:w-56 h-full bg-gradient-to-r from-[#08080a] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-24 md:w-56 h-full bg-gradient-to-l from-[#08080a] to-transparent z-10 pointer-events-none"></div>
 
         <div className="flex animate-marquee group-hover:[animation-play-state:paused] whitespace-nowrap py-4">
           {/* First set of cards */}
@@ -123,12 +129,12 @@ function FeedbackCard({ item, index }: { item: typeof feedbacks[0], index: numbe
   const isQuote = index % 3 === 1;
 
   return (
-    <div className="w-[320px] md:w-[420px] flex-shrink-0 mx-4 md:mx-6 flex flex-col whitespace-normal bg-white p-8 md:p-10 transition-transform hover:-translate-y-2">
+    <div className="w-[320px] md:w-[420px] flex-shrink-0 mx-3 md:mx-5 flex flex-col whitespace-normal bg-[#111216] border border-white/[0.12] rounded-2xl p-7 md:p-9 shadow-[0_20px_45px_rgba(0,0,0,0.8)] transition-all duration-300 hover:-translate-y-2 hover:border-[#0052ff]/50 hover:shadow-[0_25px_50px_rgba(0,82,255,0.15)]">
       
-      {/* Avatar */}
-      <div className="mb-8">
+      {/* Avatar / Quote Icon */}
+      <div className="mb-6">
         {isQuote ? (
-          <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border-2 border-[#df1b3f] flex items-center justify-center text-[#df1b3f] text-3xl md:text-4xl font-serif leading-none pt-3">
+          <div className="w-13 h-13 md:w-15 md:h-15 rounded-full border-2 border-[#0052ff] bg-[#0052ff]/10 flex items-center justify-center text-[#0052ff] text-3xl md:text-4xl font-serif leading-none pt-2 shadow-[0_0_15px_rgba(0,82,255,0.3)]">
             &rdquo;
           </div>
         ) : (
@@ -137,37 +143,37 @@ function FeedbackCard({ item, index }: { item: typeof feedbacks[0], index: numbe
             alt={item.name} 
             loading="lazy"
             decoding="async"
-            className="w-14 h-14 md:w-16 md:h-16 rounded-full border-2 border-[#df1b3f] object-cover p-[2px]" 
+            className="w-13 h-13 md:w-15 md:h-15 rounded-full border-2 border-[#0052ff] object-cover p-[2px] shadow-[0_0_15px_rgba(0,82,255,0.25)]" 
           />
         )}
       </div>
 
       {/* Label */}
-      <div className="text-[#df1b3f] font-bold text-xs md:text-sm mb-4 uppercase tracking-widest">
+      <div className="text-[#0052ff] font-bold text-xs mb-3 uppercase tracking-widest">
         {item.label}
       </div>
 
       {/* Title */}
-      <h3 className="text-black text-2xl md:text-3xl font-bold mb-6 leading-tight" style={{ fontFamily: "'Anton', sans-serif", letterSpacing: '0.5px' }}>
+      <h3 className="text-white text-xl md:text-2xl font-bold mb-4 leading-tight" style={{ fontFamily: "'Anton', sans-serif", letterSpacing: '0.5px' }}>
         {item.title}
       </h3>
 
       {/* Quote */}
-      <p className="text-[#555555] text-sm md:text-base leading-relaxed mb-6">
+      <p className="text-gray-300 text-xs md:text-sm leading-relaxed mb-6 font-normal">
         &ldquo;{item.quote}&rdquo;
       </p>
 
       {/* Embedded Project Image */}
       {item.image && (
-        <div className="w-full h-48 mb-8 rounded-xl overflow-hidden border border-gray-200/50 shadow-sm">
-          <img src={item.image} alt="Project reference" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+        <div className="w-full h-44 mb-6 rounded-xl overflow-hidden border border-white/[0.1] shadow-inner bg-black/40">
+          <img src={item.image} alt="Project reference" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 opacity-90 hover:opacity-100" />
         </div>
       )}
 
       {/* Author */}
-      <div className="mt-auto pt-4 border-t border-gray-100">
-        <h4 className="text-black font-bold text-base md:text-lg mb-1">{item.name}</h4>
-        <p className="text-[#888888] text-xs md:text-sm">{item.role}</p>
+      <div className="mt-auto pt-4 border-t border-white/[0.08]">
+        <h4 className="text-white font-bold text-sm md:text-base mb-0.5">{item.name}</h4>
+        <p className="text-gray-400 text-xs">{item.role}</p>
       </div>
       
     </div>

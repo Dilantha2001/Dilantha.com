@@ -4,21 +4,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import './Hero2.css';
 import heroVideo from '../../assets/hero.mp4';
-import { 
-  LuCompass, 
-  LuLayoutGrid, 
-  LuArrowDownRight, 
-  LuLayers, 
-  LuExternalLink 
-} from 'react-icons/lu';
 import { MdWavingHand } from 'react-icons/md';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero2 = () => {
   const [isPlaying, setIsPlaying] = useState(true);
-  const [activeTab, setActiveTab] = useState('001');
-  const [bannerVisible, setBannerVisible] = useState(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
@@ -31,7 +22,6 @@ const Hero2 = () => {
   const headerRef = useRef<HTMLElement>(null);
   const bottomLeftRef = useRef<HTMLDivElement>(null);
   const bottomBarRef = useRef<HTMLDivElement>(null);
-  const rightDockRef = useRef<HTMLElement>(null);
 
   // GSAP ScrollTrigger: Split at the two S's (IMPOS <-> SIBLE) & zoom video into fullscreen
   useGSAP(() => {
@@ -72,7 +62,7 @@ const Hero2 = () => {
       0
     )
     .to(
-      [headerRef.current, bottomLeftRef.current, bottomBarRef.current, rightDockRef.current],
+      [headerRef.current, bottomLeftRef.current, bottomBarRef.current],
       {
         opacity: 0,
         y: (i) => (i === 0 ? -40 : 40),
@@ -177,9 +167,7 @@ const Hero2 = () => {
         <header ref={headerRef} className="hero2-header">
           <div className="hero2-brand">
             <span className="hero2-brand-name">DILANTHA RANAWEERA</span>
-            <span className="hero2-status-pill">
-              <span className="hero2-status-dot" /> AVAILABLE FOR Q2/Q3 PROJECTS
-            </span>
+            
           </div>
 
           <nav className="hero2-nav">
@@ -252,61 +240,9 @@ const Hero2 = () => {
           </button>
         </div>
 
-        {/* Floating Right Dock */}
-        <aside ref={rightDockRef} className="hero2-right-dock" aria-label="Quick navigation">
-          <button 
-            className={`hero2-dock-btn ${activeTab === '001' ? 'active' : ''}`}
-            onClick={() => setActiveTab('001')}
-            title="3D Viewport"
-          >
-            <LuCompass />
-          </button>
-          <button 
-            className={`hero2-dock-btn ${activeTab === '002' ? 'active' : ''}`}
-            onClick={() => setActiveTab('002')}
-            title="Layer Architecture"
-          >
-            <LuLayers />
-          </button>
-          <button 
-            className={`hero2-dock-btn ${activeTab === '003' ? 'active' : ''}`}
-            onClick={() => setActiveTab('003')}
-            title="Project Index"
-          >
-            <LuLayoutGrid />
-          </button>
-          <button 
-            className="hero2-dock-btn"
-            onClick={scrollToNext}
-            title="Next Section"
-          >
-            <LuArrowDownRight />
-          </button>
-        </aside>
+       
 
-        {/* Bottom Minimal Notice / Cookie Pill */}
-        {bannerVisible && (
-          <div className="hero2-cookie-banner">
-            <span className="hero2-cookie-text">
-              Crafting digital art and scalable systems at the edge of possibility.
-            </span>
-            <div className="hero2-cookie-actions">
-              <button 
-                className="hero2-cookie-btn decline"
-                onClick={() => setBannerVisible(false)}
-              >
-                DISMISS
-              </button>
-              <a 
-                href="#works" 
-                className="hero2-cookie-btn accept"
-                onClick={() => setBannerVisible(false)}
-              >
-                EXPLORE WORKS <LuExternalLink size={12} style={{ marginLeft: 4 }} />
-              </a>
-            </div>
-          </div>
-        )}
+        
       </section>
     </div>
   );

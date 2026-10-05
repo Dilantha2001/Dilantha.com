@@ -39,5 +39,5 @@ body {
   border-radius: 4px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #df1b3f;
+  background: #0052ff;
 }

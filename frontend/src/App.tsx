@@ -5,8 +5,7 @@ import Lenis from 'lenis';
 
 import Hero2 from './components/Hero/Hero2';
 import AboutMe from './components/AboutMe/AboutMe';
-import ProjectsSlider from './components/ProjectsSlider/ProjectsSlider';
-import Process from './components/Process/Process';
+import RecentWorks from './components/RecentWorks/RecentWorks';
 import ServicesList from './components/Services/ServicesList';
 import Works from './components/Works/Works';
 import Technologies from './components/Technologies/Technologies';
@@ -52,37 +51,34 @@ function App() {
       {/* 1st Section: Hero */}
       <Hero2 />
 
-      {/* 2nd Section: About Me */}
+      {/* 2nd Section: About Me with Editorial Counter Grid */}
       <AboutMe />
       
-      {/* 3rd Section: Projects Slider */}
-      <ProjectsSlider />
+      {/* 3rd Section: Recent Works (Editorial Asymmetric Grid) */}
+      <RecentWorks />
 
-      {/* 4th Section: How We Work / Process */}
-      <Process />
-
-      {/* 5th Section: Services */}
+      {/* 4th Section: Scroll-Expanding Interactive Services Section (Exact Screenshot Design) */}
       <ServicesList />
 
-      {/* 6th Section: Works Timeline & Showcase */}
+      {/* 5th Section: Horizontal Scroll Works Section (Ball push & timeline) */}
       <Works />
 
-      {/* 7th Section: Technologies */}
+      {/* 6th Section: Technologies */}
       <Technologies />
 
-      {/* 8th Section: Client Feedback Marquee */}
+      {/* 7th Section: Client Feedback Marquee */}
       <Feedback2 />
 
-      {/* 9th Section: FAQ */}
+      {/* 8th Section: FAQ */}
       <FAQ />
 
-      {/* 10th Section: Contact / Lets Chat */}
+      {/* 9th Section: Contact / Lets Chat */}
       <LetsChat />
 
-      {/* 11th Section: GitHub Activity & Live Stats */}
+      {/* 10th Section: GitHub Activity & Live Stats */}
       <StatsSection />
 
-      {/* 12th Section: Footer */}
+      {/* 11th Section: Footer */}
       <Footer />
     </div>
   );

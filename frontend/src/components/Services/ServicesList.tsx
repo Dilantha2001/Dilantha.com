@@ -1,115 +1,203 @@
-import React, { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import frontendVideo from '../../assets/frontend.mp4';
+import aiVideo from '../../assets/ai.mp4';
 import './ServicesList.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
     num: '01',
-    title: 'Brand identity',
-    desc: "We get into the actual substance of what you're building before touching a single visual. What you stand for, who you're really talking to, what makes you different. Once we know that, we build the identity around it. Rooted in something real, not just something pretty.",
-    img: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=400&q=80'
+    title: 'Frontend Engineering',
+    desc: 'Crafting pixel-perfect, reactive user interfaces with React, Next.js, TypeScript, and micro-interactions.',
+    img: frontendVideo,
   },
   {
     num: '02',
-    title: 'Website design',
-    desc: "A brand that lives nowhere is just an idea. We build where yours shows up. Starting with what your audience actually needs when they land there, not with what looks good in a mockup. Clear, considered, built to work.",
-    img: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=400&q=80'
+    title: 'Backend & API Architecture',
+    desc: 'Designing resilient REST & GraphQL APIs, microservices, secure authentication, and high-throughput Node/Python backends.',
+    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80',
   },
   {
     num: '03',
-    title: 'UI/UX Design',
-    desc: "Creating intuitive and stunning user interfaces. Designing experiences that captivate and convert your audience. Every touchpoint is carefully crafted.",
-    img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=400&q=80'
+    title: 'Database & Cloud Systems',
+    desc: 'Architecting scalable SQL/NoSQL databases, distributed caching with Redis, CI/CD pipelines, and AWS cloud deployments.',
+    img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
   },
   {
     num: '04',
-    title: 'Frontend Development',
-    desc: "Bringing designs to life with interactive, pixel-perfect, and highly responsive user interfaces using modern web technologies like React, GSAP, and TailwindCSS.",
-    img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80'
+    title: 'Creative Motion & WebGL',
+    desc: 'Building immersive, high-performance web experiences using GSAP animations, Three.js 3D viewports, and custom shaders.',
+    img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
   },
   {
     num: '05',
-    title: 'Backend Development',
-    desc: "Building scalable, robust, and secure server-side architectures and APIs. Turning complex business logic into clean, high-performance code that stands the test of time.",
-    img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=400&q=80'
+    title: 'AI & Intelligent Systems',
+    desc: 'Integrating Large Language Models, vector search embeddings, computer vision, and real-time AI automation pipelines.',
+    img: aiVideo,
   }
 ];
 
 export default function ServicesList() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
-  const floatingRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const cursorFollowerRef = useRef<HTMLDivElement>(null);
+  const [activeMedia, setActiveMedia] = useState<string>(services[0].img);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (floatingRef.current) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const offsetX = e.clientX - rect.left - rect.width / 2;
-      const offsetY = e.clientY - rect.top - rect.height / 2;
-      
-      floatingRef.current.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px)) scale(1)`;
+  useGSAP(() => {
+    if (!containerRef.current) return;
+
+    // Row reveal animation on scroll
+    const rows = gsap.utils.toArray('.clean-service-row') as HTMLElement[];
+    rows.forEach((row) => {
+      gsap.fromTo(
+        row,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: row,
+            start: 'top 88%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    });
+
+    // Smooth Cursor Media Follower
+    if (cursorFollowerRef.current && containerRef.current) {
+      const follower = cursorFollowerRef.current;
+      const xTo = gsap.quickTo(follower, 'x', { duration: 0.35, ease: 'power3.out' });
+      const yTo = gsap.quickTo(follower, 'y', { duration: 0.35, ease: 'power3.out' });
+      const rotTo = gsap.quickTo(follower, 'rotation', { duration: 0.45, ease: 'power3.out' });
+
+      let prevX = 0;
+
+      const handleMouseMove = (e: MouseEvent) => {
+        const deltaX = e.clientX - prevX;
+        prevX = e.clientX;
+
+        xTo(e.clientX);
+        yTo(e.clientY);
+        rotTo(gsap.utils.clamp(-12, 12, deltaX * 0.4));
+      };
+
+      window.addEventListener('mousemove', handleMouseMove);
+
+      return () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+      };
+    }
+
+  }, { scope: containerRef });
+
+  const handleRowEnter = (mediaSrc: string) => {
+    setActiveMedia(mediaSrc);
+    if (cursorFollowerRef.current) {
+      gsap.to(cursorFollowerRef.current, {
+        scale: 1,
+        opacity: 1,
+        duration: 0.3,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
     }
   };
 
-  const handleMouseLeave = () => {
-    if (floatingRef.current) {
-      floatingRef.current.style.transform = `translate(-50%, -50%) scale(1)`;
+  const handleRowLeave = () => {
+    if (cursorFollowerRef.current) {
+      gsap.to(cursorFollowerRef.current, {
+        scale: 0.75,
+        opacity: 0,
+        duration: 0.25,
+        ease: 'power2.in',
+        overwrite: 'auto',
+      });
     }
   };
 
   return (
     <section 
-      id="services"
-      className="services-container relative" 
-      onMouseLeave={() => {
-        setHoveredIndex(0);
-        handleMouseLeave();
-      }}
-      onMouseMove={handleMouseMove}
+      id="services" 
+      ref={containerRef} 
+      className="clean-services-section"
+      onMouseLeave={handleRowLeave}
     >
-      {/* Section Header */}
-      <div className="services-header-box px-8 md:px-16 lg:px-24 pt-10 pb-6 max-w-7xl mx-auto w-full">
-        <div className="flex items-center gap-4 mb-3">
-          <div className="h-[2px] w-8 bg-[#df1b3f]"></div>
-          <h4 className="text-[#df1b3f] text-xs font-bold tracking-[0.2em] uppercase font-sans">
-            SERVICES // WHAT I OFFER
-          </h4>
+      <div className="clean-services-container">
+        
+        {/* Section Top Header */}
+        <div className="clean-services-header">
+          <div className="services-tag-row">
+            <span className="services-dot"></span>
+            <span className="services-tag-text">SERVICES & EXPERTISE</span>
+          </div>
+          <h2 className="services-section-title">
+            SOLUTIONS CRAFTED <span className="text-[#0052ff]">FOR IMPACT</span>
+          </h2>
         </div>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal text-[#111] tracking-tight uppercase" style={{ fontFamily: 'Anton, sans-serif' }}>
-          Crafting Digital <span className="text-[#df1b3f]">Experiences</span>
-        </h2>
+
+        {/* Minimal 3-Column Editorial List */}
+        <div className="clean-services-list">
+          {services.map((svc) => (
+            <div 
+              key={svc.num} 
+              className="clean-service-row group"
+              onMouseEnter={() => handleRowEnter(svc.img)}
+            >
+              
+              {/* Left Column: Number */}
+              <div className="clean-num-col">
+                <span className="clean-num-text">{svc.num}</span>
+              </div>
+
+              {/* Middle Column: Bold Title */}
+              <div className="clean-title-col">
+                <h3 className="clean-title-text">{svc.title}</h3>
+              </div>
+
+              {/* Right Column: Clean Description Paragraph */}
+              <div className="clean-desc-col">
+                <p className="clean-desc-text">{svc.desc}</p>
+              </div>
+
+            </div>
+          ))}
+        </div>
+
       </div>
 
-      {/* Single floating image for all rows */}
+      {/* Floating Mouse Cursor Media Follower */}
       <div 
-        ref={floatingRef}
-        className={`service-image-wrapper ${hoveredIndex !== null ? 'visible' : ''} pointer-events-none`}
+        ref={cursorFollowerRef} 
+        className="service-cursor-follower"
+        aria-hidden="true"
       >
-        <div className="service-image-frame">
-          <img 
-            src={services[hoveredIndex !== null ? hoveredIndex : 0].img} 
-            alt="Service preview" 
-            className="service-image" 
-          />
+        <div className="service-cursor-img-box">
+          {(activeMedia.includes('.mp4') || activeMedia.endsWith('.mp4')) ? (
+            <video 
+              key={activeMedia}
+              src={activeMedia} 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="service-cursor-img" 
+            />
+          ) : (
+            <img 
+              src={activeMedia} 
+              alt="Service Preview" 
+              className="service-cursor-img" 
+            />
+          )}
         </div>
       </div>
-      {services.map((svc, index) => {
-        const isActive = hoveredIndex === index;
-        return (
-          <div 
-            key={svc.num} 
-            className={`service-row ${isActive ? 'active' : ''}`}
-            onMouseEnter={() => setHoveredIndex(index)}
-          >
-            <div className="service-content">
-              <h3 className="service-title">
-                <span className="service-num">{svc.num} &mdash; </span>
-                {svc.title.toLowerCase()}
-              </h3>
-              <p className="service-desc">
-                {svc.desc}
-              </p>
-            </div>
-          </div>
-        );
-      })}
+
     </section>
   );
 }

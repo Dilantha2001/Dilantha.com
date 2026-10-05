@@ -79,10 +79,10 @@ export default function StatsSection() {
                 <span>Less</span>
                 <div className="flex gap-[3px]">
                   <div className="w-[12px] h-[12px] rounded-[2px] bg-gray-200"></div>
-                  <div className="w-[12px] h-[12px] rounded-[2px] bg-[#ffb3c1]"></div>
-                  <div className="w-[12px] h-[12px] rounded-[2px] bg-[#ff4d6d]"></div>
-                  <div className="w-[12px] h-[12px] rounded-[2px] bg-[#df1b3f]"></div>
-                  <div className="w-[12px] h-[12px] rounded-[2px] bg-[#9a1b33]"></div>
+                  <div className="w-[12px] h-[12px] rounded-[2px] bg-[#bfdbfe]"></div>
+                  <div className="w-[12px] h-[12px] rounded-[2px] bg-[#60a5fa]"></div>
+                  <div className="w-[12px] h-[12px] rounded-[2px] bg-[#0052ff]"></div>
+                  <div className="w-[12px] h-[12px] rounded-[2px] bg-[#1e40af]"></div>
                 </div>
                 <span>More</span>
               </div>
