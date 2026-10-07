@@ -31,6 +31,7 @@
 .recent-works-header-block {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
   width: 100%;
 }
@@ -60,7 +61,7 @@
   height: 6px;
   border-radius: 50%;
   background-color: #0052ff;
-  box-shadow: 0 0 8px #0052ff;
+ 
   display: inline-block;
 }
 
@@ -75,10 +76,12 @@
 
 .recent-works-title-row {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: baseline;
+  gap: 16px;
   width: 100%;
   position: relative;
+  text-align: center;
 }
 
 .recent-works-title {
@@ -90,12 +93,20 @@
   color: #ffffff;
   text-transform: uppercase;
   margin: 0;
+  text-align: center;
   white-space: nowrap;
   /* Subtle reflective gradient fade */
   background: linear-gradient(180deg, #ffffff 45%, rgba(255, 255, 255, 0.25) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.8));
+}
+
+.recent-works-title .title-accent {
+  background: linear-gradient(180deg, #3b82f6 20%, #0052ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 .recent-works-count {

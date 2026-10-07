@@ -129,52 +129,51 @@ function FeedbackCard({ item, index }: { item: typeof feedbacks[0], index: numbe
   const isQuote = index % 3 === 1;
 
   return (
-    <div className="w-[320px] md:w-[420px] flex-shrink-0 mx-3 md:mx-5 flex flex-col whitespace-normal bg-[#111216] border border-white/[0.12] rounded-2xl p-7 md:p-9 shadow-[0_20px_45px_rgba(0,0,0,0.8)] transition-all duration-300 hover:-translate-y-2 hover:border-[#0052ff]/50 hover:shadow-[0_25px_50px_rgba(0,82,255,0.15)]">
+    <div className="w-[320px] md:w-[420px] flex-shrink-0 mx-3 md:mx-5 flex flex-col whitespace-normal bg-[#111216] border border-white/[0.12] rounded-2xl p-6 md:p-8 shadow-[0_20px_45px_rgba(0,0,0,0.8)] transition-all duration-300 hover:-translate-y-2 hover:border-[#0052ff]/50 hover:shadow-[0_25px_50px_rgba(0,82,255,0.15)]">
       
-      {/* Avatar / Quote Icon */}
-      <div className="mb-6">
-        {isQuote ? (
-          <div className="w-13 h-13 md:w-15 md:h-15 rounded-full border-2 border-[#0052ff] bg-[#0052ff]/10 flex items-center justify-center text-[#0052ff] text-3xl md:text-4xl font-serif leading-none pt-2 shadow-[0_0_15px_rgba(0,82,255,0.3)]">
-            &rdquo;
+      {/* Header: Avatar + Author Info + Category Tag */}
+      <div className="flex items-center justify-between gap-3 mb-4">
+        <div className="flex items-center gap-3">
+          {isQuote ? (
+            <div className="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-[#0052ff] bg-[#0052ff]/10 flex items-center justify-center text-[#0052ff] text-2xl font-serif leading-none pt-1 shadow-[0_0_12px_rgba(0,82,255,0.3)] shrink-0">
+              &rdquo;
+            </div>
+          ) : (
+            <img 
+              src={`https://i.pravatar.cc/150?img=${(index * 3) + 11}`} 
+              alt={item.name} 
+              loading="lazy"
+              decoding="async"
+              className="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-[#0052ff] object-cover p-[2px] shadow-[0_0_12px_rgba(0,82,255,0.25)] shrink-0" 
+            />
+          )}
+          <div className="flex flex-col">
+            <h4 className="text-white font-bold text-sm md:text-base leading-tight mb-0.5">{item.name}</h4>
+            <p className="text-gray-400 text-xs leading-tight line-clamp-1">{item.role}</p>
           </div>
-        ) : (
-          <img 
-            src={`https://i.pravatar.cc/150?img=${(index * 3) + 11}`} 
-            alt={item.name} 
-            loading="lazy"
-            decoding="async"
-            className="w-13 h-13 md:w-15 md:h-15 rounded-full border-2 border-[#0052ff] object-cover p-[2px] shadow-[0_0_15px_rgba(0,82,255,0.25)]" 
-          />
-        )}
-      </div>
+        </div>
 
-      {/* Label */}
-      <div className="text-[#0052ff] font-bold text-xs mb-3 uppercase tracking-widest">
-        {item.label}
+        <span className="text-[#0052ff] font-bold text-[10px] md:text-[11px] uppercase tracking-wider bg-[#0052ff]/10 border border-[#0052ff]/20 px-2.5 py-1 rounded-full shrink-0">
+          {item.label}
+        </span>
       </div>
 
       {/* Title */}
-      <h3 className="text-white text-xl md:text-2xl font-bold mb-4 leading-tight" style={{ fontFamily: "'Anton', sans-serif", letterSpacing: '0.5px' }}>
+      <h3 className="text-white text-xl md:text-2xl font-bold mb-3 leading-tight" style={{ fontFamily: "'Anton', sans-serif", letterSpacing: '0.5px' }}>
         {item.title}
       </h3>
 
       {/* Quote */}
-      <p className="text-gray-300 text-xs md:text-sm leading-relaxed mb-6 font-normal">
+      <p className="text-gray-300 text-xs md:text-sm leading-relaxed mb-5 font-normal">
         &ldquo;{item.quote}&rdquo;
       </p>
 
       {/* Embedded Project Image */}
       {item.image && (
-        <div className="w-full h-44 mb-6 rounded-xl overflow-hidden border border-white/[0.1] shadow-inner bg-black/40">
+        <div className="w-full h-44 mt-auto rounded-xl overflow-hidden border border-white/[0.1] shadow-inner bg-black/40">
           <img src={item.image} alt="Project reference" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 opacity-90 hover:opacity-100" />
         </div>
       )}
-
-      {/* Author */}
-      <div className="mt-auto pt-4 border-t border-white/[0.08]">
-        <h4 className="text-white font-bold text-sm md:text-base mb-0.5">{item.name}</h4>
-        <p className="text-gray-400 text-xs">{item.role}</p>
-      </div>
       
     </div>
   );

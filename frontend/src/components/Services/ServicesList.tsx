@@ -103,9 +103,9 @@ export default function ServicesList() {
     setActiveMedia(mediaSrc);
     if (cursorFollowerRef.current) {
       gsap.to(cursorFollowerRef.current, {
+        autoAlpha: 1,
         scale: 1,
-        opacity: 1,
-        duration: 0.3,
+        duration: 0.35,
         ease: 'power2.out',
         overwrite: 'auto',
       });
@@ -115,8 +115,8 @@ export default function ServicesList() {
   const handleRowLeave = () => {
     if (cursorFollowerRef.current) {
       gsap.to(cursorFollowerRef.current, {
+        autoAlpha: 0,
         scale: 0.75,
-        opacity: 0,
         duration: 0.25,
         ease: 'power2.in',
         overwrite: 'auto',

@@ -1,12 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import ScrambleText from '../Common/ScrambleText';
 
 export default function StatsSection() {
   const [svgContent, setSvgContent] = useState<string>('');
   const [selectedYear, setSelectedYear] = useState<string>('2026');
+  const [isInView, setIsInView] = useState(false);
+  const graphRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch('https://raw.githubusercontent.com/Dilantha2001/Dilantha2001/output/github-contribution-grid-snake.svg')
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    );
+
+    if (graphRef.current) {
+      observer.observe(graphRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    fetch(`https://raw.githubusercontent.com/Dilantha2001/Dilantha2001/output/github-contribution-grid-snake.svg?t=${Date.now()}`)
       .then((res) => res.text())
       .then((raw) => {
         // Replace SVG CSS variables with electric blue theme palette and hide progress bar
@@ -25,7 +46,7 @@ export default function StatsSection() {
       .catch((err) => {
         console.error('Failed to load GitHub activity SVG', err);
       });
-  }, []);
+  }, [isInView]);
 
   return (
     <section id="stats" className="w-full bg-white py-24 px-4 md:px-8">
@@ -34,15 +55,52 @@ export default function StatsSection() {
         {/* Top 3 Stats */}
         <div className="flex flex-col md:flex-row justify-between items-center w-full mb-12 gap-12 md:gap-4 px-4">
           
-          <div className="flex flex-col items-center text-center">
-            <h2 className="text-black text-[4rem] md:text-[5rem] font-bold mb-0 leading-none flex items-start font-['Anton',sans-serif]">
-              <ScrambleText text="100M+" />
-              <span className="text-xl md:text-2xl ml-1 mt-2 text-[#0052ff]">
-                <ScrambleText text="+100" />
-              </span>
-            </h2>
+          <div className="flex flex-col items-center text-center relative select-none">
+            <style>{`
+              @keyframes floatUpTokens8s {
+                0% {
+                  opacity: 0;
+                  transform: translateY(12px) scale(0.75);
+                }
+                4% {
+                  opacity: 1;
+                  transform: translateY(-6px) scale(1.12);
+                }
+                20% {
+                  opacity: 0.95;
+                  transform: translateY(-38px) scale(1);
+                }
+                26% {
+                  opacity: 0;
+                  transform: translateY(-58px) scale(0.8);
+                }
+                100% {
+                  opacity: 0;
+                  transform: translateY(-58px) scale(0.8);
+                }
+              }
+            `}</style>
+            
+            <div className="relative inline-flex items-start">
+              <h2 className="text-black text-[4rem] md:text-[5rem] font-bold mb-0 leading-none flex items-start font-['Anton',sans-serif]">
+                <ScrambleText text="100M+" />
+              </h2>
+
+              {/* Floating +100 particle floating upwards every 8 seconds */}
+              <div className="absolute -top-3 -right-14 md:-right-16 pointer-events-none h-16 w-16">
+                <span 
+                  className="absolute text-base md:text-xl font-extrabold text-[#0052ff] font-['Anton',sans-serif] tracking-tight whitespace-nowrap drop-shadow-[0_2px_10px_rgba(0,82,255,0.45)]"
+                  style={{
+                    animation: 'floatUpTokens8s 8s cubic-bezier(0.22, 1, 0.36, 1) infinite',
+                  }}
+                >
+                  +100
+                </span>
+              </div>
+            </div>
+
             <p className="text-black/50 text-sm font-semibold tracking-widest uppercase mt-4 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0052ff]"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#0052ff] animate-ping"></span>
               AI TOKENS <span className="opacity-40">✦</span> USED
             </p>
           </div>
@@ -70,10 +128,9 @@ export default function StatsSection() {
         </div>
 
         {/* Github Snake Graph with Dates & Legend */}
-        <div className="flex flex-col items-center mt-12 w-full max-w-5xl mx-auto pb-4">
+        <div ref={graphRef} className="flex flex-col items-center mt-12 w-full max-w-5xl mx-auto pb-4">
           
           <div className="flex items-center gap-2 mb-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#0052ff] animate-pulse"></span>
             <h3 className="text-black text-base font-bold tracking-widest uppercase font-sans">
               PERSONAL GITHUB ACTIVITY
             </h3>
@@ -108,19 +165,6 @@ export default function StatsSection() {
                     Loading GitHub Activity...
                   </div>
                 )}
-              </div>
-
-              {/* Legend */}
-              <div className="flex items-center justify-center md:justify-end gap-2 mt-4 text-[10px] text-black/60 pr-4 font-medium">
-                <span>Less</span>
-                <div className="flex gap-[3px]">
-                  <div className="w-[12px] h-[12px] rounded-[2px] bg-[#ebedf0] border border-black/5"></div>
-                  <div className="w-[12px] h-[12px] rounded-[2px] bg-[#bfdbfe]"></div>
-                  <div className="w-[12px] h-[12px] rounded-[2px] bg-[#60a5fa]"></div>
-                  <div className="w-[12px] h-[12px] rounded-[2px] bg-[#0052ff]"></div>
-                  <div className="w-[12px] h-[12px] rounded-[2px] bg-[#1e40af]"></div>
-                </div>
-                <span>More</span>
               </div>
 
             </div>

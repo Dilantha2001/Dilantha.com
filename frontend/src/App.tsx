@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 
 import Hero2 from './components/Hero/Hero2';
+import StickyNavbar from './components/Common/StickyNavbar';
 import AboutMe from './components/AboutMe/AboutMe';
 import RecentWorks from './components/RecentWorks/RecentWorks';
 import ServicesList from './components/Services/ServicesList';
@@ -48,12 +49,15 @@ function App() {
 
   return (
     <div className="app-wrapper">
+      {/* Persistent Floating Navbar (Active from 2nd page / About section onwards) */}
+      <StickyNavbar />
+
       {/* 1st Section: Hero */}
       <Hero2 />
 
-      {/* 2nd Section: About Me with Editorial Counter Grid */}
+      {/* 2nd Section: About Me with Editorial Counter Grid & Bottom Logo Marquee */}
       <AboutMe />
-      
+
       {/* 3rd Section: Recent Works (Editorial Asymmetric Grid) */}
       <RecentWorks />
 

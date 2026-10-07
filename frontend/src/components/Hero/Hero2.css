@@ -26,17 +26,7 @@
   z-index: 20;
 }
 
-/* Subtle Architectural Grid Overlay */
-.hero2-grid-bg {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
-  background-size: 80px 80px;
-  pointer-events: none;
-  z-index: 1;
-}
+
 
 /* Top Header */
 .hero2-header {
@@ -174,6 +164,7 @@
   will-change: transform, opacity, filter;
 }
 
+.hero2-accent-text,
 .hero2-im-text {
   color: #0052ff;
   display: inline-block;

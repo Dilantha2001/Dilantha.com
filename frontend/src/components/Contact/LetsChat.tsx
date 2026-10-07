@@ -1,39 +1,139 @@
+import { useState } from 'react';
+import { FiMail, FiPhone, FiCopy, FiCheck, FiArrowUpRight } from 'react-icons/fi';
 
 export default function LetsChat() {
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
+
+  const email = "pramudithadilantha89@gmail.com";
+  const phone = "+94 75 681 3888";
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(email);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2000);
+  };
+
+  const handleCopyPhone = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(phone.replace(/\s+/g, ''));
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2000);
+  };
+
   return (
-    <section id="contact" className="w-full bg-white py-24 px-6 md:px-12 flex justify-center items-center">
+    <section id="contact" className="w-full bg-white pt-2 md:pt-4 pb-16 md:pb-24 px-6 md:px-12 flex justify-center items-center">
       <div className="w-full max-w-[1600px] flex flex-col items-center">
-        
         {/* Title */}
         <h1 
-          className="text-black text-[clamp(4rem,15vw,14rem)] uppercase leading-none text-center m-0" 
-          style={{ fontFamily: "'Anton', sans-serif", letterSpacing: '-0.02em', transform: 'scaleY(1.1)' }}
+          className="text-black text-[clamp(3.8rem,14vw,13.5rem)] uppercase leading-none text-center m-0 select-none" 
+          style={{ fontFamily: "'Anton', sans-serif", letterSpacing: '-0.02em', transform: 'scaleY(1.08)' }}
         >
-          Let's have a chat
+          Let's have a <span className="text-[#0052ff]">chat</span>
         </h1>
 
         {/* Divider */}
-        <hr className="w-full border-t border-black/20 mt-12 mb-8" />
+        <hr className="w-full border-t border-black/10 mt-8 md:mt-10 mb-8" />
 
-        {/* Buttons */}
-        <div className="w-full flex flex-col md:flex-row justify-between items-center gap-6">
+        {/* Modern Contact Cards */}
+        <div className="w-full flex flex-col items-center justify-center gap-6">
           
-          <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-4xl">
+            
+            {/* Email Modern Card */}
             <a 
-              href="mailto:pramudithadilantha89@gmail.com" 
-              className="bg-gray-100 hover:bg-gray-200 text-black text-sm md:text-base font-medium py-4 px-8 rounded-full border border-black/10 transition-all hover:-translate-y-1 inline-flex items-center justify-center whitespace-nowrap"
+              href={`mailto:${email}`}
+              className="group relative flex-1 w-full sm:w-auto min-w-[280px] sm:min-w-[340px] flex items-center justify-between gap-4 sm:gap-6 px-5 py-4 rounded-2xl bg-neutral-50/90 hover:bg-white border border-black/10 hover:border-[#0052ff]/40 shadow-xs hover:shadow-xl hover:shadow-[#0052ff]/10 transition-all duration-300 transform hover:-translate-y-0.5"
             >
-              pramudithadilantha89@gmail.com
+              <div className="flex items-center gap-3.5 sm:gap-4">
+                <div className="w-11 h-11 rounded-xl bg-white group-hover:bg-[#0052ff] border border-black/5 flex items-center justify-center text-[#0052ff] group-hover:text-white transition-all duration-300 shadow-xs">
+                  <FiMail className="w-5 h-5 transition-transform group-hover:scale-110" />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[10px] sm:text-[11px] font-bold tracking-wider text-black/40 group-hover:text-[#0052ff] uppercase transition-colors">
+                    Email Address
+                  </span>
+                  <span className="text-sm sm:text-base font-semibold text-neutral-900 tracking-tight">
+                    {email}
+                  </span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center gap-1.5 pl-2">
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  title="Copy email to clipboard"
+                  className="p-2 rounded-lg text-black/40 hover:text-black hover:bg-black/5 active:scale-95 transition-all cursor-pointer"
+                >
+                  {copiedEmail ? (
+                    <span className="flex items-center text-xs font-semibold text-emerald-600 gap-1">
+                      <FiCheck className="w-4 h-4" />
+                      <span className="hidden sm:inline">Copied</span>
+                    </span>
+                  ) : (
+                    <FiCopy className="w-4 h-4" />
+                  )}
+                </button>
+                <div className="w-7 h-7 rounded-full bg-black/5 group-hover:bg-[#0052ff] flex items-center justify-center text-black/50 group-hover:text-white transition-all duration-300">
+                  <FiArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </div>
+              </div>
             </a>
+
+            {/* Phone Modern Card */}
             <a 
-              href="tel:+94756813888" 
-              className="bg-gray-100 hover:bg-gray-200 text-black text-sm md:text-base font-medium py-4 px-8 rounded-full border border-black/10 transition-all hover:-translate-y-1 inline-flex items-center justify-center whitespace-nowrap"
+              href={`tel:${phone.replace(/\s+/g, '')}`}
+              className="group relative flex-1 w-full sm:w-auto min-w-[280px] sm:min-w-[340px] flex items-center justify-between gap-4 sm:gap-6 px-5 py-4 rounded-2xl bg-neutral-50/90 hover:bg-white border border-black/10 hover:border-[#0052ff]/40 shadow-xs hover:shadow-xl hover:shadow-[#0052ff]/10 transition-all duration-300 transform hover:-translate-y-0.5"
             >
-              +94 75 681 3888
+              <div className="flex items-center gap-3.5 sm:gap-4">
+                <div className="w-11 h-11 rounded-xl bg-white group-hover:bg-[#0052ff] border border-black/5 flex items-center justify-center text-[#0052ff] group-hover:text-white transition-all duration-300 shadow-xs">
+                  <FiPhone className="w-5 h-5 transition-transform group-hover:scale-110" />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[10px] sm:text-[11px] font-bold tracking-wider text-black/40 group-hover:text-[#0052ff] uppercase transition-colors">
+                    Phone / WhatsApp
+                  </span>
+                  <span className="text-sm sm:text-base font-semibold text-neutral-900 tracking-tight">
+                    {phone}
+                  </span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center gap-1.5 pl-2">
+                <button
+                  type="button"
+                  onClick={handleCopyPhone}
+                  title="Copy phone number"
+                  className="p-2 rounded-lg text-black/40 hover:text-black hover:bg-black/5 active:scale-95 transition-all cursor-pointer"
+                >
+                  {copiedPhone ? (
+                    <span className="flex items-center text-xs font-semibold text-emerald-600 gap-1">
+                      <FiCheck className="w-4 h-4" />
+                      <span className="hidden sm:inline">Copied</span>
+                    </span>
+                  ) : (
+                    <FiCopy className="w-4 h-4" />
+                  )}
+                </button>
+                <div className="w-7 h-7 rounded-full bg-black/5 group-hover:bg-[#0052ff] flex items-center justify-center text-black/50 group-hover:text-white transition-all duration-300">
+                  <FiArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </div>
+              </div>
             </a>
+
           </div>
 
-         
+          {/* Quick response note */}
+          <div className="text-xs sm:text-sm text-black/50 font-medium flex items-center justify-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#0052ff] animate-pulse"></span>
+            Typical response time: <span className="text-black font-semibold">within 2 hours</span>
+          </div>
 
         </div>
       </div>

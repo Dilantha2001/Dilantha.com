@@ -52,6 +52,14 @@ export const PORTFOLIO_INFO: Portfolio = {
           note: "Used in production since 2022",
         },
         {
+          name: "Next.js",
+          level: 85,
+          icon: "SiNextdotjs",
+          category: "frontend",
+          years: 2,
+          note: "Used in production since 2023",
+        },
+        {
           name: "TypeScript",
           level: 85,
           icon: "SiTypescript",
@@ -103,12 +111,12 @@ export const PORTFOLIO_INFO: Portfolio = {
       title: "Backend",
       skills: [
         {
-          name: "Php",
-          level: 80,
-          icon: "SiFastapi",
+          name: "Spring Boot",
+          level: 75,
+          icon: "SiSpringboot",
           category: "backend",
-          years: 3,
-          note: "Used in production since 2022",
+          years: 2,
+          note: "Used in production since 2023",
         },
         {
           name: "Node.js",
@@ -127,12 +135,20 @@ export const PORTFOLIO_INFO: Portfolio = {
           note: "Used in production since 2023",
         },
         {
-          name: "Java ",
-          level: 70,
+          name: "Java",
+          level: 75,
           icon: "SiJava",
           category: "backend",
           years: 2,
           note: "Used in production from 2022",
+        },
+        {
+          name: "PHP",
+          level: 75,
+          icon: "SiPhp",
+          category: "backend",
+          years: 2,
+          note: "Used in production since 2022",
         },
       ],
     },
@@ -462,10 +478,12 @@ export const tagColors: TagColors = {
 
 // ---------- TECHNOLOGIES SECTION DATA ----------
 export const TECH_STACK = [
-  { name: "webflow", iconName: "", font: "font-serif italic font-bold text-[1.4rem] tracking-wide" },
-  { name: "tailwindcss", iconName: "SiTailwindcss", font: "font-sans font-medium text-[1.4rem]" },
-  { name: "React", iconName: "SiReact", font: "font-sans font-light text-[1.4rem]" },
-  { name: "node", iconName: "SiNodedotjs", font: "font-sans font-black text-[1.7rem] tracking-tighter" },
-  { name: "TypeScript", iconName: "", font: "font-sans font-light text-[1.8rem] tracking-tight" },
-  { name: "SVELTE", iconName: "SiSvelte", font: "font-sans font-bold text-[1.4rem] tracking-widest" }
+  { name: "Next.js", iconName: "SiNextdotjs", font: "font-sans font-bold text-[1.45rem] tracking-tight" },
+  { name: "React", iconName: "SiReact", font: "font-sans font-normal text-[1.45rem] tracking-tight" },
+  { name: "Spring Boot", iconName: "SiSpringboot", font: "font-sans font-semibold text-[1.45rem] tracking-tight" },
+  { name: "Node.js", iconName: "SiNodedotjs", font: "font-sans font-bold text-[1.45rem] tracking-tight" },
+  { name: "TypeScript", iconName: "SiTypescript", font: "font-sans font-normal text-[1.45rem] tracking-tight" },
+  { name: "Express.js", iconName: "SiExpress", font: "font-sans font-normal text-[1.45rem] tracking-tight" },
+  { name: "Tailwind CSS", iconName: "SiTailwindcss", font: "font-sans font-medium text-[1.45rem] tracking-tight" },
+  { name: "MongoDB", iconName: "SiMongodb", font: "font-sans font-semibold text-[1.45rem] tracking-tight" },
 ];

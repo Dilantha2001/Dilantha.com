@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import profileImg from '../../assets/profile.jpg';
 import profile2Img from '../../assets/profile2.png';
+import LogoMarquee from '../LogoMarquee/LogoMarquee';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,8 +48,10 @@ const statsData = [
   },
 ];
 
+
 export default function AboutMe() {
   const containerRef = useRef<HTMLElement>(null);
+  const statementRef = useRef<HTMLDivElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const bigTitleRef = useRef<HTMLHeadingElement>(null);
@@ -67,9 +70,15 @@ export default function AboutMe() {
     });
 
     tl.fromTo(
+      statementRef.current,
+      { opacity: 0, y: 35 },
+      { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }
+    )
+    .fromTo(
       portraitRef.current,
       { opacity: 0, x: -40, filter: 'blur(8px)' },
-      { opacity: 1, x: 0, filter: 'blur(0px)', duration: 0.9, ease: 'power3.out' }
+      { opacity: 1, x: 0, filter: 'blur(0px)', duration: 0.9, ease: 'power3.out' },
+      '-=0.7'
     )
     .fromTo(
       contentRef.current,
@@ -90,7 +99,7 @@ export default function AboutMe() {
       '-=0.6'
     );
 
-    // Modern GSAP Number Counter Animations with ScrollTrigger
+    // Modern GSAP Number Counter Animations with ScrollTrigger on statsDeckRef
     statsData.forEach((stat, index) => {
       const el = statRefs.current[index];
       if (!el) return;
@@ -98,22 +107,30 @@ export default function AboutMe() {
       
       gsap.to(obj, {
         count: stat.target,
-        duration: 2.2,
+        duration: 2.0,
         ease: 'power2.out',
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 75%',
+          trigger: statsDeckRef.current || containerRef.current,
+          start: 'top 85%',
           toggleActions: 'play none none none',
+          once: true,
         },
         onUpdate: () => {
           if (stat.isDecimal) {
-            el.textContent = `${obj.count.toFixed(1)}${stat.suffix}`;
+            el.textContent = obj.count.toFixed(1);
           } else {
             const val = Math.floor(obj.count);
             const displayVal = stat.prefix && val < 10 ? `${stat.prefix}${val}` : `${val}`;
-            el.textContent = `${displayVal}${stat.suffix}`;
+            el.textContent = `${displayVal}`;
           }
         },
+        onComplete: () => {
+          if (stat.isDecimal) {
+            el.textContent = stat.target.toFixed(1);
+          } else {
+            el.textContent = stat.prefix && stat.target < 10 ? `${stat.prefix}${stat.target}` : `${stat.target}`;
+          }
+        }
       });
     });
 
@@ -121,29 +138,11 @@ export default function AboutMe() {
 
   return (
     <section id="about" ref={containerRef} className="meet-about-section">
-      {/* Top Header Bar */}
-      <div className="meet-about-header">
-        <div className="meet-about-brand-tag">
-          <div className="brand-tag-row">
-            <span>Dilantha</span>
-            <span className="brand-tag-divider">Portfolio</span>
-          </div>
-          <div className="brand-tag-row">
-            <span>Ranaweera</span>
-            <span className="brand-tag-divider">2026</span>
-          </div>
-        </div>
-
-        <div className="meet-about-nav-crumb">
-          <span className="crumb-dim">HOME</span>
-          <span className="crumb-slash">/</span>
-          <span className="crumb-active">ABOUT</span>
-        </div>
-      </div>
-
-      {/* Main Content Layout */}
-      <div className="meet-about-body">
-        {/* Left Column: Clear High-Resolution Portrait */}
+      
+      {/* Main Grid: Left Portrait + Right Content Deck (Aligned at Top Level of Image) */}
+      <div className="meet-about-container">
+        
+        {/* Left Column: High-Resolution Portrait Card */}
         <div ref={portraitRef} className="meet-about-portrait-wrapper">
           <div className="meet-about-portrait-card">
             <img 
@@ -154,15 +153,19 @@ export default function AboutMe() {
           </div>
         </div>
 
-        {/* Center Column: Bio and Experience */}
-        <div ref={contentRef} className="meet-about-content">
-          {/* Block 1: Role & Story */}
-          <div className="meet-about-block">
-            <span className="meet-about-subtag">A 24 y.o</span>
-            <h2 className="meet-about-hero-title">
-              CREATIVE FULL-STACK<br />
-              DEVELOPER
+        {/* Right Main Column: Starts at exact top level with Image */}
+        <div className="meet-about-right-main">
+          
+          {/* 1. Full-Width Statement Headline Across Right Column */}
+          <div ref={statementRef} className="meet-about-statement-banner">
+            <h2 className="meet-about-statement-title">
+              <span className="statement-highlight-blue">Product design</span> for complex systems that feel obvious
             </h2>
+          </div>
+
+          {/* 2. Full-Width Bio Story Block */}
+          <div ref={contentRef} className="meet-about-bio-banner">
+            <span className="meet-about-subtag">A 24 y.o Engineer</span>
             <p className="meet-about-mono-desc">
               with a passion for developing functional and beautiful web
               experiences. At 16 in 2018, his interest in software development was
@@ -173,56 +176,64 @@ export default function AboutMe() {
             </p>
           </div>
 
-          {/* Block 2: Experience & Tech Acquired */}
-          <div className="meet-about-block secondary">
-            <span className="meet-about-subtag">Having more than</span>
-            <h3 className="meet-about-hero-title">
-              4+ YEARS OF<br />
-              HANDS-ON EXPERIENCE
-            </h3>
-            <p className="meet-about-mono-subtext">
-              he has acquired a variety of technologies that includes modern frontend, robust backend architectures, distributed cloud systems, and AI integration.
-            </p>
+          {/* 3. Bottom Deck: MEET DILANTHA + Experience & Stats Grid */}
+          <div className="meet-about-right-col">
+            
+            {/* Header Row: MEET DILANTHA on left, 4+ Years Experience on right */}
+            <div className="meet-about-right-header-row">
+              <div className="meet-about-big-title-col">
+                <h1 ref={bigTitleRef} className="meet-about-big-title">
+                  MEET DILANTHA
+                </h1>
+              </div>
+
+              {/* Experience & Background directly to the right of MEET DILANTHA */}
+              <div className="meet-about-block secondary exp-header-block">
+                <span className="meet-about-subtag">Having more than</span>
+                <h3 className="meet-about-secondary-title">
+                  4+ YEARS OF<br />
+                  HANDS-ON EXP
+                </h3>
+                <p className="meet-about-mono-subtext">
+                  he has acquired a variety of technologies that includes modern frontend, robust backend architectures, distributed cloud systems, and AI integration.
+                </p>
+              </div>
+            </div>
+
+            <div ref={statsDeckRef} className="meet-about-stats-deck">
+              {/* Clean Modern Glassmorphism 2x2 Stats Grid */}
+              <div className="editorial-stats-grid">
+                {statsData.map((stat, idx) => (
+                  <div key={stat.id} className="editorial-stat-item">
+                    <div className="stat-card-glow"></div>
+                    <div className="stat-num-wrap">
+                      <span
+                        ref={(el) => {
+                          statRefs.current[idx] = el;
+                        }}
+                        className="editorial-stat-number"
+                      >
+                        {stat.isDecimal ? `0.0` : `${stat.prefix}0`}
+                      </span>
+                      <span className="stat-blue-suffix">{stat.suffix}</span>
+                    </div>
+                    <div className="stat-label-wrap">
+                      <span className="editorial-stat-label-line">{stat.line1}</span>
+                      <span className="editorial-stat-label-line">{stat.line2}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
 
-        {/* Right Column: Title & Modern Editorial Counters Grid */}
-        <div className="meet-about-right-col">
-          <div className="meet-about-big-title-col">
-            <h1 ref={bigTitleRef} className="meet-about-big-title">
-              MEET DILANTHA
-            </h1>
-          </div>
+      </div>
 
-          <div ref={statsDeckRef} className="meet-about-stats-deck">
-            <div className="stats-deck-header">
-              <span className="stats-deck-dot"></span>
-              <span className="stats-deck-title">// TRACK RECORD & METRICS</span>
-            </div>
-
-            {/* Clean Modern Editorial 2x2 Stats Grid */}
-            <div className="editorial-stats-grid">
-              {statsData.map((stat, idx) => (
-                <div key={stat.id} className="editorial-stat-item">
-                  <div className="stat-num-wrap">
-                    <span
-                      ref={(el) => {
-                        statRefs.current[idx] = el;
-                      }}
-                      className="editorial-stat-number"
-                    >
-                      {stat.isDecimal ? `0.0${stat.suffix}` : `${stat.prefix}0${stat.suffix}`}
-                    </span>
-                  </div>
-                  <div className="stat-label-wrap">
-                    <span className="editorial-stat-label-line">{stat.line1}</span>
-                    <span className="editorial-stat-label-line">{stat.line2}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+      {/* Bottom Full-Width Logo Marquee attached to About Section */}
+      <div className="meet-about-marquee-wrapper">
+        <LogoMarquee />
       </div>
     </section>
   );

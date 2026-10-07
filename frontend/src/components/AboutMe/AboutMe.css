@@ -73,13 +73,16 @@
   padding-bottom: 1px;
 }
 
-/* MAIN BODY (3-COLUMN LAYOUT) */
-.meet-about-section .meet-about-body {
+/* =========================================================================
+   MAIN 2-CONTAINER GRID: LEFT PORTRAIT + RIGHT CONTENT DECK
+   ========================================================================= */
+
+.meet-about-section .meet-about-container {
   position: relative;
   z-index: 10;
   display: grid;
-  grid-template-columns: clamp(380px, 32vw, 500px) 1.2fr 1.1fr;
-  gap: 48px;
+  grid-template-columns: clamp(380px, 32vw, 500px) 1fr;
+  gap: 56px;
   align-items: start;
   width: 100%;
 }
@@ -92,13 +95,58 @@
 .meet-about-section .meet-about-portrait-card {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1.26;
-  border-radius: 12px;
+  aspect-ratio: 1 / 1.32;
+  border-radius: 14px;
   overflow: hidden;
   background: #111216;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.95);
+  box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.95);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+/* Right Main Column: Holds Headline and Content Grid (Starts at top level of image) */
+.meet-about-section .meet-about-right-main {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  width: 100%;
+}
+
+/* 1. Full-Width Statement Headline Across Right Column */
+.meet-about-section .meet-about-statement-banner {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  margin-bottom: 0;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.meet-about-section .meet-about-statement-title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(2.2rem, 3.8vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin: 0;
+  text-transform: none;
+}
+
+.meet-about-section .statement-highlight-blue {
+  color: #0052ff;
+  font-weight: 800;
+  display: inline-block;
+  letter-spacing: -0.04em;
+}
+
+/* 2. Sub-Columns Grid (Underneath Headline) */
+.meet-about-section .meet-about-columns-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 44px;
+  align-items: start;
+  width: 100%;
 }
 
 .meet-about-section .meet-about-portrait-card:hover {
@@ -122,16 +170,17 @@
   transform: scale(1.03);
 }
 
-/* Center Column: Content Blocks */
-.meet-about-section .meet-about-content {
+/* Full-Width Bio Story Block */
+.meet-about-section .meet-about-bio-banner {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  width: 100%;
 }
 
-.meet-about-section .meet-about-block {
+.meet-about-section .meet-about-standards-col {
   display: flex;
   flex-direction: column;
+  gap: 24px;
 }
 
 .meet-about-section .meet-about-subtag {
@@ -154,31 +203,56 @@
   margin: 0 0 16px 0;
 }
 
+.meet-about-section .meet-about-secondary-title {
+  font-family: 'Anton', 'Bebas Neue', sans-serif;
+  font-size: clamp(1.6rem, 2.3vw, 2.3rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
+}
+
+.meet-about-section .meet-about-block.secondary {
+  margin-top: 4px;
+}
+
 .meet-about-section .meet-about-mono-desc {
   font-family: 'Space Mono', monospace;
-  font-size: clamp(10.5px, 0.95vw, 12px);
-  line-height: 1.65;
+  font-size: clamp(11.5px, 0.95vw, 13px);
+  line-height: 1.7;
   color: #d1d5db;
   margin: 0;
   letter-spacing: -0.01em;
-  max-width: 580px;
+  width: 100%;
+  max-width: 100%;
   text-align: justify;
 }
 
 .meet-about-section .meet-about-mono-subtext {
   font-family: 'Space Mono', monospace;
   font-size: 11px;
-  line-height: 1.5;
+  line-height: 1.55;
   color: #9ca3af;
   margin: 0;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  max-width: 500px;
 }
 
 /* Right Column: Title & Editorial Counters Grid */
 .meet-about-section .meet-about-right-col {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 24px;
+  width: 100%;
+}
+
+.meet-about-section .meet-about-right-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
   width: 100%;
 }
 
@@ -186,20 +260,47 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  padding-top: 4px;
+  padding-top: 2px;
 }
 
 .meet-about-section .meet-about-big-title {
   font-family: 'Anton', 'Bebas Neue', sans-serif;
-  font-size: clamp(2.8rem, 4.6vw, 5.2rem);
+  font-size: clamp(2.4rem, 3.4vw, 4.2rem);
   font-weight: 900;
-  line-height: 0.88;
+  line-height: 0.9;
   letter-spacing: 0.04em;
   color: #ffffff;
   text-transform: uppercase;
   margin: 0;
   text-align: left;
-  white-space: nowrap;
+}
+
+.meet-about-section .exp-header-block {
+  display: flex;
+  flex-direction: column;
+  max-width: 240px;
+  margin-top: 0;
+}
+
+.meet-about-section .exp-header-block .meet-about-subtag {
+  margin-bottom: 6px;
+}
+
+.meet-about-section .exp-header-block .meet-about-secondary-title {
+  font-family: 'Anton', 'Bebas Neue', sans-serif;
+  font-size: clamp(1.2rem, 1.6vw, 1.7rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0 0 6px 0;
+}
+
+.meet-about-section .exp-header-block .meet-about-mono-subtext {
+  font-size: 10px;
+  line-height: 1.45;
+  color: #9ca3af;
 }
 
 /* Stats Deck Container */
@@ -208,120 +309,110 @@
   flex-direction: column;
   gap: 16px;
   width: 100%;
-  margin-top: 8px;
-}
-
-.meet-about-section .stats-deck-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 4px;
-}
-
-.meet-about-section .stats-deck-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #0052ff;
-  box-shadow: 0 0 8px #0052ff;
-  display: inline-block;
-  animation: meetPulseDot 2s infinite ease-in-out;
-}
-
-@keyframes meetPulseDot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
-}
-
-.meet-about-section .stats-deck-title {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  color: #9ca3af;
-  text-transform: uppercase;
+  margin-top: 2px;
 }
 
 /* =========================================================================
-   EDITORIAL 2x2 STATS GRID (MINIMAL & PRECISE)
+   EDITORIAL 4-STAT METRICS BAR (MODERN CYBERNETIC CARDS WITH ELECTRIC BLUE)
    ========================================================================= */
 
 .meet-about-section .editorial-stats-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
   width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .meet-about-section .editorial-stat-item {
   position: relative;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: flex-start;
-  gap: 16px;
-  padding: 24px 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  transition: all 0.3s ease;
+  gap: 8px;
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
+  overflow: hidden;
 }
 
-/* Odd items have right divider border */
-.meet-about-section .editorial-stat-item:nth-child(odd) {
-  border-right: 1px solid rgba(255, 255, 255, 0.12);
-  padding-left: 0;
-}
-
-/* Bottom row has no bottom border inside grid */
-.meet-about-section .editorial-stat-item:nth-child(3),
-.meet-about-section .editorial-stat-item:nth-child(4) {
-  border-bottom: none;
+.meet-about-section .stat-card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #0052ff, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .meet-about-section .editorial-stat-item:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(0, 82, 255, 0.04);
+  border-color: rgba(0, 82, 255, 0.4);
+  box-shadow: 0 15px 35px -10px rgba(0, 82, 255, 0.18);
+  transform: translateY(-2px);
 }
 
-/* Number Container & Typography */
+.meet-about-section .editorial-stat-item:hover .stat-card-glow {
+  opacity: 1;
+}
+
+/* Number Container & Typography (Stacked on Top) */
 .meet-about-section .stat-num-wrap {
   flex-shrink: 0;
   display: inline-flex;
   align-items: baseline;
+  gap: 2px;
+  margin-bottom: 2px;
 }
 
 .meet-about-section .editorial-stat-number {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(2.4rem, 3.5vw, 3.8rem);
-  font-weight: 800;
-  line-height: 0.95;
-  letter-spacing: -0.04em;
+  font-size: clamp(2.2rem, 3.2vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
   color: #ffffff;
   display: inline-block;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
-.meet-about-section .editorial-stat-item:hover .editorial-stat-number {
-  color: #ffffff;
-  transform: translateX(2px);
+.meet-about-section .stat-blue-suffix {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.6rem, 2.2vw, 2.4rem);
+  font-weight: 900;
+  color: #0052ff;
+  line-height: 1;
+  transition: color 0.3s ease;
 }
 
-/* Label Container & Typography (2 stacked lines) */
+.meet-about-section .editorial-stat-item:hover .stat-blue-suffix {
+  color: #3b82f6;
+}
+
+/* Label Container & Typography (Placed Cleanly Underneath Number) */
 .meet-about-section .stat-label-wrap {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 2px;
+  width: 100%;
 }
 
 .meet-about-section .editorial-stat-label-line {
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: clamp(8.5px, 0.72vw, 10px);
+  font-size: clamp(9.5px, 0.75vw, 11px);
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   color: #9ca3af;
   text-transform: uppercase;
-  line-height: 1.25;
-  white-space: nowrap;
+  line-height: 1.3;
+  white-space: normal;
   transition: color 0.3s ease;
 }
 
@@ -329,14 +420,382 @@
   color: #ffffff;
 }
 
+.meet-about-section .editorial-stat-item:hover .editorial-stat-label-line {
+  color: #e5e7eb;
+}
+
+/* =========================================================================
+   LEFT COLUMN STATUS & ACTION CARD
+   ========================================================================= */
+
+.meet-about-section .meet-about-status-card {
+  margin-top: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+}
+
+.meet-about-section .meet-about-status-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.meet-about-section .status-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.meet-about-section .status-live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meet-about-section .status-pulse-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #10b981;
+  animation: statusPulse 2s infinite ease-in-out;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.meet-about-section .status-live-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #34d399;
+  text-transform: uppercase;
+}
+
+.meet-about-section .status-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: #9ca3af;
+  letter-spacing: 0.04em;
+}
+
+.meet-about-section .status-loc-icon {
+  font-size: 12px;
+  color: #60a5fa;
+}
+
+.meet-about-section .status-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meet-about-section .about-action-btn.primary {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #0052ff;
+  color: #ffffff;
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 82, 255, 0.35);
+  transition: all 0.25s ease;
+}
+
+.meet-about-section .about-action-btn.primary:hover {
+  background: #1d68ff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 82, 255, 0.5);
+}
+
+.meet-about-section .action-btn-icon {
+  font-size: 13px;
+}
+
+.meet-about-section .about-social-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meet-about-section .about-social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #d1d5db;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+.meet-about-section .about-social-btn:hover {
+  color: #ffffff;
+  background: rgba(0, 82, 255, 0.2);
+  border-color: rgba(0, 82, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+/* =========================================================================
+   CENTER COLUMN PRINCIPLES DECK ("HOW I WORK")
+   ========================================================================= */
+
+.meet-about-section .meet-about-principles-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.meet-about-section .meet-about-standards-title {
+  font-family: 'Anton', 'Bebas Neue', sans-serif;
+  font-size: clamp(1.4rem, 2vw, 2.1rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0 0 2px 0;
+}
+
+.meet-about-section .meet-about-principles-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.meet-about-section .meet-about-principle-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.6);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.meet-about-section .meet-about-principle-card:hover {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: translateX(6px);
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.8);
+}
+
+.meet-about-section .meet-about-principle-card.speed:hover {
+  border-color: rgba(245, 158, 11, 0.45);
+}
+
+.meet-about-section .meet-about-principle-card.arch:hover {
+  border-color: rgba(0, 82, 255, 0.45);
+}
+
+.meet-about-section .meet-about-principle-card.ai:hover {
+  border-color: rgba(168, 85, 247, 0.45);
+}
+
+/* Modern Refined Icon Wrapper */
+.meet-about-section .principle-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.meet-about-section .meet-about-principle-card:hover .principle-icon-wrap {
+  transform: scale(1.06);
+}
+
+.meet-about-section .principle-svg {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.meet-about-section .principle-icon-wrap.speed {
+  border-color: rgba(56, 189, 248, 0.25);
+  color: #38bdf8;
+}
+
+.meet-about-section .meet-about-principle-card.speed:hover .principle-icon-wrap {
+  border-color: rgba(56, 189, 248, 0.6);
+  background: rgba(56, 189, 248, 0.08);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+.meet-about-section .principle-icon-wrap.speed .principle-svg {
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.5));
+}
+
+.meet-about-section .principle-icon-wrap.arch {
+  border-color: rgba(74, 222, 128, 0.25);
+  color: #4ade80;
+}
+
+.meet-about-section .meet-about-principle-card.arch:hover .principle-icon-wrap {
+  border-color: rgba(74, 222, 128, 0.6);
+  background: rgba(74, 222, 128, 0.08);
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+}
+
+.meet-about-section .principle-icon-wrap.arch .principle-svg {
+  filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.5));
+}
+
+.meet-about-section .principle-icon-wrap.ai {
+  border-color: rgba(192, 132, 252, 0.25);
+  color: #c084fc;
+}
+
+.meet-about-section .meet-about-principle-card.ai:hover .principle-icon-wrap {
+  border-color: rgba(192, 132, 252, 0.6);
+  background: rgba(192, 132, 252, 0.08);
+  box-shadow: 0 0 20px rgba(192, 132, 252, 0.3);
+}
+
+.meet-about-section .principle-icon-wrap.ai .principle-svg {
+  filter: drop-shadow(0 0 8px rgba(192, 132, 252, 0.5));
+}
+
+.meet-about-section .principle-text-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meet-about-section .principle-title {
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  font-size: clamp(14px, 1.05vw, 16px);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.meet-about-section .principle-desc {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(11.5px, 0.85vw, 13px);
+  line-height: 1.55;
+  color: #c4c9d4;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* =========================================================================
+   RIGHT COLUMN TECH STACK PILLS
+   ========================================================================= */
+
+.meet-about-section .meet-about-tech-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.meet-about-section .tech-pills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.meet-about-section .tech-pill {
+  font-family: 'Space Mono', monospace;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e5e7eb;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+  user-select: none;
+}
+
+.meet-about-section .tech-pill:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.meet-about-section .tech-pill.frontend:hover {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.45);
+  color: #7dd3fc;
+}
+
+.meet-about-section .tech-pill.core:hover {
+  background: rgba(129, 140, 248, 0.12);
+  border-color: rgba(129, 140, 248, 0.45);
+  color: #a5b4fc;
+}
+
+.meet-about-section .tech-pill.backend:hover {
+  background: rgba(74, 222, 128, 0.12);
+  border-color: rgba(74, 222, 128, 0.45);
+  color: #86efac;
+}
+
+.meet-about-section .tech-pill.data:hover {
+  background: rgba(251, 191, 36, 0.12);
+  border-color: rgba(251, 191, 36, 0.45);
+  color: #fde047;
+}
+
+.meet-about-section .tech-pill.cloud:hover {
+  background: rgba(192, 132, 252, 0.12);
+  border-color: rgba(192, 132, 252, 0.45);
+  color: #d8b4fe;
+}
+
+.meet-about-section .tech-pill.ai:hover {
+  background: rgba(251, 113, 133, 0.12);
+  border-color: rgba(251, 113, 133, 0.45);
+  color: #fda4af;
+}
+
 /* =========================================================================
    RESPONSIVENESS
    ========================================================================= */
 
 @media (max-width: 1320px) {
-  .meet-about-section .meet-about-body {
-    grid-template-columns: clamp(320px, 28vw, 400px) 1.1fr 1fr;
+  .meet-about-section .meet-about-container {
+    grid-template-columns: clamp(320px, 28vw, 400px) 1fr;
     gap: 36px;
+  }
+
+  .meet-about-section .meet-about-columns-grid {
+    gap: 28px;
   }
 
   .meet-about-section .meet-about-big-title {
@@ -344,18 +803,43 @@
   }
 }
 
+/* =========================================================================
+   BOTTOM LOGO MARQUEE INTEGRATION
+   ========================================================================= */
+
+.meet-about-section .meet-about-marquee-wrapper {
+  width: calc(100% + 128px);
+  margin: 64px -64px -80px -64px;
+  position: relative;
+  z-index: 10;
+}
+
 @media (max-width: 1080px) {
   .meet-about-section {
     padding: 40px 32px 60px;
   }
 
-  .meet-about-section .meet-about-body {
+  .meet-about-section .meet-about-statement-banner {
+    padding-bottom: 20px;
+  }
+
+  .meet-about-section .meet-about-marquee-wrapper {
+    width: calc(100% + 64px);
+    margin: 48px -32px -60px -32px;
+  }
+
+  .meet-about-section .meet-about-container {
     grid-template-columns: 1fr;
     gap: 44px;
   }
 
+  .meet-about-section .meet-about-columns-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
   .meet-about-section .meet-about-portrait-card {
-    max-width: 380px;
+    max-width: 480px;
   }
 
   .meet-about-section .meet-about-big-title-col {
@@ -369,13 +853,29 @@
 
   .meet-about-section .editorial-stats-grid {
     grid-template-columns: repeat(2, 1fr);
-    max-width: 600px;
+    width: 100%;
   }
 }
 
 @media (max-width: 640px) {
   .meet-about-section {
     padding: 32px 20px 48px;
+  }
+
+  .meet-about-section .meet-about-statement-banner {
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+  }
+
+  .meet-about-section .meet-about-statement-title {
+    font-size: clamp(2rem, 8.5vw, 2.8rem);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+  }
+
+  .meet-about-section .meet-about-marquee-wrapper {
+    width: calc(100% + 40px);
+    margin: 36px -20px -48px -20px;
   }
 
   .meet-about-section .meet-about-hero-title {
@@ -387,15 +887,13 @@
   }
 
   .meet-about-section .editorial-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .meet-about-section .editorial-stats-grid {
     grid-template-columns: 1fr;
-  }
-
-  .meet-about-section .editorial-stat-item:nth-child(odd) {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  }
-
-  .meet-about-section .editorial-stat-item:nth-child(3) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
 }

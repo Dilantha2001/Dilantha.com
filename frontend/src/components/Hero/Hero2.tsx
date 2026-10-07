@@ -160,9 +160,6 @@ const Hero2 = () => {
   return (
     <div ref={containerRef} className="hero2-scroll-container">
       <section ref={heroRef} className="hero2-wrapper">
-        {/* Background Subtle Architectural Grid */}
-        <div className="hero2-grid-bg" />
-
         {/* Top Navigation */}
         <header ref={headerRef} className="hero2-header">
           <div className="hero2-brand">
@@ -181,18 +178,18 @@ const Hero2 = () => {
           </nav>
         </header>
 
-        {/* Center Giant Typographic Showcase with Video positioned between the two 'S' letters */}
+        {/* Center Giant Typographic Showcase with Video positioned between DEVEL and OPER */}
         <div className="hero2-center-stage">
           <div className="hero2-title-container">
-            {/* Left 5 letters: "IMPOS" (ends with the first 'S') */}
+            {/* Left 5 letters: "DEVEL" */}
             <div ref={leftChunkRef} className="hero2-title-chunk left">
-              <span className="hero2-im-text">IM</span>
-              <span className="hero2-black-text">POS</span>
+              <span className="hero2-accent-text">DEV</span>
+              <span className="hero2-black-text">EL</span>
             </div>
 
-            {/* Right 5 letters: "SIBLE" (starts with the second 'S') */}
+            {/* Right 4 letters: "OPER" */}
             <div ref={rightChunkRef} className="hero2-title-chunk right">
-              <span className="hero2-black-text">SIBLE</span>
+              <span className="hero2-black-text">OPER</span>
             </div>
           </div>
 

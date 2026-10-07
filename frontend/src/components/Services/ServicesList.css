@@ -1,45 +1,42 @@
 /* =========================================================================
-   CLEAN EDITORIAL SERVICES LIST (FULLSCREEN 100VH VIEWPORT LAYOUT)
+   CLEAN EDITORIAL SERVICES LIST (FULL PAGE 100VH VIEWPORT LAYOUT)
    ========================================================================= */
 
 .clean-services-section {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  min-height: 100dvh;
   background-color: #08080a;
   color: #ffffff;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  padding: 4vw 4vw;
+  padding: 80px 48px 100px;
   box-sizing: border-box;
   overflow: hidden;
   z-index: 20;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .clean-services-container {
   width: 100%;
-  max-width: 100%;
-  height: 100%;
-  flex: 1;
+  max-width: 1540px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 24px;
+  gap: 44px;
 }
 
 /* =========================================================================
-   HEADER (FULLSCREEN TOP)
+   HEADER (TOP)
    ========================================================================= */
 
 .clean-services-header {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding-bottom: 16px;
+  gap: 12px;
+  padding-bottom: 24px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   flex-shrink: 0;
 }
@@ -69,7 +66,7 @@
 
 .services-section-title {
   font-family: 'Anton', 'Bebas Neue', sans-serif;
-  font-size: clamp(2.4rem, 4.4vw, 4.4rem);
+  font-size: clamp(3rem, 6.2vw, 6.4rem);
   font-weight: 900;
   line-height: 0.95;
   letter-spacing: 0.02em;
@@ -79,26 +76,22 @@
 }
 
 /* =========================================================================
-   3-COLUMN FULLSCREEN EDITORIAL ROWS
+   3-COLUMN EDITORIAL ROWS
    ========================================================================= */
 
 .clean-services-list {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
-  margin-top: 10px;
 }
 
 .clean-service-row {
-  flex: 1;
   position: relative;
   display: grid;
-  grid-template-columns: 80px 1.15fr 1.35fr;
+  grid-template-columns: 80px 1.2fr 1.3fr;
   align-items: center;
-  gap: 32px;
-  padding: 16px 12px;
+  gap: 36px;
+  padding: 24px 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
@@ -141,9 +134,9 @@
 
 .clean-title-text {
   font-family: 'Inter', -apple-system, sans-serif;
-  font-size: clamp(1.8rem, 2.8vw, 3rem);
+  font-size: clamp(1.6rem, 2.4vw, 2.6rem);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: -0.025em;
   color: #ffffff;
   margin: 0;
@@ -152,7 +145,7 @@
 
 .clean-service-row:hover .clean-title-text {
   color: #ffffff;
-  transform: translateX(12px);
+  transform: translateX(10px);
 }
 
 /* Column 3: Description */
@@ -183,14 +176,15 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 230px;
-  height: 330px;
+  width: 240px;
+  height: 340px;
   pointer-events: none;
   z-index: 1000;
   opacity: 0;
+  visibility: hidden;
   transform: translate(-50%, -50%) scale(0.75);
   transform-origin: center center;
-  will-change: transform, opacity;
+  will-change: transform, opacity, visibility;
 }
 
 .service-cursor-img-box {

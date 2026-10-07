@@ -28,16 +28,17 @@ export default function FAQ() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const isFirstRender = useRef(true);
 
   useGSAP(() => {
     if (!containerRef.current) return;
     
     // Entrance animation
     gsap.from('.faq-item', {
-      y: 50,
+      y: 40,
       opacity: 0,
-      duration: 1,
-      stagger: 0.15,
+      duration: 0.8,
+      stagger: 0.12,
       ease: "power3.out",
       scrollTrigger: {
         trigger: containerRef.current,
@@ -47,21 +48,30 @@ export default function FAQ() {
   }, { scope: containerRef });
 
   useLayoutEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     contentRefs.current.forEach((ref, index) => {
       if (!ref) return;
       if (openIndex === index) {
-        gsap.to(ref, {
-          height: 'auto',
-          opacity: 1,
-          duration: 0.6,
-          ease: "expo.out"
-        });
+        gsap.fromTo(
+          ref,
+          { height: 0, opacity: 0 },
+          {
+            height: 'auto',
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.out"
+          }
+        );
       } else {
         gsap.to(ref, {
           height: 0,
           opacity: 0,
-          duration: 0.4,
-          ease: "power3.inOut"
+          duration: 0.35,
+          ease: "power2.inOut"
         });
       }
     });
@@ -72,19 +82,19 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" ref={containerRef} className="relative w-full bg-white py-32 px-8 z-10 border-t border-black/5">
-      <div className="max-w-4xl mx-auto flex flex-col gap-16">
+    <section id="faq" ref={containerRef} className="relative w-full bg-white pt-20 md:pt-28 pb-8 md:pb-12 px-6 sm:px-8 z-10 border-t border-black/5">
+      <div className="max-w-4xl mx-auto flex flex-col gap-14">
         
         <div className="text-center">
-          <h2 className="text-4xl md:text-6xl font-light text-black tracking-tight">
-            Frequently Asked <span className="font-serif italic text-[#0052ff]">Questions</span>
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-black tracking-tight uppercase">
+            FREQUENTLY ASKED <span className="text-[#0052ff]">QUESTIONS</span>
           </h2>
-          <p className="mt-4 text-black/50 text-sm md:text-base max-w-lg mx-auto">
+          <p className="mt-4 text-black/60 font-medium text-sm md:text-base max-w-lg mx-auto">
             Everything you need to know about my process and how we can work together.
           </p>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;
             return (
@@ -93,11 +103,11 @@ export default function FAQ() {
                 className="faq-item group cursor-pointer border-b border-black/10 pb-4 transition-colors hover:border-black/30"
                 onClick={() => toggleFaq(i)}
               >
-                <div className="flex justify-between items-center py-6">
-                  <h3 className={`text-lg md:text-2xl transition-colors duration-300 ${isOpen ? 'text-[#0052ff]' : 'text-black'}`}>
+                <div className="flex justify-between items-center py-5 sm:py-6">
+                  <h3 className={`text-lg sm:text-xl md:text-2xl font-bold transition-colors duration-300 ${isOpen ? 'text-[#0052ff]' : 'text-black'}`}>
                     {faq.question}
                   </h3>
-                  <div className={`relative w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isOpen ? 'border-[#0052ff] bg-[#0052ff]/10' : 'border-black/20'}`}>
+                  <div className={`relative w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 ml-4 ${isOpen ? 'border-[#0052ff] bg-[#0052ff]/10' : 'border-black/20'}`}>
                     <span className={`absolute w-3.5 h-[1.5px] bg-current transition-transform duration-500 ease-in-out ${isOpen ? 'rotate-180 text-[#0052ff]' : 'text-black'}`}></span>
                     <span className={`absolute w-3.5 h-[1.5px] bg-current transition-transform duration-500 ease-in-out ${isOpen ? 'rotate-180 text-[#0052ff] opacity-0' : 'rotate-90 text-black'}`}></span>
                   </div>
@@ -105,9 +115,13 @@ export default function FAQ() {
                 
                 <div 
                   ref={el => { contentRefs.current[i] = el; }}
-                  className="overflow-hidden h-0 opacity-0"
+                  className="overflow-hidden"
+                  style={{
+                    height: i === 0 ? 'auto' : 0,
+                    opacity: i === 0 ? 1 : 0
+                  }}
                 >
-                  <p className="text-black/60 font-light pb-6 pr-12 leading-relaxed text-sm md:text-base">
+                  <p className="text-black/70 font-normal pb-6 pr-8 sm:pr-12 leading-relaxed text-sm md:text-base">
                     {faq.answer}
                   </p>
                 </div>

@@ -123,23 +123,11 @@ export default function RecentWorks() {
     <section id="works" ref={sectionRef} className="recent-works-section">
       <div className="recent-works-container">
         
-        {/* Top Meta Bar */}
+        {/* Giant Title with Counter Badge */}
         <div ref={headerRef} className="recent-works-header-block">
-          <div className="recent-works-top-bar">
-            <div className="top-bar-left">
-              <span className="dot-indicator"></span>
-              <span className="top-bar-text">FEATURED PROJECTS</span>
-            </div>
-            <div className="top-bar-cross">+</div>
-            <div className="top-bar-right">
-              <span>@2026</span>
-            </div>
-          </div>
-
-          {/* Giant Title with Counter Badge */}
           <div className="recent-works-title-row">
             <h2 className="recent-works-title">
-              RECENT WORKS
+              RECENT <span className="title-accent">WORKS</span>
             </h2>
             <span className="recent-works-count">
               [+{String(featuredProjects.length).padStart(2, '0')}]

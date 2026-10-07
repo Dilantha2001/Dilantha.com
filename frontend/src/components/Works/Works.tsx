@@ -105,14 +105,11 @@ export default function Works() {
       <div className="flex-1 flex flex-col relative h-full overflow-hidden">
         
         {/* Header */}
-        <div className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-10 md:left-10 z-20 flex flex-col z-[100] pointer-events-none">
-          <div className="text-gray-600 text-[10px] sm:text-xs md:text-sm tracking-[0.2em] mb-1 uppercase flex items-center">
-            DILANTHA DEV / 2018 <span className="mx-1 md:mx-2">→</span> <span className="text-[#0052ff] font-bold">NOW</span>
-          </div>
+        <div className="absolute top-3 left-4 sm:top-4 sm:left-6 md:top-6 md:left-10 z-20 flex flex-col z-[100] pointer-events-none">
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold font-['Anton',sans-serif] uppercase tracking-wide leading-none md:leading-tight">
             IT TOOK <span className="text-[#0052ff]">MY TIME.</span>
           </h2>
-          <div className="mt-2 sm:mt-4 md:mt-6 text-xl sm:text-2xl md:text-3xl font-bold font-['Anton',sans-serif]">
+          <div className="mt-1.5 sm:mt-2.5 md:mt-3 text-xl sm:text-2xl md:text-3xl font-bold font-['Anton',sans-serif]">
             <span className="text-[#0052ff] transition-all duration-300">{activeIndexStr}</span> <span className="text-gray-400">/ {totalProjectsStr}</span>
           </div>
         </div>

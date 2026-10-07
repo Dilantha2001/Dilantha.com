@@ -3,16 +3,10 @@ import { TECH_STACK } from '../../data/portfolioData';
 import './Technologies.css';
 
 // Ensure proper icon matching for items
-const getTechIcon = (name: string, iconName?: string) => {
+const getTechIcon = (iconName?: string) => {
   if (iconName && (SiIcons as any)[iconName]) {
     const IconComp = (SiIcons as any)[iconName];
-    return <IconComp size={iconName === 'SiNodedotjs' ? 28 : 22} />;
-  }
-  if (name.toLowerCase().includes('webflow')) {
-    return <SiIcons.SiWebflow size={22} />;
-  }
-  if (name.toLowerCase().includes('typescript')) {
-    return <SiIcons.SiTypescript size={20} />;
+    return <IconComp size={22} />;
   }
   return null;
 };
@@ -25,7 +19,6 @@ export default function Technologies() {
         {/* Left Column: Heading & Summary */}
         <div className="technologies-left">
           <div className="tech-tag-row">
-            <span className="tech-dot"></span>
             <span className="tech-tag-text">STACK & TOOLING</span>
           </div>
           <h2 className="tech-heading">
@@ -40,7 +33,7 @@ export default function Technologies() {
         {/* Right Column: 2-Column Tech Grid */}
         <div className="technologies-right">
           {TECH_STACK.map((t, i) => {
-            const icon = getTechIcon(t.name, t.iconName);
+            const icon = getTechIcon(t.iconName);
             return (
               <div key={i} className="tech-item-row group">
                 {icon && (
