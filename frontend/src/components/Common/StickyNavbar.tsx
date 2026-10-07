@@ -154,9 +154,6 @@ export default function StickyNavbar() {
           title="Back to Top"
         >
           <span className="sticky-navbar-brand-name">DILANTHA</span>
-          <span className="sticky-navbar-dot-wrapper">
-            <span className="sticky-navbar-pulse-dot"></span>
-          </span>
         </a>
 
         {/* Desktop Links */}

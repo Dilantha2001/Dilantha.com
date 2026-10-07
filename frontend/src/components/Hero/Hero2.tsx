@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import './Hero2.css';
 import heroVideo from '../../assets/hero.mp4';
 import { MdWavingHand } from 'react-icons/md';
+import TechText from '../Common/TechText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,9 +20,9 @@ const Hero2 = () => {
   const videoFrameRef = useRef<HTMLDivElement>(null);
   const squareBoxRef = useRef<HTMLDivElement>(null);
   const shadowRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLElement>(null);
   const bottomLeftRef = useRef<HTMLDivElement>(null);
   const bottomBarRef = useRef<HTMLDivElement>(null);
+  const topChunkRef = useRef<HTMLDivElement>(null);
 
   // GSAP ScrollTrigger: Split at the two S's (IMPOS <-> SIBLE) & zoom video into fullscreen
   useGSAP(() => {
@@ -31,8 +32,9 @@ const Hero2 = () => {
       scrollTrigger: {
         trigger: containerRef.current,
         start: 'top top',
-        end: '+=150%',
+        end: 'bottom top',
         pin: heroRef.current,
+        pinSpacing: false,
         scrub: 1.2,
         anticipatePin: 1,
       }
@@ -62,10 +64,10 @@ const Hero2 = () => {
       0
     )
     .to(
-      [headerRef.current, bottomLeftRef.current, bottomBarRef.current],
+      [bottomLeftRef.current, bottomBarRef.current, topChunkRef.current],
       {
         opacity: 0,
-        y: (i) => (i === 0 ? -40 : 40),
+        y: (i) => (i === 2 ? -40 : 40),
         duration: 0.35,
         ease: 'power2.in',
       },
@@ -103,27 +105,28 @@ const Hero2 = () => {
     .to(
       videoFrameRef.current,
       {
-        width: '100vw',
-        height: '100vh',
-        top: 0,
-        left: 0,
-        margin: 0,
-        borderRadius: 0,
+        width: '80vw',
+        height: '80vh',
+        top: '50%',
+        left: '50%',
+        xPercent: -50,
+        yPercent: -50,
+        borderRadius: '24px',
         duration: 0.65,
         ease: 'power2.inOut',
       },
-      0.12
+      0
     )
     .to(
       squareBoxRef.current,
       {
-        borderRadius: 0,
+        borderRadius: '24px',
         borderWidth: 0,
-        boxShadow: 'none',
+        boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4)',
         duration: 0.65,
         ease: 'power2.inOut',
       },
-      0.12
+      0
     )
     .to(
       videoRef.current,
@@ -132,8 +135,21 @@ const Hero2 = () => {
         duration: 0.7,
         ease: 'power1.out',
       },
-      0.15
+      0
     );
+
+    // Dedicated ScrollTrigger to fade out the entire hero section as AboutMe slides over
+    gsap.to(heroRef.current, {
+      opacity: 0,
+      filter: 'blur(10px)',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'bottom bottom', // When AboutMe starts entering from the bottom
+        end: 'bottom top',      // When AboutMe fully covers the screen
+        scrub: true,
+      }
+    });
 
   }, { scope: containerRef });
 
@@ -160,36 +176,52 @@ const Hero2 = () => {
   return (
     <div ref={containerRef} className="hero2-scroll-container">
       <section ref={heroRef} className="hero2-wrapper">
-        {/* Top Navigation */}
-        <header ref={headerRef} className="hero2-header">
-          <div className="hero2-brand">
-            <span className="hero2-brand-name">DILANTHA RANAWEERA</span>
-            
-          </div>
-
-          <nav className="hero2-nav">
-            <a href="#about" className="hero2-nav-link">ABOUT</a>
-            <a href="#works" className="hero2-nav-link">PROJECTS</a>
-            <a href="#services" className="hero2-nav-link">SERVICES</a>
-            <a href="#contact" className="hero2-nav-btn">
-              <MdWavingHand className="hero2-hand-icon" />
-              <span>LET&apos;S TALK</span>
-            </a>
-          </nav>
-        </header>
+        {/* Decorative Top Bar to fix empty space */}
+        <div className="hero2-decorative-top">
+          <span className="hero2-brand-name">DILANTHA</span>
+          <span className="hero2-tagline">DIGITAL PORTFOLIO © {new Date().getFullYear()}</span>
+        </div>
 
         {/* Center Giant Typographic Showcase with Video positioned between DEVEL and OPER */}
         <div className="hero2-center-stage">
           <div className="hero2-title-container">
-            {/* Left 5 letters: "DEVEL" */}
-            <div ref={leftChunkRef} className="hero2-title-chunk left">
-              <span className="hero2-accent-text">DEV</span>
-              <span className="hero2-black-text">EL</span>
+            {/* Top line: "NEXT-GEN" */}
+            <div ref={topChunkRef} className="hero2-title-row-top" style={{ height: 'clamp(80px, 15vw, 200px)' }}>
+              <TechText
+                text="NEXT-GEN"
+                fontWeight={900}
+                fontSize={150}
+                reveal="letter"
+                dashLength={4}
+                dashGap={2}
+                specks={15}
+                fontFamily="Inter, sans-serif"
+                color="#0052ff"
+                accentColor="#0052ff"
+                letterSpacing={-0.055}
+                reach={200}
+                softness={0.7}
+                strokeWidth={1.5}
+                speed={1}
+                lineStyle="dashed"
+                selection
+                labels
+                draggable
+                sweep
+              />
             </div>
 
-            {/* Right 4 letters: "OPER" */}
-            <div ref={rightChunkRef} className="hero2-title-chunk right">
-              <span className="hero2-black-text">OPER</span>
+            {/* Bottom line: "DIGITAL EXPERIENCE" */}
+            <div className="hero2-title-row-bottom">
+              {/* Left letters: "DIGITAL" */}
+              <div ref={leftChunkRef} className="hero2-title-chunk left">
+                <span className="hero2-black-text">DIGITAL</span>
+              </div>
+
+              {/* Right letters: "EXPERIENCE" */}
+              <div ref={rightChunkRef} className="hero2-title-chunk right">
+                <span className="hero2-black-text">SOLUTION</span>
+              </div>
             </div>
           </div>
 
@@ -220,14 +252,14 @@ const Hero2 = () => {
 
         {/* Bottom Left Quotation / Philosophy */}
         <div ref={bottomLeftRef} className="hero2-bottom-left">
-          <p className="hero2-quote-primary">there are probably things we simply cannot do.</p>
-          <p className="hero2-quote-secondary">we are not sure of that.</p>
+          <p className="hero2-quote-primary">architecting scalable systems and seamless user experiences.</p>
+          <p className="hero2-quote-secondary">turning complex problems into elegant solutions.</p>
         </div>
 
         {/* Bottom Bar Info / Ticker */}
         <div ref={bottomBarRef} className="hero2-bottom-bar">
           <div className="hero2-tagline">
-            <span>VISUAL COMMUNICATIONS, SOFTWARE ENGINEERING & DIGITAL EXPERIENCES</span>
+            <span>FULL-STACK ENGINEERING, CLOUD ARCHITECTURE & MODERN WEB EXPERIENCES</span>
           </div>
 
           <button onClick={scrollToNext} className="hero2-scroll-indicator" aria-label="Scroll down">

@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 const statsData = [
   { 
     id: 'projects', 
-    target: 800, 
+    target: 10, 
     prefix: '', 
     suffix: '+', 
     isDecimal: false, 
@@ -21,25 +21,25 @@ const statsData = [
   },
   { 
     id: 'satisfaction', 
-    target: 99, 
+    target: 100, 
     prefix: '', 
     suffix: '%', 
     isDecimal: false, 
     line1: 'CLIENT', 
-    line2: 'SATISFACTION RATE' 
+    line2: 'SATISFACTION' 
   },
   { 
     id: 'rating', 
-    target: 4.8, 
+    target: 5.0, 
     prefix: '', 
-    suffix: '*', 
+    suffix: '★', 
     isDecimal: true, 
     line1: 'STAR AVERAGE', 
     line2: 'RATING' 
   },
   { 
     id: 'experience', 
-    target: 5, 
+    target: 4, 
     prefix: '0', 
     suffix: '+', 
     isDecimal: false, 
@@ -191,8 +191,7 @@ export default function AboutMe() {
               <div className="meet-about-block secondary exp-header-block">
                 <span className="meet-about-subtag">Having more than</span>
                 <h3 className="meet-about-secondary-title">
-                  4+ YEARS OF<br />
-                  HANDS-ON EXP
+                  <span style={{ color: '#0052ff' }}>4+ YEARS OF</span> HANDS-ON EXP
                 </h3>
                 <p className="meet-about-mono-subtext">
                   he has acquired a variety of technologies that includes modern frontend, robust backend architectures, distributed cloud systems, and AI integration.

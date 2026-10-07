@@ -6,7 +6,7 @@
   position: relative;
   width: 100%;
   height: 220vh;
-  background-color: #f2f2f4;
+  background-color: transparent;
 }
 
 .hero2-wrapper {
@@ -25,9 +25,19 @@
   user-select: none;
   z-index: 20;
 }
-
-
-
+.hero2-decorative-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 32px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  z-index: 20;
+  pointer-events: none;
+}
 /* Top Header */
 .hero2-header {
   position: relative;
@@ -131,7 +141,6 @@
 
 /* Center Giant Typographic Showcase Stage */
 .hero2-center-stage {
-  position: relative;
   z-index: 10;
   display: flex;
   justify-content: center;
@@ -145,6 +154,7 @@
 
 .hero2-title-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -152,16 +162,45 @@
   font-weight: 900;
   letter-spacing: -0.055em;
   text-transform: uppercase;
-  font-size: clamp(4.5rem, 17.5vw, 19.5rem);
   white-space: nowrap;
   pointer-events: none;
   overflow: visible;
 }
 
+.hero2-title-row-top {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  will-change: transform, opacity;
+  font-size: clamp(3rem, 10vw, 12rem);
+}
+
+.hero2-title-row-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: clamp(2.5rem, 8vw, 10rem);
+}
+
 .hero2-title-chunk {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   will-change: transform, opacity, filter;
+  flex: 1;
+}
+
+.hero2-title-chunk.left {
+  justify-content: flex-end;
+  padding-right: clamp(90px, 9vw, 130px);
+}
+
+.hero2-title-chunk.right {
+  justify-content: flex-start;
+  padding-left: clamp(90px, 9vw, 130px);
 }
 
 .hero2-accent-text,
@@ -180,17 +219,16 @@
 /* Center Square Video Box */
 .hero2-video-frame-container {
   position: absolute;
-  top: 50%;
+  top: 58%;
   left: 50%;
-  width: clamp(160px, 15vw, 230px);
-  height: clamp(160px, 15vw, 230px);
-  margin-top: clamp(-80px, -7.5vw, -115px);
-  margin-left: clamp(-80px, -7.5vw, -115px);
+  width: clamp(120px, 12vw, 180px);
+  height: clamp(120px, 12vw, 180px);
+  transform: translate(-50%, -50%);
   z-index: 25;
   cursor: pointer;
   pointer-events: auto;
   transform-style: preserve-3d;
-  will-change: width, height, top, left, margin, transform;
+  will-change: width, height, top, left, transform;
 }
 
 /* Ground Cast Shadow */

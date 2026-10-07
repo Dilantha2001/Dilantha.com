@@ -7,70 +7,87 @@ import img6 from '../../assets/images (55).jfif';
 import img7 from '../../assets/images (56).jfif';
 import img8 from '../../assets/images (57).jfif';
 
+import avatar1 from '../../assets/feedbacks/ffedbacks (1).jpg';
+import avatar2 from '../../assets/feedbacks/ffedbacks (2).jfif';
+import avatar3 from '../../assets/feedbacks/ffedbacks (3).jfif';
+import avatar4 from '../../assets/feedbacks/ffedbacks (4).jfif';
+import avatar5 from '../../assets/feedbacks/ffedbacks (1).jfif';
+import avatar6 from '../../assets/feedbacks/images (62).jfif';
+import avatar7 from '../../assets/feedbacks/images (63).jfif';
+import avatar8 from '../../assets/feedbacks/images (64).jfif';
+
 const feedbacks = [
   {
     label: "Results-oriented",
     title: "70% growth in retention rate",
     quote: "After the deployment the platform allowed us to get more than one thousand users in a month with a retention rate of more than 70%. The subscription distribution and set of rather unique features together with clear UX make our users stay with us for longer.",
-    name: "Aidan Perkins",
+    name: "Alex Perkins",
     role: "Managing Director, Real Estate Agency Registry",
-    image: img1
+    image: img1,
+    avatar: avatar1
   },
   {
     label: "Fast to deliver",
     title: "Finished in 3 months what should've taken 9",
     quote: "I love working with Dilantha and his process. He is fun, nice, reliable, and able to work quickly—he finished in three months what should've taken nine. He views issues and difficult tasks as challenges, remaining constantly available and working all night to solve certain issues.",
-    name: "Founder",
-    role: "Digital Agency",
-    image: img2
+    name: "Jordan Lee",
+    role: "Founder, Digital Agency",
+    image: img2,
+    avatar: avatar2
   },
   {
     label: "Data-driven",
     title: "Based on numbers, without vague theories",
     quote: "We received a stable web platform allowing us to bring our business to new heights, provide high-quality services to our clients and make them confident in their retirement. Dilantha made his assumptions for improvement always based on the numbers and reports, without vague theories, which impressed our team.",
-    name: "Alec Öberg",
+    name: "Taylor Öberg",
     role: "Business Development Officer, SaaS Company",
-    image: img3
+    image: img3,
+    avatar: avatar3
   },
   {
     label: "Creative Vision",
     title: "A design that truly stands out",
     quote: "He completely transformed our online presence. His attention to detail and creative vision brought our brand to life in ways we didn't think were possible. The animations, color schemes, and layout are absolutely world-class and perfectly aligned with our goals.",
-    name: "Sarah Jenkins",
+    name: "Casey Jenkins",
     role: "Marketing Director, TechStart",
-    image: img4
+    image: img4,
+    avatar: avatar4
   },
   {
     label: "Highly Professional",
     title: "Communication was flawless",
     quote: "From the very first meeting to the final hand-off, the communication was clear and highly professional. We always knew exactly where the project stood, and every single deadline was met ahead of schedule. A true pleasure to work with.",
-    name: "David Chen",
+    name: "Riley Chen",
     role: "CEO, Innovate Solutions",
-    image: img5
+    image: img5,
+    avatar: avatar5
   },
   {
     label: "Problem Solver",
     title: "Fixed complex issues effortlessly",
     quote: "We had a really complicated backend integration that two previous developers couldn't figure out. Dilantha came in and not only solved it within a week, but also optimized the entire flow to make it run 3x faster.",
-    name: "Emily Rodriguez",
+    name: "Morgan Rodriguez",
     role: "Product Manager, E-Commerce Pro",
-    image: img6
+    image: img6,
+    avatar: avatar6
   },
   {
     label: "User-Centric",
     title: "Engagement skyrocketed by 150%",
     quote: "The new UI/UX design is so intuitive that our user engagement metrics shot up immediately after launch. Customers keep telling us how much easier it is to navigate the new platform compared to our old legacy system.",
-    name: "Mark Thompson",
+    name: "Jamie Thompson",
     role: "Co-Founder, SaaS Cloud",
-    image: img7
+    image: img7,
+    avatar: avatar7
   },
   {
     label: "Exceptional Quality",
     title: "Zero bugs on launch day",
     quote: "I've never experienced a launch as smooth as this one. The code quality is exceptional, fully responsive across all devices, and we literally had zero bug reports in the first month of going live. Highly recommended!",
-    name: "Jessica Wu",
+    name: "Avery Wu",
     role: "Operations Head, FinTech Plus",
-    image: img8
+    image: img8,
+    avatar: avatar8
   }
 ];
 
@@ -134,19 +151,13 @@ function FeedbackCard({ item, index }: { item: typeof feedbacks[0], index: numbe
       {/* Header: Avatar + Author Info + Category Tag */}
       <div className="flex items-center justify-between gap-3 mb-4">
         <div className="flex items-center gap-3">
-          {isQuote ? (
-            <div className="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-[#0052ff] bg-[#0052ff]/10 flex items-center justify-center text-[#0052ff] text-2xl font-serif leading-none pt-1 shadow-[0_0_12px_rgba(0,82,255,0.3)] shrink-0">
-              &rdquo;
-            </div>
-          ) : (
-            <img 
-              src={`https://i.pravatar.cc/150?img=${(index * 3) + 11}`} 
-              alt={item.name} 
-              loading="lazy"
-              decoding="async"
-              className="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-[#0052ff] object-cover p-[2px] shadow-[0_0_12px_rgba(0,82,255,0.25)] shrink-0" 
-            />
-          )}
+          <img 
+            src={item.avatar || `https://i.pravatar.cc/150?img=${(index * 3) + 11}`} 
+            alt={item.name} 
+            loading="lazy"
+            decoding="async"
+            className="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-[#0052ff] object-cover p-[2px] shadow-[0_0_12px_rgba(0,82,255,0.25)] shrink-0 bg-[#08080a]" 
+          />
           <div className="flex flex-col">
             <h4 className="text-white font-bold text-sm md:text-base leading-tight mb-0.5">{item.name}</h4>
             <p className="text-gray-400 text-xs leading-tight line-clamp-1">{item.role}</p>
