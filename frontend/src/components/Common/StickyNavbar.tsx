@@ -2,7 +2,16 @@ import { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { MdWavingHand } from 'react-icons/md';
+import { 
+  FiHome, 
+  FiFolder, 
+  FiLayers, 
+  FiMessageSquare, 
+  FiHelpCircle, 
+  FiArrowUpRight, 
+  FiChevronRight,
+  FiPlus
+} from 'react-icons/fi';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import './StickyNavbar.css';
 
@@ -12,14 +21,15 @@ interface NavItem {
   id: string;
   label: string;
   href: string;
+  icon: React.ReactNode;
 }
 
 const navItems: NavItem[] = [
-  { id: 'about', label: 'ABOUT', href: '#about' },
-  { id: 'works', label: 'PROJECTS', href: '#works' },
-  { id: 'services', label: 'SERVICES', href: '#services' },
-  { id: 'feedback', label: 'REVIEWS', href: '#feedback' },
-  { id: 'faq', label: 'FAQ', href: '#faq' },
+  { id: 'about', label: 'Home', href: '#about', icon: <FiHome size={15} /> },
+  { id: 'works', label: 'Projects', href: '#works', icon: <FiFolder size={15} /> },
+  { id: 'services', label: 'Services', href: '#services', icon: <FiLayers size={15} /> },
+  { id: 'feedback', label: 'Reviews', href: '#feedback', icon: <FiMessageSquare size={15} /> },
+  { id: 'faq', label: 'FAQ', href: '#faq', icon: <FiHelpCircle size={15} /> },
 ];
 
 export default function StickyNavbar() {
@@ -146,18 +156,24 @@ export default function StickyNavbar() {
     >
       <div className="sticky-navbar-container">
         
-        {/* Brand & Live Status */}
+        {/* Left: Logo mark + 2-line brand */}
         <a 
           href="#top" 
           onClick={scrollToTop} 
           className="sticky-navbar-brand"
           title="Back to Top"
         >
-          <span className="sticky-navbar-brand-name">DILANTHA</span>
+          <div className="sticky-navbar-logo-mark" aria-hidden="true">
+            <FiPlus size={16} strokeWidth={2.6} />
+          </div>
+          <div className="sticky-navbar-brand-text">
+            <span className="brand-name">Dilantha</span>
+            <span className="brand-sub">Portfolio</span>
+          </div>
         </a>
 
-        {/* Desktop Links */}
-        <div className="sticky-navbar-links">
+        {/* Center: Desktop Nav Pills */}
+        <div className="sticky-navbar-pills">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
             return (
@@ -165,24 +181,30 @@ export default function StickyNavbar() {
                 key={item.id}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className={`sticky-navbar-link ${isActive ? 'active' : ''}`}
+                className={`sticky-navbar-pill ${isActive ? 'active' : ''}`}
               >
-                {item.label}
-                {isActive && <span className="sticky-navbar-active-bar" />}
+                <span className="pill-icon">{item.icon}</span>
+                <span className="pill-text">{item.label}</span>
               </a>
             );
           })}
         </div>
 
-        {/* Right CTA Button */}
-        <div className="sticky-navbar-cta">
+        {/* Right: CTA Button with black circle arrow & chevrons */}
+        <div className="sticky-navbar-cta-group">
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, '#contact')}
-            className="sticky-navbar-talk-btn"
+            className="sticky-navbar-cta-btn"
           >
-            <MdWavingHand className="sticky-navbar-hand" />
-            <span>LET&apos;S TALK</span>
+            <span className="cta-btn-text">Start now</span>
+            <span className="cta-btn-dot">
+              <FiArrowUpRight size={15} strokeWidth={2.4} />
+            </span>
+            <span className="cta-btn-chevrons" aria-hidden="true">
+              <FiChevronRight size={13} strokeWidth={2.5} />
+              <FiChevronRight size={13} strokeWidth={2.5} style={{ marginLeft: -8 }} />
+            </span>
           </a>
 
           {/* Mobile Menu Toggle */}
@@ -207,7 +229,8 @@ export default function StickyNavbar() {
               onClick={(e) => handleNavClick(e, item.href)}
               className={`sticky-navbar-mobile-link ${activeSection === item.id ? 'active' : ''}`}
             >
-              {item.label}
+              <span className="pill-icon">{item.icon}</span>
+              <span>{item.label}</span>
             </a>
           ))}
           <a
@@ -215,8 +238,8 @@ export default function StickyNavbar() {
             onClick={(e) => handleNavClick(e, '#contact')}
             className="sticky-navbar-mobile-cta-btn"
           >
-            <MdWavingHand className="sticky-navbar-hand" />
-            <span>LET&apos;S TALK</span>
+            <span>Start now</span>
+            <FiArrowUpRight size={15} />
           </a>
         </div>
       )}

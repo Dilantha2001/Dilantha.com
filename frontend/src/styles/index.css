@@ -26,18 +26,46 @@ body {
   box-sizing: border-box;
 }
 
+/* Global Electric Blue Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #08080a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0052ff;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1a64ff;
+  box-shadow: 0 0 10px rgba(0, 82, 255, 0.8);
+}
+
+/* Firefox Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0052ff #08080a;
+}
+
 /* Custom scrollbar utility */
 .custom-scrollbar::-webkit-scrollbar {
   height: 6px;
+  width: 6px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: rgba(0, 0, 0, 0.05);
   border-radius: 4px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #ccc;
+  background: #0052ff;
   border-radius: 4px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #0052ff;
+  background: #1a64ff;
 }

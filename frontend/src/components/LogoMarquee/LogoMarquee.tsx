@@ -1,74 +1,67 @@
-import logoAura from '../../assets/logos/logo_aura.jpg';
-import logoNexus from '../../assets/logos/logo_nexus.jpg';
-import logoVertex from '../../assets/logos/logo_vertex.jpg';
-import logoLumina from '../../assets/logos/logo_lumina.jpg';
-import logoNova from '../../assets/logos/logo_nova.jpg';
-import logoSynergy from '../../assets/logos/logo_synergy.jpg';
-import logoQuantum from '../../assets/logos/logo_quantum.jpg';
-import logoKimberly from '../../assets/logos/logo_kimberly.jpg';
-import logoCream from '../../assets/logos/logo_cream.jpg';
-import logoMonogram from '../../assets/logos/logo_monogram.jpg';
+import logo1 from '../../assets/logos/1.png';
+import logo2 from '../../assets/logos/2.png';
+import logo3 from '../../assets/logos/3.png';
+import logo4 from '../../assets/logos/4.png';
+import logo5 from '../../assets/logos/5.png';
+import logo6 from '../../assets/logos/6.png';
+import logo7 from '../../assets/logos/7.png';
+import logo8 from '../../assets/logos/8.png';
+import logo9 from '../../assets/logos/9.png';
 
 export default function LogoMarquee() {
   const logos = [
     {
-      id: 'kimberly',
+      id: 'logo1',
       component: (
-        <img src={logoKimberly} alt="Kimberly Logo" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
+        <img src={logo1} alt="Client Logo 1" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
       ),
     },
     {
-      id: 'cream',
+      id: 'logo2',
       component: (
-        <img src={logoCream} alt="Cream Logo" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
+        <img src={logo2} alt="Client Logo 2" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
       ),
     },
     {
-      id: 'monogram',
+      id: 'logo3',
       component: (
-        <img src={logoMonogram} alt="Monogram Logo" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
+        <img src={logo3} alt="Client Logo 3" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
       ),
     },
     {
-      id: 'aura',
+      id: 'logo4',
       component: (
-        <img src={logoAura} alt="Aura Logo" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
+        <img src={logo4} alt="Client Logo 4" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
       ),
     },
     {
-      id: 'nexus',
+      id: 'logo5',
       component: (
-        <img src={logoNexus} alt="Nexus Logo" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
+        <img src={logo5} alt="Client Logo 5" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
       ),
     },
     {
-      id: 'vertex',
+      id: 'logo6',
       component: (
-        <img src={logoVertex} alt="Vertex Logo" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
+        <img src={logo6} alt="Client Logo 6" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
       ),
     },
     {
-      id: 'lumina',
+      id: 'logo7',
       component: (
-        <img src={logoLumina} alt="Lumina Logo" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
+        <img src={logo7} alt="Client Logo 7" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
       ),
     },
     {
-      id: 'nova',
+      id: 'logo8',
       component: (
-        <img src={logoNova} alt="Nova Logo" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
+        <img src={logo8} alt="Client Logo 8" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
       ),
     },
     {
-      id: 'synergy',
+      id: 'logo9',
       component: (
-        <img src={logoSynergy} alt="Synergy Logo" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
-      ),
-    },
-    {
-      id: 'quantum',
-      component: (
-        <img src={logoQuantum} alt="Quantum Logo" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
+        <img src={logo9} alt="Client Logo 9" className="h-[90px] w-auto object-contain mix-blend-multiply opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300" />
       ),
     },
   ];

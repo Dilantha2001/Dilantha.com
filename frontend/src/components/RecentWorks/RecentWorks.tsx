@@ -123,13 +123,15 @@ export default function RecentWorks() {
     <section id="works" ref={sectionRef} className="recent-works-section">
       <div className="recent-works-container">
         
-        {/* Giant Title */}
+        {/* Section Top Header */}
         <div ref={headerRef} className="recent-works-header-block">
-          <div className="recent-works-title-row">
-            <h2 className="recent-works-title">
-              RECENT <span className="title-accent">WORKS</span>
-            </h2>
+          <div className="recent-works-tag-row">
+            <span className="recent-works-dot"></span>
+            <span className="recent-works-tag-text">SELECTED WORKS & CASE STUDIES</span>
           </div>
+          <h2 className="recent-works-title">
+            RECENT <span className="title-accent">WORKS</span>
+          </h2>
         </div>
 
         {/* Asymmetric 2-Column Responsive Grid */}

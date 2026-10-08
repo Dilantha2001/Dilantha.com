@@ -1,0 +1,58 @@
+.rolling-text-root {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+  vertical-align: middle;
+  color: #101012;
+  transition: color 0.3s ease;
+}
+
+.rolling-char-track {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  height: 1.2em;
+  overflow: hidden;
+  line-height: 1.2em;
+}
+
+.rolling-char {
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1), color 0.3s ease;
+  transition-delay: calc(var(--char-index) * 35ms);
+  will-change: transform, color;
+}
+
+.rolling-char.primary {
+  transform: translateY(0%);
+  color: #101012;
+}
+
+.rolling-char.clone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateY(100%);
+  color: #0052ff !important;
+}
+
+/* On Hover: Primary rolls straight UP (-100%), Clone rolls straight IN from bottom (0%) and turns Electric Blue */
+.rolling-text-root:hover .rolling-char.primary {
+  transform: translateY(-100%);
+  color: #0052ff !important;
+}
+
+.rolling-text-root:hover .rolling-char.clone {
+  transform: translateY(0%);
+  color: #0052ff !important;
+}

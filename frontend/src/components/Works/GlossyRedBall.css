@@ -1,0 +1,67 @@
+/* =========================================================================
+   3D GLOSSY ELECTRIC BLUE BALL (MATCHING SITE BRAND THEME #0052ff)
+   ========================================================================= */
+
+.glossy-ball-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glossy-ball {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  /* Signature Electric Blue 3D Radial Gradient */
+  background: radial-gradient(
+    circle at 32% 28%,
+    #7bb2ff 0%,
+    #3b82f6 24%,
+    #0052ff 60%,
+    #003bb3 82%,
+    #001a66 100%
+  );
+  box-shadow: 
+    inset -10px -10px 24px rgba(0, 10, 45, 0.6),
+    inset 4px 4px 14px rgba(255, 255, 255, 0.45);
+  overflow: hidden;
+  will-change: transform;
+}
+
+.glossy-shine {
+  position: absolute;
+  top: 10%;
+  left: 14%;
+  width: 32%;
+  height: 18%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(-35deg);
+  pointer-events: none;
+}
+
+.glossy-rim {
+  position: absolute;
+  bottom: 8%;
+  right: 14%;
+  width: 38%;
+  height: 20%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(147, 197, 253, 0.4) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: rotate(35deg);
+  pointer-events: none;
+}

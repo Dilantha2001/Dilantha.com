@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { PORTFOLIO_INFO } from '../../data/portfolioData';
-import RealisticSphere from './RealisticSphere';
+import GlossyRedBall from './GlossyRedBall';
 import './Works.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -126,14 +126,14 @@ export default function Works() {
             {/* Intro Text Slide (Positioned towards the right of center) */}
             <div className="project-slide w-auto shrink-0 h-full flex items-center justify-start px-4 sm:px-8 md:px-12 mr-6 sm:mr-10 md:mr-16">
               
-              {/* Photorealistic 3D WebGL Sphere */}
+              {/* 3D Glossy Electric Blue Ball (Brand Theme #0052ff) */}
               <div className="floating-object w-28 h-28 sm:w-40 sm:h-40 md:w-52 md:h-52 shrink-0 mr-3 sm:mr-6 md:mr-8 relative z-20 flex items-center justify-center">
-                <RealisticSphere className="w-full h-full" />
+                <GlossyRedBall className="w-full h-full" />
               </div>
 
               {/* Text being pushed */}
-              <h1 className="pushed-text text-[clamp(2rem,5.5vw,6.5rem)] font-['Anton',sans-serif] whitespace-nowrap text-[#0052ff] tracking-wide uppercase z-10 drop-shadow-sm leading-none">
-                DESIGNED <span className="text-transparent bg-clip-text bg-gradient-to-r from-black to-gray-500">FOR YOU.</span>
+              <h1 className="pushed-text text-[clamp(2rem,5.5vw,6.5rem)] font-['Anton',sans-serif] whitespace-nowrap text-black tracking-wide uppercase z-10 drop-shadow-sm leading-none">
+                DESIGNED <span className="text-[#0052ff]">FOR</span> YOU.
               </h1>
 
             </div>

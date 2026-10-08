@@ -55,73 +55,36 @@ export default function StatsSection() {
         {/* Top 3 Stats */}
         <div className="flex flex-col md:flex-row justify-between items-center w-full mb-12 gap-12 md:gap-4 px-4">
           
-          <div className="flex flex-col items-center text-center relative select-none">
-            <style>{`
-              @keyframes floatUpTokens8s {
-                0% {
-                  opacity: 0;
-                  transform: translateY(12px) scale(0.75);
-                }
-                4% {
-                  opacity: 1;
-                  transform: translateY(-6px) scale(1.12);
-                }
-                20% {
-                  opacity: 0.95;
-                  transform: translateY(-38px) scale(1);
-                }
-                26% {
-                  opacity: 0;
-                  transform: translateY(-58px) scale(0.8);
-                }
-                100% {
-                  opacity: 0;
-                  transform: translateY(-58px) scale(0.8);
-                }
-              }
-            `}</style>
-            
-            <div className="relative inline-flex items-start">
-              <h2 className="text-black text-[4rem] md:text-[5rem] font-bold mb-0 leading-none flex items-start font-['Anton',sans-serif]">
-                <ScrambleText text="100M+" />
-              </h2>
-
-              {/* Floating +100 particle floating upwards every 8 seconds */}
-              <div className="absolute -top-3 -right-14 md:-right-16 pointer-events-none h-16 w-16">
-                <span 
-                  className="absolute text-base md:text-xl font-extrabold text-[#0052ff] font-['Anton',sans-serif] tracking-tight whitespace-nowrap drop-shadow-[0_2px_10px_rgba(0,82,255,0.45)]"
-                  style={{
-                    animation: 'floatUpTokens8s 8s cubic-bezier(0.22, 1, 0.36, 1) infinite',
-                  }}
-                >
-                  +100
-                </span>
-              </div>
-            </div>
-
-            <p className="text-black/50 text-sm font-semibold tracking-widest uppercase mt-4 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0052ff] animate-ping"></span>
-              AI TOKENS <span className="opacity-40">✦</span> USED
-            </p>
-          </div>
-
+          {/* 1. Projects Completed */}
           <div className="flex flex-col items-center text-center">
             <h2 className="text-black text-[4rem] md:text-[5rem] font-bold mb-0 leading-none font-['Anton',sans-serif]">
-              <ScrambleText text="3.1K+" />
+              <ScrambleText text="15+" />
             </h2>
             <p className="text-black/50 text-sm font-semibold tracking-widest uppercase mt-4 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#0052ff]"></span>
-              COFFEES DRANK
+              PROJECTS COMPLETED
             </p>
           </div>
 
+          {/* 2. GitHub Contributions */}
           <div className="flex flex-col items-center text-center">
             <h2 className="text-black text-[4rem] md:text-[5rem] font-bold mb-0 leading-none font-['Anton',sans-serif]">
-              <ScrambleText text="6.7K+" />
+              <ScrambleText text="3.5K+" />
             </h2>
             <p className="text-black/50 text-sm font-semibold tracking-widest uppercase mt-4 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#0052ff]"></span>
-              CODE COMMITS
+              GITHUB CONTRIBUTIONS
+            </p>
+          </div>
+
+          {/* 3. System Uptime & Reliability */}
+          <div className="flex flex-col items-center text-center">
+            <h2 className="text-black text-[4rem] md:text-[5rem] font-bold mb-0 leading-none font-['Anton',sans-serif]">
+              <ScrambleText text="99.9%" />
+            </h2>
+            <p className="text-black/50 text-sm font-semibold tracking-widest uppercase mt-4 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#0052ff]"></span>
+              UPTIME & RELIABILITY
             </p>
           </div>
 

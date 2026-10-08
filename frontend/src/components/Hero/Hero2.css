@@ -14,7 +14,7 @@
   top: 0;
   width: 100%;
   height: 100vh;
-  background-color: #f2f2f4;
+  background-color: #ececef;
   color: #111111;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   overflow: hidden;
@@ -25,6 +25,77 @@
   user-select: none;
   z-index: 20;
 }
+
+/* Subtle dot grain texture */
+.hero2-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+      circle at 1px 1px,
+      rgba(15, 15, 20, 0.045) 1px,
+      transparent 1.4px
+    )
+    0 0/22px 22px;
+  opacity: 0.6;
+}
+
+/* Atmospheric Glow Blobs behind the wave */
+.hero2-wave-glow {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 62%;
+  aspect-ratio: 1;
+  background: radial-gradient(
+    closest-side,
+    rgba(40, 190, 255, 0.22),
+    transparent 70%
+  );
+  filter: blur(75px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero2-wave-glow.b {
+  top: 60%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  width: 44%;
+  background: radial-gradient(
+    closest-side,
+    rgba(70, 230, 180, 0.16),
+    transparent 70%
+  );
+}
+
+/* Wave Ribbon / Flowing 3D Strand - Lower centered with reduced opacity */
+.hero2-wave-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: none;
+  width: min(1380px, 96vw);
+  max-width: 1480px;
+  height: auto;
+  opacity: 0.55;
+  filter: drop-shadow(0 25px 40px rgba(20, 80, 160, 0.08));
+  will-change: transform, opacity;
+  transition: opacity 0.3s ease;
+}
+
+.hero2-wave-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform-origin: center;
+}
+
 .hero2-decorative-top {
   position: absolute;
   top: 0;
@@ -57,11 +128,19 @@
 }
 
 .hero2-brand-name {
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  pointer-events: auto;
+  font-size: clamp(16px, 1.6vw, 22px);
+  font-weight: 900;
+  letter-spacing: 0.14em;
   color: #101012;
   text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero2-brand-name:hover {
+  color: #0052ff;
+  transform: translateY(-1px);
 }
 
 .hero2-status-pill {
@@ -288,19 +367,18 @@
 }
 
 .hero2-quote-primary {
-  font-size: clamp(14px, 1.4vw, 18px);
+  font-size: clamp(14px, 1.35vw, 17px);
   font-weight: 500;
-  color: #1f242e;
+  color: #111216;
   line-height: 1.45;
   margin: 0;
   letter-spacing: -0.015em;
 }
 
 .hero2-quote-secondary {
-  font-size: clamp(14px, 1.4vw, 18px);
-  font-style: italic;
+  font-size: clamp(14px, 1.35vw, 17px);
   font-weight: 500;
-  color: #0052ff;
+  color: #64748b;
   line-height: 1.45;
   margin-top: 4px;
   letter-spacing: -0.015em;

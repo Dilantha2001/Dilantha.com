@@ -6,6 +6,7 @@ import './Hero2.css';
 import heroVideo from '../../assets/hero.mp4';
 import { MdWavingHand } from 'react-icons/md';
 import TechText from '../Common/TechText';
+import SlotText from '../Common/SlotText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -94,9 +95,10 @@ const Hero2 = () => {
       0.05
     )
     .to(
-      '.hero2-grid-bg',
+      ['.hero2-grid-bg', '.hero2-wave-wrap', '.hero2-wave-glow'],
       {
         opacity: 0,
+        y: -60,
         duration: 0.5,
         ease: 'power2.out',
       },
@@ -138,6 +140,53 @@ const Hero2 = () => {
       0
     );
 
+    // Continuous ambient floating for wave strand & glowing atmosphere
+    gsap.to('.hero2-wave-wrap', {
+      y: -18,
+      rotation: -1.2,
+      duration: 5.5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+    gsap.to('.hero2-wave-glow', {
+      y: 12,
+      scale: 1.06,
+      duration: 6,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+    gsap.to('.hero2-wave-glow.b', {
+      y: -16,
+      x: -10,
+      duration: 7,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+
+    // Mouse parallax for subtle depth
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = e.clientX / window.innerWidth - 0.5;
+      const y = e.clientY / window.innerHeight - 0.5;
+      gsap.to('.hero2-wave-wrap', {
+        x: x * 30,
+        duration: 1.2,
+        ease: 'power3.out',
+        overwrite: 'auto'
+      });
+      gsap.to('.hero2-wave-glow', {
+        x: x * 50,
+        y: y * 35,
+        duration: 1.4,
+        ease: 'power3.out',
+        overwrite: 'auto'
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
     // Dedicated ScrollTrigger to fade out the entire hero section as AboutMe slides over
     gsap.to(heroRef.current, {
       opacity: 0,
@@ -150,6 +199,10 @@ const Hero2 = () => {
         scrub: true,
       }
     });
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
 
   }, { scope: containerRef });
 
@@ -176,9 +229,20 @@ const Hero2 = () => {
   return (
     <div ref={containerRef} className="hero2-scroll-container">
       <section ref={heroRef} className="hero2-wrapper">
+        {/* Background Atmospheric Glows + Flowing 3D Wave Strand */}
+        <div className="hero2-wave-glow" />
+        <div className="hero2-wave-glow b" />
+        <div className="hero2-wave-wrap" id="wave">
+          <img 
+            src="https://cdn.shopify.com/s/files/1/0185/5999/1872/files/blue_strand_transparent.png?v=1778949964" 
+            alt="Flowing blue strand" 
+            onError={(e) => { (e.currentTarget as HTMLElement).style.display = 'none'; }}
+          />
+        </div>
+
         {/* Decorative Top Bar to fix empty space */}
         <div className="hero2-decorative-top">
-          <span className="hero2-brand-name">DILANTHA</span>
+          <SlotText text="DILANTHA" className="hero2-brand-name" />
           <span className="hero2-tagline">DIGITAL PORTFOLIO © {new Date().getFullYear()}</span>
         </div>
 
