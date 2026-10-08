@@ -23,25 +23,27 @@ gsap.registerPlugin(ScrollTrigger);
 function App() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.4,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       wheelMultiplier: 1,
-      touchMultiplier: 2,
+      touchMultiplier: 1.5,
     });
     
     (window as any).lenis = lenis;
 
     lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
+    const updateTicker = (time: number) => {
       lenis.raf(time * 1000);
-    });
+    };
 
+    gsap.ticker.add(updateTicker);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(updateTicker);
       lenis.destroy();
       delete (window as any).lenis;
     };

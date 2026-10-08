@@ -143,8 +143,6 @@ export default function Feedback2() {
 }
 
 function FeedbackCard({ item, index }: { item: typeof feedbacks[0], index: number }) {
-  const isQuote = index % 3 === 1;
-
   return (
     <div className="w-[320px] md:w-[420px] flex-shrink-0 mx-3 md:mx-5 flex flex-col whitespace-normal bg-[#111216] border border-white/[0.12] rounded-2xl p-6 md:p-8 shadow-[0_20px_45px_rgba(0,0,0,0.8)] transition-all duration-300 hover:-translate-y-2 hover:border-[#0052ff]/50 hover:shadow-[0_25px_50px_rgba(0,82,255,0.15)]">
       

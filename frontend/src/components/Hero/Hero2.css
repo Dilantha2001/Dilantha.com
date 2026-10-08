@@ -306,6 +306,7 @@
   z-index: 25;
   cursor: pointer;
   pointer-events: auto;
+  perspective: 1200px;
   transform-style: preserve-3d;
   will-change: width, height, top, left, transform;
 }
@@ -327,7 +328,8 @@
   filter: blur(14px);
   pointer-events: none;
   z-index: -1;
-  will-change: opacity;
+  will-change: transform, opacity;
+  transition: opacity 0.3s ease;
 }
 
 /* Square Box Frame */
@@ -343,7 +345,30 @@
     0 20px 45px -10px rgba(0, 0, 0, 0.35),
     0 0 0 1px rgba(0, 0, 0, 0.1),
     inset 0 1px 1px rgba(255, 255, 255, 0.3);
-  will-change: border-radius, box-shadow;
+  transform-style: preserve-3d;
+  will-change: transform, border-radius, box-shadow;
+  transition: border-color 0.3s ease;
+}
+
+.hero2-square-box:hover {
+  border-color: rgba(0, 82, 255, 0.5);
+}
+
+/* 3D Dynamic Surface Glare */
+.hero2-square-box-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 140px at var(--glare-x, 50%) var(--glare-y, 50%),
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.12) 40%,
+    transparent 75%
+  );
+  opacity: var(--glare-opacity, 0);
+  transition: opacity 0.25s ease;
+  z-index: 5;
+  mix-blend-mode: screen;
 }
 
 /* Actual Video */

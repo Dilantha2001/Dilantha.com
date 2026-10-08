@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import './Hero2.css';
 import heroVideo from '../../assets/hero.mp4';
-import { MdWavingHand } from 'react-icons/md';
+// @ts-ignore
 import TechText from '../Common/TechText';
 import SlotText from '../Common/SlotText';
 
@@ -24,6 +24,8 @@ const Hero2 = () => {
   const bottomLeftRef = useRef<HTMLDivElement>(null);
   const bottomBarRef = useRef<HTMLDivElement>(null);
   const topChunkRef = useRef<HTMLDivElement>(null);
+
+  const glareRef = useRef<HTMLDivElement>(null);
 
   // GSAP ScrollTrigger: Split at the two S's (IMPOS <-> SIBLE) & zoom video into fullscreen
   useGSAP(() => {
@@ -122,6 +124,10 @@ const Hero2 = () => {
     .to(
       squareBoxRef.current,
       {
+        rotateX: 0,
+        rotateY: 0,
+        z: 0,
+        scale: 1,
         borderRadius: '24px',
         borderWidth: 0,
         boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4)',
@@ -166,26 +172,149 @@ const Hero2 = () => {
       ease: 'sine.inOut'
     });
 
-    // Mouse parallax for subtle depth
+    let isCardHovered = false;
+
+    // Mouse movement over hero section - 3D parallax and floating physics
     const handleMouseMove = (e: MouseEvent) => {
-      const x = e.clientX / window.innerWidth - 0.5;
-      const y = e.clientY / window.innerHeight - 0.5;
+      if (!heroRef.current) return;
+      const progress = tl.progress();
+      // If user has scrolled and zoom animation is underway, disable mouse tilt
+      if (progress > 0.08) return;
+
+      const rect = heroRef.current.getBoundingClientRect();
+      const normX = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+      const normY = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 to 0.5
+
+      // Parallax & 3D tilt on floating wave ribbon
       gsap.to('.hero2-wave-wrap', {
-        x: x * 30,
+        x: normX * 45,
+        y: normY * 35,
+        rotationY: normX * 22,
+        rotationX: -normY * 18,
+        rotationZ: normX * 4,
         duration: 1.2,
-        ease: 'power3.out',
+        ease: 'power2.out',
         overwrite: 'auto'
       });
+
+      // Background atmospheric ambient glow reaction
       gsap.to('.hero2-wave-glow', {
-        x: x * 50,
-        y: y * 35,
+        x: normX * 60,
+        y: normY * 45,
         duration: 1.4,
-        ease: 'power3.out',
+        ease: 'power2.out',
         overwrite: 'auto'
       });
+      gsap.to('.hero2-wave-glow.b', {
+        x: -normX * 40,
+        y: -normY * 35,
+        duration: 1.6,
+        ease: 'power2.out',
+        overwrite: 'auto'
+      });
+
+      // Ambient 3D Tilt for Center 3D Box when moving cursor anywhere in Hero
+      if (!isCardHovered && squareBoxRef.current && shadowRef.current) {
+        gsap.to(squareBoxRef.current, {
+          rotateY: normX * 24,
+          rotateX: -normY * 24,
+          transformPerspective: 1000,
+          duration: 1,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+        gsap.to(shadowRef.current, {
+          x: -normX * 22,
+          y: -normY * 14,
+          duration: 1,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      }
+    };
+
+    // Direct 3D Card Hover & Magnetic Tilt Interaction
+    const cardEl = videoFrameRef.current;
+    const handleCardMouseMove = (e: MouseEvent) => {
+      if (!cardEl || !squareBoxRef.current) return;
+      const progress = tl.progress();
+      if (progress > 0.08) return;
+
+      isCardHovered = true;
+      const boxRect = cardEl.getBoundingClientRect();
+      const cardX = (e.clientX - boxRect.left) / boxRect.width - 0.5;
+      const cardY = (e.clientY - boxRect.top) / boxRect.height - 0.5;
+
+      const rotateY = cardX * 30; // Max ±15deg
+      const rotateX = -cardY * 30; // Max ±15deg
+      const transZ = 28;
+
+      gsap.to(squareBoxRef.current, {
+        rotateX: rotateX,
+        rotateY: rotateY,
+        z: transZ,
+        scale: 1.06,
+        transformPerspective: 1000,
+        boxShadow: `${-cardX * 25}px ${20 - cardY * 20}px 45px rgba(0, 0, 0, 0.45)`,
+        duration: 0.35,
+        ease: 'power1.out',
+        overwrite: 'auto'
+      });
+
+      if (shadowRef.current) {
+        gsap.to(shadowRef.current, {
+          x: -cardX * 30,
+          y: 6 - cardY * 12,
+          scale: 1.12,
+          opacity: 0.95,
+          duration: 0.35,
+          ease: 'power1.out',
+          overwrite: 'auto'
+        });
+      }
+
+      if (glareRef.current) {
+        const glareX = ((e.clientX - boxRect.left) / boxRect.width) * 100;
+        const glareY = ((e.clientY - boxRect.top) / boxRect.height) * 100;
+        glareRef.current.style.setProperty('--glare-x', `${glareX}%`);
+        glareRef.current.style.setProperty('--glare-y', `${glareY}%`);
+        glareRef.current.style.setProperty('--glare-opacity', '0.7');
+      }
+    };
+
+    const handleCardMouseLeave = () => {
+      isCardHovered = false;
+      if (squareBoxRef.current) {
+        gsap.to(squareBoxRef.current, {
+          rotateX: 0,
+          rotateY: 0,
+          z: 0,
+          scale: 1,
+          boxShadow: '0 20px 45px -10px rgba(0, 0, 0, 0.35)',
+          duration: 0.8,
+          ease: 'elastic.out(1, 0.6)',
+          overwrite: 'auto'
+        });
+      }
+      if (shadowRef.current) {
+        gsap.to(shadowRef.current, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      }
+      if (glareRef.current) {
+        glareRef.current.style.setProperty('--glare-opacity', '0');
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
+    cardEl.addEventListener('mousemove', handleCardMouseMove);
+    cardEl.addEventListener('mouseleave', handleCardMouseLeave);
 
     // Dedicated ScrollTrigger to fade out the entire hero section as AboutMe slides over
     gsap.to(heroRef.current, {
@@ -202,6 +331,10 @@ const Hero2 = () => {
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      if (cardEl) {
+        cardEl.removeEventListener('mousemove', handleCardMouseMove);
+        cardEl.removeEventListener('mouseleave', handleCardMouseLeave);
+      }
     };
 
   }, { scope: containerRef });
@@ -300,6 +433,7 @@ const Hero2 = () => {
 
             {/* Clean Square Box Frame */}
             <div ref={squareBoxRef} className="hero2-square-box">
+              <div ref={glareRef} className="hero2-square-box-glare" />
               <video
                 ref={videoRef}
                 src={heroVideo}

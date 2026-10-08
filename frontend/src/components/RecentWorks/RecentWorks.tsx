@@ -153,6 +153,7 @@ export default function RecentWorks() {
                     loop
                     muted
                     playsInline
+                    preload="metadata"
                     className="card-media-img"
                   />
                 ) : (
