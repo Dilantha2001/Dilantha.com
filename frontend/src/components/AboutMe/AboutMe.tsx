@@ -3,8 +3,8 @@ import './AboutMe.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import profileImg from '../../assets/profile.jpg';
-import profile2Img from '../../assets/profile2.png';
+import profileImg from '../../assets/color.jpg';
+import profile2Img from '../../assets/profile.jpg';
 import LogoMarquee from '../LogoMarquee/LogoMarquee';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -61,10 +61,15 @@ export default function AboutMe() {
   useGSAP(() => {
     if (!containerRef.current) return;
 
+    // Set hardware accelerated properties
+    gsap.set([statementRef.current, portraitRef.current, contentRef.current, bigTitleRef.current, '.meet-about-section .editorial-stat-item'], {
+      force3D: true,
+    });
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: 'top 75%',
+        start: 'top 82%',
         toggleActions: 'play none none reverse',
       }
     });
@@ -72,31 +77,31 @@ export default function AboutMe() {
     tl.fromTo(
       statementRef.current,
       { opacity: 0, y: 35 },
-      { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }
+      { opacity: 1, y: 0, duration: 0.85, ease: 'power3.out' }
     )
     .fromTo(
       portraitRef.current,
-      { opacity: 0, x: -40, filter: 'blur(8px)' },
-      { opacity: 1, x: 0, filter: 'blur(0px)', duration: 0.9, ease: 'power3.out' },
-      '-=0.7'
+      { opacity: 0, y: 30, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: 'power3.out' },
+      '-=0.65'
     )
     .fromTo(
       contentRef.current,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' },
+      { opacity: 0, y: 25 },
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
       '-=0.6'
     )
     .fromTo(
       bigTitleRef.current,
-      { opacity: 0, x: 40, letterSpacing: '0.15em' },
-      { opacity: 1, x: 0, letterSpacing: '0.04em', duration: 1.0, ease: 'power3.out' },
-      '-=0.8'
+      { opacity: 0, y: 25 },
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+      '-=0.6'
     )
     .fromTo(
       '.meet-about-section .editorial-stat-item',
-      { opacity: 0, y: 24 },
-      { opacity: 1, y: 0, duration: 0.75, stagger: 0.1, ease: 'power3.out' },
-      '-=0.6'
+      { opacity: 0, y: 20, scale: 0.98 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.65, stagger: 0.08, ease: 'power3.out' },
+      '-=0.5'
     );
 
     // Modern GSAP Number Counter Animations with ScrollTrigger on statsDeckRef
@@ -107,13 +112,12 @@ export default function AboutMe() {
       
       gsap.to(obj, {
         count: stat.target,
-        duration: 2.0,
+        duration: 1.8,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: statsDeckRef.current || containerRef.current,
           start: 'top 85%',
-          toggleActions: 'play none none none',
-          once: true,
+          toggleActions: 'restart none none reset',
         },
         onUpdate: () => {
           if (stat.isDecimal) {
@@ -142,14 +146,23 @@ export default function AboutMe() {
       {/* Main Grid: Left Portrait + Right Content Deck (Aligned at Top Level of Image) */}
       <div className="meet-about-container">
         
-        {/* Left Column: High-Resolution Portrait Card */}
+        {/* Left Column: High-Resolution Portrait Card with Mask Wipe on Hover */}
         <div ref={portraitRef} className="meet-about-portrait-wrapper">
           <div className="meet-about-portrait-card">
+            {/* Base Image */}
             <img 
-              src={profileImg || profile2Img} 
+              src={profileImg} 
               alt="Dilantha Ranaweera"
-              className="meet-about-portrait-img"
+              className="meet-about-portrait-img base-portrait-img"
             />
+            {/* Overlay Mask Image that fills up on hover */}
+            <div className="portrait-mask-overlay">
+              <img 
+                src={profile2Img} 
+                alt="Dilantha Ranaweera"
+                className="meet-about-portrait-img overlay-portrait-img"
+              />
+            </div>
           </div>
         </div>
 

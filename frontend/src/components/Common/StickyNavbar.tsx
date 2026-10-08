@@ -190,14 +190,32 @@ export default function StickyNavbar() {
           })}
         </div>
 
-        {/* Right: CTA Button with black circle arrow & chevrons */}
+        {/* Right: CTA Button with vector hand & black circle arrow */}
         <div className="sticky-navbar-cta-group">
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, '#contact')}
             className="sticky-navbar-cta-btn"
           >
-            <span className="cta-btn-text">Start now</span>
+            <span className="cta-hand-wrap" aria-hidden="true">
+              <svg 
+                className="cta-hand-svg" 
+                viewBox="0 0 24 24" 
+                width="16" 
+                height="16" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <path d="M18 11V6a2 2 0 0 0-4 0v4" />
+                <path d="M14 10V4a2 2 0 0 0-4 0v6" />
+                <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
+                <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+              </svg>
+            </span>
+            <span className="cta-btn-text">Let&apos;s connect</span>
             <span className="cta-btn-dot">
               <FiArrowUpRight size={15} strokeWidth={2.4} />
             </span>
@@ -238,7 +256,25 @@ export default function StickyNavbar() {
             onClick={(e) => handleNavClick(e, '#contact')}
             className="sticky-navbar-mobile-cta-btn"
           >
-            <span>Start now</span>
+            <span className="cta-hand-wrap" aria-hidden="true">
+              <svg 
+                className="cta-hand-svg" 
+                viewBox="0 0 24 24" 
+                width="16" 
+                height="16" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <path d="M18 11V6a2 2 0 0 0-4 0v4" />
+                <path d="M14 10V4a2 2 0 0 0-4 0v6" />
+                <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
+                <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+              </svg>
+            </span>
+            <span>Let&apos;s connect</span>
             <FiArrowUpRight size={15} />
           </a>
         </div>

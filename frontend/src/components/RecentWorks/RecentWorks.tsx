@@ -80,43 +80,50 @@ export default function RecentWorks() {
     if (!sectionRef.current) return;
 
     // Header reveal
-    gsap.fromTo(
-      headerRef.current,
-      { opacity: 0, y: 35 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
+    if (headerRef.current) {
+      gsap.fromTo(
+        headerRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    }
 
-    // Cards reveal with stagger
+    // High-Performance GPU-accelerated scale & appear entrance
     const cards = gsap.utils.toArray('.recent-work-card') as HTMLElement[];
     cards.forEach((card) => {
       gsap.fromTo(
         card,
-        { opacity: 0, y: 50, scale: 0.97 },
+        {
+          opacity: 0,
+          y: 45,
+          scale: 0.90,
+          force3D: true,
+        },
         {
           opacity: 1,
           y: 0,
           scale: 1,
           duration: 0.85,
           ease: 'power3.out',
+          force3D: true,
           scrollTrigger: {
             trigger: card,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
+            start: 'top 88%',
+            toggleActions: 'play none none reverse',
           },
         }
       );
     });
-
   }, { scope: sectionRef });
 
   return (

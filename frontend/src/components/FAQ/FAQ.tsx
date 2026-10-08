@@ -26,6 +26,7 @@ const faqs = [
 
 export default function FAQ() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isFirstRender = useRef(true);
@@ -33,18 +34,48 @@ export default function FAQ() {
   useGSAP(() => {
     if (!containerRef.current) return;
     
-    // Entrance animation
-    gsap.from('.faq-item', {
-      y: 40,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.12,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 75%",
-      }
-    });
+    // Header entrance animation
+    if (headerRef.current) {
+      gsap.fromTo(
+        headerRef.current.children,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: 'power3.out',
+          force3D: true,
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    }
+
+    // FAQ Items stagger entrance
+    const items = gsap.utils.toArray('.faq-item') as HTMLElement[];
+    if (items.length) {
+      gsap.fromTo(
+        items,
+        { opacity: 0, y: 35, force3D: true },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.75,
+          stagger: 0.1,
+          ease: "power3.out",
+          force3D: true,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            toggleActions: 'play none none reverse',
+          }
+        }
+      );
+    }
   }, { scope: containerRef });
 
   useLayoutEffect(() => {
@@ -85,7 +116,7 @@ export default function FAQ() {
     <section id="faq" ref={containerRef} className="relative w-full bg-white pt-20 md:pt-28 pb-8 md:pb-12 px-6 sm:px-8 z-10 border-t border-black/5">
       <div className="max-w-4xl mx-auto flex flex-col gap-14">
         
-        <div className="text-center">
+        <div ref={headerRef} className="text-center">
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-black tracking-tight uppercase">
             FREQUENTLY ASKED <span className="text-[#0052ff]">QUESTIONS</span>
           </h2>

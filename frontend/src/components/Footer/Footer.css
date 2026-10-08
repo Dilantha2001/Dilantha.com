@@ -107,7 +107,7 @@
 .custom-footer .footer-col a {
   color: #d4d4d8;
   text-decoration: none;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   display: inline-block;
@@ -117,6 +117,68 @@
 .custom-footer .footer-col a:hover {
   color: #0052ff;
   transform: translateX(3px);
+}
+
+.custom-footer .footer-col a.footer-social-link,
+.custom-footer .footer-social-link {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  color: #d4d4d8;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.custom-footer .footer-social-icon {
+  font-size: 1.1rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  display: inline-block !important;
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
+  color: #9ca3af;
+}
+
+.custom-footer .footer-col a.footer-social-link:hover {
+  color: #ffffff;
+}
+
+.custom-footer .footer-col a.footer-social-link:hover .linkedin-icon {
+  color: #0a66c2;
+  transform: scale(1.18);
+}
+
+.custom-footer .footer-col a.footer-social-link:hover .github-icon {
+  color: #ffffff;
+  transform: scale(1.18);
+}
+
+.custom-footer .footer-col a.footer-nav-link,
+.custom-footer .footer-nav-link {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.custom-footer .footer-count-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #60a5fa;
+  background: rgba(0, 82, 255, 0.18);
+  border: 1px solid rgba(0, 82, 255, 0.4);
+  padding: 1px 7px;
+  border-radius: 999px;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  transition: all 0.25s ease;
+}
+
+.custom-footer .footer-nav-link:hover .footer-count-badge {
+  background: #0052ff;
+  color: #ffffff;
+  border-color: #0052ff;
+  transform: scale(1.05);
 }
 
 .custom-footer .footer-email {

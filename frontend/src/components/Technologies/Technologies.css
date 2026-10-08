@@ -107,9 +107,9 @@
 }
 
 .tech-item-row:hover {
-  background: rgba(255, 255, 255, 0.035);
+  background: rgba(255, 255, 255, 0.04);
   color: #ffffff;
-  border-bottom-color: rgba(0, 82, 255, 0.5);
+  border-bottom-color: var(--brand-color, rgba(0, 82, 255, 0.5));
   transform: translateY(-2px);
 }
 
@@ -117,14 +117,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #a1a1aa;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
   flex-shrink: 0;
 }
 
 .tech-item-row:hover .tech-icon-box {
-  color: #0052ff;
-  transform: scale(1.1);
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 10px var(--brand-color, #0052ff));
 }
 
 .tech-name {

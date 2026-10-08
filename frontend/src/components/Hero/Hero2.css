@@ -42,58 +42,27 @@
   opacity: 0.6;
 }
 
-/* Atmospheric Glow Blobs behind the wave */
-.hero2-wave-glow {
-  position: absolute;
-  top: 46%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 62%;
-  aspect-ratio: 1;
-  background: radial-gradient(
-    closest-side,
-    rgba(40, 190, 255, 0.22),
-    transparent 70%
-  );
-  filter: blur(75px);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.hero2-wave-glow.b {
-  top: 60%;
-  left: 52%;
-  transform: translate(-50%, -50%);
-  width: 44%;
-  background: radial-gradient(
-    closest-side,
-    rgba(70, 230, 180, 0.16),
-    transparent 70%
-  );
-}
-
-/* Wave Ribbon / Flowing 3D Strand - Lower centered with reduced opacity */
+/* Wave Ribbon / Flowing 2D Strand Image (Optimized for zero RAM overhead) */
 .hero2-wave-wrap {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
   z-index: 2;
   pointer-events: none;
   width: min(1380px, 96vw);
   max-width: 1480px;
   height: auto;
   opacity: 0.55;
-  filter: drop-shadow(0 25px 40px rgba(20, 80, 160, 0.08));
-  will-change: transform, opacity;
-  transition: opacity 0.3s ease;
+  will-change: opacity, transform;
+  contain: paint;
 }
 
 .hero2-wave-wrap img {
   width: 100%;
   height: auto;
   display: block;
-  transform-origin: center;
+  pointer-events: none;
 }
 
 .hero2-decorative-top {
@@ -253,7 +222,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  will-change: transform, opacity;
+  will-change: transform, opacity, filter;
   font-size: clamp(3rem, 10vw, 12rem);
 }
 
@@ -306,8 +275,6 @@
   z-index: 25;
   cursor: pointer;
   pointer-events: auto;
-  perspective: 1200px;
-  transform-style: preserve-3d;
   will-change: width, height, top, left, transform;
 }
 
@@ -345,37 +312,21 @@
     0 20px 45px -10px rgba(0, 0, 0, 0.35),
     0 0 0 1px rgba(0, 0, 0, 0.1),
     inset 0 1px 1px rgba(255, 255, 255, 0.3);
-  transform-style: preserve-3d;
   will-change: transform, border-radius, box-shadow;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hero2-square-box:hover {
-  border-color: rgba(0, 82, 255, 0.5);
+  border-color: rgba(0, 82, 255, 0.6);
 }
 
-/* 3D Dynamic Surface Glare */
-.hero2-square-box-glare {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    circle 140px at var(--glare-x, 50%) var(--glare-y, 50%),
-    rgba(255, 255, 255, 0.55) 0%,
-    rgba(255, 255, 255, 0.12) 40%,
-    transparent 75%
-  );
-  opacity: var(--glare-opacity, 0);
-  transition: opacity 0.25s ease;
-  z-index: 5;
-  mix-blend-mode: screen;
-}
-
-/* Actual Video */
-.hero2-center-video {
+/* Center Showcase Video */
+.hero2-center-video,
+.hero2-center-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
   transform-origin: center center;
   will-change: transform;

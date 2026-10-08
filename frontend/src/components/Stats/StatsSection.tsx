@@ -1,11 +1,64 @@
 import { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import ScrambleText from '../Common/ScrambleText';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function StatsSection() {
   const [svgContent, setSvgContent] = useState<string>('');
   const [selectedYear, setSelectedYear] = useState<string>('2026');
   const [isInView, setIsInView] = useState(false);
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const statsRowRef = useRef<HTMLDivElement>(null);
   const graphRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!sectionRef.current) return;
+
+    if (statsRowRef.current) {
+      gsap.fromTo(
+        statsRowRef.current.children,
+        { opacity: 0, y: 35, scale: 0.95 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.85,
+          stagger: 0.14,
+          ease: 'power3.out',
+          force3D: true,
+          scrollTrigger: {
+            trigger: statsRowRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    }
+
+    if (graphRef.current) {
+      gsap.fromTo(
+        graphRef.current,
+        { opacity: 0, y: 40, scale: 0.98 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.9,
+          ease: 'power3.out',
+          force3D: true,
+          scrollTrigger: {
+            trigger: graphRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    }
+  }, { scope: sectionRef });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -49,11 +102,11 @@ export default function StatsSection() {
   }, [isInView]);
 
   return (
-    <section id="stats" className="w-full bg-white py-24 px-4 md:px-8">
+    <section id="stats" ref={sectionRef} className="w-full bg-white py-24 px-4 md:px-8">
       <div className="w-full max-w-[1200px] mx-auto flex flex-col items-center">
         
         {/* Top 3 Stats */}
-        <div className="flex flex-col md:flex-row justify-between items-center w-full mb-12 gap-12 md:gap-4 px-4">
+        <div ref={statsRowRef} className="flex flex-col md:flex-row justify-between items-center w-full mb-12 gap-12 md:gap-4 px-4">
           
           {/* 1. Projects Completed */}
           <div className="flex flex-col items-center text-center">

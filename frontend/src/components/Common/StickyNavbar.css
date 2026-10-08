@@ -173,12 +173,42 @@
     0 8px 22px rgba(0, 0, 0, 0.12);
 }
 
+.cta-hand-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0052ff;
+  transform-origin: 75% 75%;
+  animation: ctaWaveHand 2.2s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+  flex-shrink: 0;
+}
+
+.sticky-navbar-cta-btn:hover .cta-hand-wrap,
+.sticky-navbar-mobile-cta-btn:hover .cta-hand-wrap {
+  animation-duration: 1.0s;
+}
+
+@keyframes ctaWaveHand {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(16deg); }
+  20% { transform: rotate(-10deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-6deg); }
+  50% { transform: rotate(8deg); }
+  60%, 100% { transform: rotate(0deg); }
+}
+
+.cta-hand-svg {
+  display: block;
+}
+
 .cta-btn-text {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 14px;
   font-weight: 600;
   color: #0a0a0c;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .cta-btn-dot {
@@ -312,7 +342,8 @@
   }
 
   .cta-btn-text,
-  .cta-btn-chevrons {
+  .cta-btn-chevrons,
+  .cta-hand-wrap {
     display: none;
   }
 

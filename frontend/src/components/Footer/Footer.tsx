@@ -1,8 +1,60 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import './Footer.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
   const [time, setTime] = useState("");
+  const footerRef = useRef<HTMLElement>(null);
+  const topAreaRef = useRef<HTMLDivElement>(null);
+  const giantTextRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!footerRef.current) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: footerRef.current,
+        start: 'top 85%',
+        toggleActions: 'play none none reverse',
+      }
+    });
+
+    if (topAreaRef.current) {
+      tl.fromTo(
+        topAreaRef.current.children,
+        { opacity: 0, y: 35 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+          stagger: 0.12,
+          ease: 'power3.out',
+          force3D: true,
+        }
+      );
+    }
+
+    if (giantTextRef.current) {
+      tl.fromTo(
+        giantTextRef.current,
+        { opacity: 0, y: 50, scale: 0.94 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.0,
+          ease: 'power3.out',
+          force3D: true,
+        },
+        '-=0.5'
+      );
+    }
+  }, { scope: footerRef });
 
   useEffect(() => {
     const updateTime = () => {
@@ -21,10 +73,10 @@ export default function Footer() {
   };
 
   return (
-    <footer className="custom-footer">
+    <footer ref={footerRef} className="custom-footer">
       
       {/* Top Content Area */}
-      <div className="footer-top">
+      <div ref={topAreaRef} className="footer-top">
         
         {/* Left Side: Logo & Big Text */}
         <div className="footer-left">
@@ -46,7 +98,12 @@ export default function Footer() {
             <h4>NAVIGATION</h4>
             <ul>
               <li><a href="#about">ABOUT</a></li>
-              <li><a href="#works">PROJECTS</a></li>
+              <li>
+                <a href="#works" className="footer-nav-link">
+                  <span>PROJECTS</span>
+                  <span className="footer-count-badge">10</span>
+                </a>
+              </li>
               <li><a href="#process">PROCESS</a></li>
               <li><a href="#services">SERVICES</a></li>
               <li><a href="#contact">LET&apos;S CONNECT</a></li>
@@ -56,8 +113,18 @@ export default function Footer() {
           <div className="footer-col">
             <h4>SOCIAL</h4>
             <ul>
-              <li><a href="https://linkedin.com/in/pramuditha-ranaweera" target="_blank" rel="noreferrer">LINKEDIN</a></li>
-              <li><a href="https://github.com/pramuditha-ranaweera" target="_blank" rel="noreferrer">GITHUB</a></li>
+              <li>
+                <a href="https://linkedin.com/in/pramuditha-ranaweera" target="_blank" rel="noreferrer" className="footer-social-link">
+                  <FaLinkedin className="footer-social-icon linkedin-icon" />
+                  <span>LINKEDIN</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/pramuditha-ranaweera" target="_blank" rel="noreferrer" className="footer-social-link">
+                  <FaGithub className="footer-social-icon github-icon" />
+                  <span>GITHUB</span>
+                </a>
+              </li>
             </ul>
           </div>
           
@@ -83,7 +150,7 @@ export default function Footer() {
       </div>
 
       {/* Giant Bottom Text */}
-      <div className="footer-giant-text">
+      <div ref={giantTextRef} className="footer-giant-text">
         DILANTHA
       </div>
 

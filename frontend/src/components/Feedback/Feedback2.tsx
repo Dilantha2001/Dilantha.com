@@ -1,3 +1,7 @@
+import { useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import img1 from '../../assets/images (50).jfif';
 import img2 from '../../assets/images (51).jfif';
 import img3 from '../../assets/images (52).jfif';
@@ -15,6 +19,8 @@ import avatar5 from '../../assets/feedbacks/ffedbacks (1).jfif';
 import avatar6 from '../../assets/feedbacks/images (62).jfif';
 import avatar7 from '../../assets/feedbacks/images (63).jfif';
 import avatar8 from '../../assets/feedbacks/images (64).jfif';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const feedbacks = [
   {
@@ -92,11 +98,59 @@ const feedbacks = [
 ];
 
 export default function Feedback2() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!sectionRef.current) return;
+
+    if (headerRef.current) {
+      gsap.fromTo(
+        headerRef.current.children,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: 'power3.out',
+          force3D: true,
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    }
+
+    if (marqueeRef.current) {
+      gsap.fromTo(
+        marqueeRef.current,
+        { opacity: 0, y: 40, scale: 0.98 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.9,
+          ease: 'power3.out',
+          force3D: true,
+          scrollTrigger: {
+            trigger: marqueeRef.current,
+            start: 'top 90%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    }
+  }, { scope: sectionRef });
+
   return (
-    <section id="feedback" className="w-full bg-[#08080a] text-white py-28 overflow-hidden relative border-t border-b border-white/[0.06]">
+    <section id="feedback" ref={sectionRef} className="w-full bg-[#08080a] text-white py-28 overflow-hidden relative border-t border-b border-white/[0.06]">
       
       {/* Section Header */}
-      <div className="text-center mb-16 px-4 flex flex-col items-center">
+      <div ref={headerRef} className="text-center mb-16 px-4 flex flex-col items-center">
         <div className="flex items-center gap-2 mb-3">
           <span className="w-1.5 h-1.5 rounded-full bg-[#0052ff] shadow-[0_0_8px_#0052ff]"></span>
           <span className="text-[10px] font-bold tracking-[0.16em] text-[#0052ff] uppercase">CLIENT TESTIMONIALS</span>
@@ -110,7 +164,7 @@ export default function Feedback2() {
       </div>
 
       {/* Infinite Horizontal Marquee Container */}
-      <div className="relative w-full flex overflow-x-hidden group">
+      <div ref={marqueeRef} className="relative w-full flex overflow-x-hidden group">
         
         {/* Fading Edges for smooth entry/exit */}
         <div className="absolute top-0 left-0 w-24 md:w-56 h-full bg-gradient-to-r from-[#08080a] to-transparent z-10 pointer-events-none"></div>
@@ -144,11 +198,11 @@ export default function Feedback2() {
 
 function FeedbackCard({ item, index }: { item: typeof feedbacks[0], index: number }) {
   return (
-    <div className="w-[320px] md:w-[420px] flex-shrink-0 mx-3 md:mx-5 flex flex-col whitespace-normal bg-[#111216] border border-white/[0.12] rounded-2xl p-6 md:p-8 shadow-[0_20px_45px_rgba(0,0,0,0.8)] transition-all duration-300 hover:-translate-y-2 hover:border-[#0052ff]/50 hover:shadow-[0_25px_50px_rgba(0,82,255,0.15)]">
+    <div className="w-[340px] md:w-[440px] flex-shrink-0 mx-3 md:mx-5 flex flex-col whitespace-normal bg-[#111216] border border-white/[0.12] rounded-2xl p-6 md:p-8 shadow-[0_20px_45px_rgba(0,0,0,0.8)] transition-all duration-300 hover:-translate-y-2 hover:border-[#0052ff]/50 hover:shadow-[0_25px_50px_rgba(0,82,255,0.15)]">
       
       {/* Header: Avatar + Author Info + Category Tag */}
       <div className="flex items-center justify-between gap-3 mb-4">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 min-w-0">
           <img 
             src={item.avatar || `https://i.pravatar.cc/150?img=${(index * 3) + 11}`} 
             alt={item.name} 
@@ -156,8 +210,8 @@ function FeedbackCard({ item, index }: { item: typeof feedbacks[0], index: numbe
             decoding="async"
             className="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-[#0052ff] object-cover p-[2px] shadow-[0_0_12px_rgba(0,82,255,0.25)] shrink-0 bg-[#08080a]" 
           />
-          <div className="flex flex-col">
-            <h4 className="text-white font-bold text-sm md:text-base leading-tight mb-0.5">{item.name}</h4>
+          <div className="flex flex-col min-w-0">
+            <h4 className="text-white font-bold text-sm md:text-base leading-tight mb-0.5 truncate">{item.name}</h4>
             <p className="text-gray-400 text-xs leading-tight line-clamp-1">{item.role}</p>
           </div>
         </div>
@@ -165,6 +219,20 @@ function FeedbackCard({ item, index }: { item: typeof feedbacks[0], index: numbe
         <span className="text-[#0052ff] font-bold text-[10px] md:text-[11px] uppercase tracking-wider bg-[#0052ff]/10 border border-[#0052ff]/20 px-2.5 py-1 rounded-full shrink-0">
           {item.label}
         </span>
+      </div>
+
+      {/* Yellow / Gold 5-Star Rating Row */}
+      <div className="flex items-center gap-1 mb-3">
+        {[...Array(5)].map((_, sIdx) => (
+          <svg 
+            key={sIdx} 
+            className="w-4 h-4 text-[#FBBF24] fill-[#FBBF24] drop-shadow-[0_0_6px_rgba(251,191,36,0.35)]" 
+            viewBox="0 0 20 20"
+          >
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+        ))}
+        <span className="text-xs font-bold text-[#FBBF24] ml-1.5 tracking-wide">5.0</span>
       </div>
 
       {/* Title */}
@@ -177,10 +245,16 @@ function FeedbackCard({ item, index }: { item: typeof feedbacks[0], index: numbe
         &ldquo;{item.quote}&rdquo;
       </p>
 
-      {/* Embedded Project Image */}
+      {/* Embedded Project Image (Responsive 16:10 Ratio, No Awkward Cropping) */}
       {item.image && (
-        <div className="w-full h-44 mt-auto rounded-xl overflow-hidden border border-white/[0.1] shadow-inner bg-black/40">
-          <img src={item.image} alt="Project reference" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 opacity-90 hover:opacity-100" />
+        <div className="w-full aspect-[16/10] mt-auto rounded-xl overflow-hidden border border-white/[0.1] shadow-inner bg-[#090a0d] relative flex items-center justify-center">
+          <img 
+            src={item.image} 
+            alt="Project reference" 
+            loading="lazy" 
+            decoding="async" 
+            className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500" 
+          />
         </div>
       )}
       

@@ -52,17 +52,40 @@ export default function ServicesList() {
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    // Row reveal animation on scroll
+    // Header reveal
+    const header = containerRef.current.querySelector('.clean-services-header');
+    if (header) {
+      gsap.fromTo(
+        header,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          force3D: true,
+          scrollTrigger: {
+            trigger: header,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    }
+
+    // Row reveal animation on scroll (repeatable)
     const rows = gsap.utils.toArray('.clean-service-row') as HTMLElement[];
     rows.forEach((row) => {
       gsap.fromTo(
         row,
-        { opacity: 0, y: 20 },
+        { opacity: 0, y: 30, scale: 0.98 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          ease: 'power2.out',
+          scale: 1,
+          duration: 0.75,
+          ease: 'power3.out',
+          force3D: true,
           scrollTrigger: {
             trigger: row,
             start: 'top 88%',

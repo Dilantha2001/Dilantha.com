@@ -1,12 +1,68 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { FiMail, FiPhone, FiCopy, FiCheck, FiArrowUpRight } from 'react-icons/fi';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function LetsChat() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const dividerRef = useRef<HTMLHRElement>(null);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
+
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
 
   const email = "pramudithadilantha89@gmail.com";
   const phone = "+94 75 681 3888";
+
+  useGSAP(() => {
+    if (!sectionRef.current) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
+      }
+    });
+
+    if (titleRef.current) {
+      tl.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 40, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: 'power3.out', force3D: true }
+      );
+    }
+
+    if (dividerRef.current) {
+      tl.fromTo(
+        dividerRef.current,
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.7, ease: 'power3.out' },
+        '-=0.5'
+      );
+    }
+
+    if (cardsContainerRef.current) {
+      tl.fromTo(
+        cardsContainerRef.current.children,
+        { opacity: 0, y: 30, scale: 0.98 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.75,
+          stagger: 0.12,
+          ease: 'power3.out',
+          force3D: true
+        },
+        '-=0.4'
+      );
+    }
+  }, { scope: sectionRef });
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -25,10 +81,11 @@ export default function LetsChat() {
   };
 
   return (
-    <section id="contact" className="w-full bg-white pt-2 md:pt-4 pb-16 md:pb-24 px-6 md:px-12 flex justify-center items-center">
+    <section id="contact" ref={sectionRef} className="w-full bg-white pt-2 md:pt-4 pb-16 md:pb-24 px-6 md:px-12 flex justify-center items-center">
       <div className="w-full max-w-[1600px] flex flex-col items-center">
         {/* Title */}
         <h1 
+          ref={titleRef}
           className="text-black text-[clamp(3.8rem,14vw,13.5rem)] uppercase leading-none text-center m-0 select-none" 
           style={{ fontFamily: "'Anton', sans-serif", letterSpacing: '-0.02em', transform: 'scaleY(1.08)' }}
         >
@@ -36,10 +93,10 @@ export default function LetsChat() {
         </h1>
 
         {/* Divider */}
-        <hr className="w-full border-t border-black/10 mt-8 md:mt-10 mb-8" />
+        <hr ref={dividerRef} className="w-full border-t border-black/10 mt-8 md:mt-10 mb-8 origin-center" />
 
         {/* Modern Contact Cards */}
-        <div className="w-full flex flex-col items-center justify-center gap-6">
+        <div ref={cardsContainerRef} className="w-full flex flex-col items-center justify-center gap-6">
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-4xl">
             

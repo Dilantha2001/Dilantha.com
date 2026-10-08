@@ -478,12 +478,13 @@ export const tagColors: TagColors = {
 
 // ---------- TECHNOLOGIES SECTION DATA ----------
 export const TECH_STACK = [
-  { name: "Next.js", iconName: "SiNextdotjs", font: "font-sans font-bold text-[1.45rem] tracking-tight" },
-  { name: "React", iconName: "SiReact", font: "font-sans font-normal text-[1.45rem] tracking-tight" },
-  { name: "Spring Boot", iconName: "SiSpringboot", font: "font-sans font-semibold text-[1.45rem] tracking-tight" },
-  { name: "Node.js", iconName: "SiNodedotjs", font: "font-sans font-bold text-[1.45rem] tracking-tight" },
-  { name: "TypeScript", iconName: "SiTypescript", font: "font-sans font-normal text-[1.45rem] tracking-tight" },
-  { name: "Express.js", iconName: "SiExpress", font: "font-sans font-normal text-[1.45rem] tracking-tight" },
-  { name: "Tailwind CSS", iconName: "SiTailwindcss", font: "font-sans font-medium text-[1.45rem] tracking-tight" },
-  { name: "MongoDB", iconName: "SiMongodb", font: "font-sans font-semibold text-[1.45rem] tracking-tight" },
+  { name: "Next.js", iconName: "SiNextdotjs", color: "#FFFFFF", font: "font-sans font-bold text-[1.45rem] tracking-tight" },
+  { name: "React", iconName: "SiReact", color: "#61DAFB", font: "font-sans font-normal text-[1.45rem] tracking-tight" },
+  { name: "Spring Boot", iconName: "SiSpringboot", color: "#6DB33F", font: "font-sans font-semibold text-[1.45rem] tracking-tight" },
+  { name: "Node.js", iconName: "SiNodedotjs", color: "#5FA04E", font: "font-sans font-bold text-[1.45rem] tracking-tight" },
+  { name: "TypeScript", iconName: "SiTypescript", color: "#3178C6", font: "font-sans font-normal text-[1.45rem] tracking-tight" },
+  { name: "Express.js", iconName: "SiExpress", color: "#FFFFFF", font: "font-sans font-normal text-[1.45rem] tracking-tight" },
+  { name: "Tailwind CSS", iconName: "SiTailwindcss", color: "#38BDF8", font: "font-sans font-medium text-[1.45rem] tracking-tight" },
+  { name: "MongoDB", iconName: "SiMongodb", color: "#47A248", font: "font-sans font-semibold text-[1.45rem] tracking-tight" },
 ];
+
