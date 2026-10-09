@@ -15,6 +15,7 @@ import FAQ from './components/FAQ/FAQ';
 import LetsChat from './components/Contact/LetsChat';
 import StatsSection from './components/Stats/StatsSection';
 import Footer from './components/Footer/Footer';
+import ProjectCursor from './components/Common/ProjectCursor';
 
 import './styles/App.css';
 
@@ -86,6 +87,9 @@ function App() {
 
       {/* 11th Section: Footer */}
       <Footer />
+
+      {/* Global Interactive Project Cursor (Black circle with 'Explore More' on project hover) */}
+      <ProjectCursor />
     </div>
   );
 }

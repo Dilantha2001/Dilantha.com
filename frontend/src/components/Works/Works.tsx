@@ -4,23 +4,32 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { PORTFOLIO_INFO } from '../../data/portfolioData';
 import GlossyRedBall from './GlossyRedBall';
+import musicAppImg from '../../assets/projects/music aoo.jpg';
+import bookstoreImg from '../../assets/projects/bookstore.jpg';
+import weddingImg from '../../assets/projects/wedding.jpg';
 import './Works.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const defaultImages = [
-  'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80'
+const projectImageMap: Record<string, string> = {
+  'music-streaming-app': musicAppImg,
+  'online-book-store': bookstoreImg,
+  'wedding-photography-platform': weddingImg,
+};
+
+const fallbackImages = [
+  'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80'
 ];
 
 const projects = PORTFOLIO_INFO.projects.map((p, index) => ({
   id: String(index + 1).padStart(2, '0'),
   title: p.title,
   subtitle: p.tags?.slice(0, 3).join(' · ') || 'FEATURED PROJECT',
-  image: defaultImages[index % defaultImages.length],
+  image: (p.id && projectImageMap[p.id]) ? projectImageMap[p.id] : fallbackImages[index % fallbackImages.length],
 }));
 
 export default function Works() {
@@ -124,7 +133,7 @@ export default function Works() {
           <div ref={scrollWrapper} className="flex h-full w-max items-center pl-[16vw] sm:pl-[24vw] md:pl-[32vw] lg:pl-[36vw] pr-[10vw]">
             
             {/* Intro Text Slide (Positioned towards the right of center) */}
-            <div className="project-slide w-auto shrink-0 h-full flex items-center justify-start px-4 sm:px-8 md:px-12 mr-6 sm:mr-10 md:mr-16">
+            <div className="works-intro-slide w-auto shrink-0 h-full flex items-center justify-start px-4 sm:px-8 md:px-12 mr-6 sm:mr-10 md:mr-16">
               
               {/* 3D Glossy Electric Blue Ball (Brand Theme #0052ff) */}
               <div className="floating-object w-28 h-28 sm:w-40 sm:h-40 md:w-52 md:h-52 shrink-0 mr-3 sm:mr-6 md:mr-8 relative z-20 flex items-center justify-center">
@@ -142,7 +151,7 @@ export default function Works() {
             {projects.map((project, i) => (
               <div key={i} className="project-slide w-[85vw] sm:w-[55vw] md:w-[42vw] lg:w-[35vw] px-3 sm:px-4 md:px-6 h-full flex items-center justify-center relative shrink-0">
                 
-                <div className="relative group cursor-pointer w-full flex flex-col">
+                <div className="works-project-card relative group cursor-pointer w-full flex flex-col">
                   
                   {/* Card Media Container */}
                   <div className="relative w-full h-[40vh] sm:h-[46vh] md:h-[50vh] max-h-[460px]">
@@ -154,7 +163,7 @@ export default function Works() {
                     </div>
 
                     {/* Image/Video */}
-                    <div className="w-full h-full overflow-hidden shadow-xl border border-gray-200 rounded-xl bg-gray-100">
+                    <div className="w-full h-full overflow-hidden shadow-xl border border-gray-200/80 rounded-xl bg-[#08080a] flex items-center justify-center">
                       {project.image.endsWith('.mp4') ? (
                         <video 
                           src={project.image} 
@@ -162,13 +171,13 @@ export default function Works() {
                           loop 
                           muted 
                           playsInline
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                          className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                         />
                       ) : (
                         <img 
                           src={project.image} 
                           alt={project.title} 
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                          className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 opacity-95 group-hover:opacity-100"
                         />
                       )}
                     </div>

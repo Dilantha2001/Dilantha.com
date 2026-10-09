@@ -8,6 +8,14 @@
   width: 100%;
 }
 
-.works-section .project-slide {
+.works-section .project-slide,
+.works-section .works-intro-slide {
   will-change: transform;
+}
+
+.works-project-card img,
+.works-project-card video {
+  object-fit: cover !important;
+  object-position: center center !important;
+  display: block;
 }

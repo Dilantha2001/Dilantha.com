@@ -9,17 +9,24 @@
 
 html {
   scroll-behavior: auto;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  max-width: 100vw;
   font-family: var(--sans);
   background-color: #08080a;
   color: #111111;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  touch-action: pan-y;
 }
 
 * {

@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import DlogoClean from '../../assets/Dlogo_clean.png';
 import './Footer.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -81,9 +82,10 @@ export default function Footer() {
         {/* Left Side: Logo & Big Text */}
         <div className="footer-left">
           <div className="footer-logo-area">
-            <div className="footer-g-logo">d</div>
-            <div className="footer-brand">
-              <span className="brand-name">DILANTHA DEV</span>
+            <img src={DlogoClean} alt="Dilantha Logo" className="footer-logo-img" />
+            <div className="footer-brand-text">
+              <span className="footer-brand-name">Dilantha</span>
+              <span className="footer-brand-sub">Portfolio</span>
             </div>
           </div>
           

@@ -4,9 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import './Hero2.css';
 import heroVideo from '../../assets/hero.mp4';
+import DlogoBlack from '../../assets/Dlogo_black.png';
 // @ts-ignore
 import TechText from '../Common/TechText';
-import SlotText from '../Common/SlotText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -275,10 +275,16 @@ const Hero2 = () => {
           />
         </div>
 
-        {/* Decorative Top Bar to fix empty space */}
+        {/* Decorative Top Bar */}
         <div className="hero2-decorative-top">
-          <SlotText text="DILANTHA" className="hero2-brand-name" />
-          <span className="hero2-tagline">DIGITAL PORTFOLIO © {new Date().getFullYear()}</span>
+          <div className="hero2-brand-group">
+            <img src={DlogoBlack} alt="Dilantha Logo" className="hero2-logo-img" />
+            <div className="hero2-brand-text">
+              <span className="hero2-brand-name">Dilantha</span>
+              <span className="hero2-brand-sub">Portfolio</span>
+            </div>
+          </div>
+          <span className="hero2-tagline">DIGITAL PORTFOLIO © 2026</span>
         </div>
 
         {/* Center Giant Typographic Showcase with Video positioned between DEVEL and OPER */}

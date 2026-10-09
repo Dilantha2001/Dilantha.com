@@ -9,10 +9,10 @@ import {
   FiMessageSquare, 
   FiHelpCircle, 
   FiArrowUpRight, 
-  FiChevronRight,
-  FiPlus
+  FiChevronRight
 } from 'react-icons/fi';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import DlogoBlack from '../../assets/Dlogo_black.png';
 import './StickyNavbar.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -163,9 +163,7 @@ export default function StickyNavbar() {
           className="sticky-navbar-brand"
           title="Back to Top"
         >
-          <div className="sticky-navbar-logo-mark" aria-hidden="true">
-            <FiPlus size={16} strokeWidth={2.6} />
-          </div>
+          <img src={DlogoBlack} alt="Dilantha Logo" className="sticky-navbar-logo-img" />
           <div className="sticky-navbar-brand-text">
             <span className="brand-name">Dilantha</span>
             <span className="brand-sub">Portfolio</span>

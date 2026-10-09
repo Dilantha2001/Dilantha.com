@@ -1,0 +1,131 @@
+/* =========================================================================
+   DYNAMIC ADAPTIVE PROJECT HOVER CURSOR ("EXPLORE MORE")
+   ========================================================================= */
+
+.project-custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 96px;
+  height: 96px;
+  pointer-events: none;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+  transform-origin: center center;
+}
+
+.cursor-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  will-change: background-color, border-color, box-shadow;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 1. White Background Theme (For Dark sections like Recent Works) */
+.cursor-circle.theme-white-bg {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 
+    0 18px 45px -5px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(255, 255, 255, 0.4),
+    inset 0 0 12px rgba(255, 255, 255, 0.8);
+}
+
+.cursor-circle.theme-white-bg .cursor-word {
+  color: #050507;
+}
+
+.cursor-circle.theme-white-bg .cursor-arrow {
+  color: #0052ff;
+}
+
+/* 2. Black Background Theme (For White horizontal sections like Works.tsx) */
+.cursor-circle.theme-black-bg {
+  background-color: #000000;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 18px 45px -5px rgba(0, 0, 0, 0.6),
+    0 0 25px rgba(0, 82, 255, 0.3),
+    inset 0 0 12px rgba(255, 255, 255, 0.1);
+}
+
+.cursor-circle.theme-black-bg .cursor-word {
+  color: #ffffff;
+}
+
+.cursor-circle.theme-black-bg .cursor-arrow {
+  color: #0052ff;
+}
+
+/* Subtle glossy reflection effect across the circle */
+.cursor-circle::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  border-radius: 50% 50% 0 0;
+  pointer-events: none;
+}
+
+.cursor-circle.theme-white-bg::after {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.cursor-circle.theme-black-bg::after {
+  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.2), transparent 70%);
+}
+
+.cursor-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-align: center;
+  user-select: none;
+  z-index: 2;
+}
+
+.cursor-word {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  transition: color 0.25s ease;
+}
+
+.cursor-sub-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.cursor-arrow {
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1;
+  transform: translateY(-0.5px);
+  display: inline-block;
+  transition: color 0.25s ease, transform 0.2s ease;
+}
+
+/* Touch screens disable */
+@media (pointer: coarse), (hover: none) {
+  .project-custom-cursor {
+    display: none !important;
+  }
+}

@@ -86,7 +86,7 @@ export default function LetsChat() {
         {/* Title */}
         <h1 
           ref={titleRef}
-          className="text-black text-[clamp(3.8rem,14vw,13.5rem)] uppercase leading-none text-center m-0 select-none" 
+          className="text-black text-[clamp(2.6rem,12vw,13.5rem)] uppercase leading-none text-center m-0 select-none" 
           style={{ fontFamily: "'Anton', sans-serif", letterSpacing: '-0.02em', transform: 'scaleY(1.08)' }}
         >
           Let's have a <span className="text-[#0052ff]">chat</span>

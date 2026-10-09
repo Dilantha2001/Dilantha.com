@@ -96,20 +96,53 @@
   gap: 18px;
 }
 
-.hero2-brand-name {
+.hero2-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   pointer-events: auto;
-  font-size: clamp(16px, 1.6vw, 22px);
-  font-weight: 900;
-  letter-spacing: 0.14em;
-  color: #101012;
-  text-transform: uppercase;
   cursor: pointer;
-  transition: color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
 }
 
-.hero2-brand-name:hover {
+.hero2-logo-img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.hero2-brand-group:hover .hero2-logo-img {
+  transform: scale(1.08);
+}
+
+.hero2-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.hero2-brand-name {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #0a0a0c;
+  transition: color 0.2s ease;
+}
+
+.hero2-brand-group:hover .hero2-brand-name {
   color: #0052ff;
-  transform: translateY(-1px);
+}
+
+.hero2-brand-sub {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #74747c;
+  letter-spacing: 0.01em;
 }
 
 .hero2-status-pill {
@@ -575,17 +608,63 @@
     padding: 0 20px;
     margin-bottom: 16px;
   }
+}
 
-  .hero2-right-dock {
-    display: none;
+@media (max-width: 480px) {
+  .hero2-header {
+    padding: 18px 16px;
   }
 
-  .hero2-cookie-banner {
-    width: 92%;
-    border-radius: 16px;
-    flex-direction: column;
-    text-align: center;
-    gap: 12px;
-    padding: 16px;
+  .hero2-brand-name {
+    font-size: 15px;
+    letter-spacing: 0.1em;
+  }
+
+  .hero2-nav-btn {
+    padding: 7px 14px;
+    font-size: 10px;
+  }
+
+  .hero2-center-stage {
+    min-height: 420px;
+    padding: 0 12px;
+  }
+
+  .hero2-title-row-top {
+    font-size: clamp(2.4rem, 11vw, 3.8rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero2-title-row-bottom {
+    font-size: clamp(2rem, 9.5vw, 3.2rem);
+  }
+
+  .hero2-title-chunk.left {
+    padding-right: 48px;
+  }
+
+  .hero2-title-chunk.right {
+    padding-left: 48px;
+  }
+
+  .hero2-video-frame-container {
+    width: 95px;
+    height: 95px;
+  }
+
+  .hero2-bottom-left {
+    padding: 0 16px;
+    margin-bottom: 12px;
+  }
+
+  .hero2-quote-primary,
+  .hero2-quote-secondary {
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+
+  .hero2-bottom-bar {
+    padding: 14px 16px;
   }
 }
+
