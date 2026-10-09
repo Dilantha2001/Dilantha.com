@@ -63,3 +63,29 @@ describe('Footer Unit Tests', () => {
     expect(screen.getByText(/PRAMUDITHADILANTHA89@GMAIL.COM/i)).toBeInTheDocument();
   });
 });
+
+describe('ProjectModal Unit Tests', () => {
+  const mockProject = {
+    id: '01',
+    rawId: 'test-app',
+    title: 'Music Streaming Application',
+    subtitle: 'REACT · NODE · FULL STACK',
+    description: 'A full-stack streaming platform.',
+    tags: ['React', 'Node.js', 'MongoDB'],
+    image: 'test.jpg',
+    links: [
+      { label: 'GitHub', url: 'https://github.com/Dilantha2001/MusicApplication' },
+    ],
+  };
+
+  it('should render project details in modal', async () => {
+    const { default: ProjectModal } = await import('../components/Works/ProjectModal');
+    render(<ProjectModal project={mockProject} onClose={vi.fn()} />);
+    
+    expect(screen.getByText('Music Streaming Application')).toBeInTheDocument();
+    expect(screen.getByText('A full-stack streaming platform.')).toBeInTheDocument();
+    expect(screen.getByText('React')).toBeInTheDocument();
+    expect(screen.getByText('Node.js')).toBeInTheDocument();
+    expect(screen.getByText('View Source Code')).toBeInTheDocument();
+  });
+});

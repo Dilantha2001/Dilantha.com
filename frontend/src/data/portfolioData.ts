@@ -381,22 +381,7 @@ export const PORTFOLIO_INFO: Portfolio = {
         },
       ],
     },
-    {
-      id: "tuition-class-app",
-      title: "Tuition Class Management Mobile App",
-      description:
-        "Developed a mobile application to streamline tuition class administration and scheduling. Built core features for student enrollment, automated class scheduling, and real-time attendance tracking. Integrated Firebase for secure user authentication, real-time database management, and cloud storage.",
-      tags: ["Android", "Firebase", "Mobile App", "Java/Kotlin"],
-      image: "./screen-3.jpg",
-      href: "#",
-      links: [
-        {
-          label: "GitHub",
-          url: "https://github.com/Dilantha2001/Mobile-E-Learning-App",
-          icon: "SiGithub",
-        },
-      ],
-    },
+    
     {
       id: "fullstack-ecommerce-platform",
       title: " E-Commerce Platform",

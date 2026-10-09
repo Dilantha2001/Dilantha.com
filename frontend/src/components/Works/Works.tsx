@@ -7,6 +7,11 @@ import GlossyRedBall from './GlossyRedBall';
 import musicAppImg from '../../assets/projects/music aoo.jpg';
 import bookstoreImg from '../../assets/projects/bookstore.jpg';
 import weddingImg from '../../assets/projects/wedding.jpg';
+import aiDogImg from '../../assets/projects/aidog.jpg';
+import postImg from '../../assets/projects/post.jpg';
+import ecommerceImg from '../../assets/projects/ecommerce.jpg';
+import sinhalaImg from '../../assets/projects/sinhala.jpg';
+import ProjectModal, { type ProjectModalData } from './ProjectModal';
 import './Works.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,6 +20,10 @@ const projectImageMap: Record<string, string> = {
   'music-streaming-app': musicAppImg,
   'online-book-store': bookstoreImg,
   'wedding-photography-platform': weddingImg,
+  'dog-behavior-ai': aiDogImg,
+  'trust-post-logistics': postImg,
+  'fullstack-ecommerce-platform': ecommerceImg,
+  'sinhala-caption': sinhalaImg,
 };
 
 const fallbackImages = [
@@ -25,17 +34,23 @@ const fallbackImages = [
   'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80'
 ];
 
-const projects = PORTFOLIO_INFO.projects.map((p, index) => ({
+const projects: ProjectModalData[] = PORTFOLIO_INFO.projects.map((p, index) => ({
   id: String(index + 1).padStart(2, '0'),
+  rawId: String(p.id ?? index),
   title: p.title,
   subtitle: p.tags?.slice(0, 3).join(' · ') || 'FEATURED PROJECT',
+  description: p.description || '',
+  tags: p.tags || [],
   image: (p.id && projectImageMap[p.id]) ? projectImageMap[p.id] : fallbackImages[index % fallbackImages.length],
+  links: p.links,
+  date: p.date,
 }));
 
 export default function Works() {
   const container = useRef<HTMLDivElement>(null);
   const scrollWrapper = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(1);
+  const [selectedProject, setSelectedProject] = useState<ProjectModalData | null>(null);
 
   useGSAP(() => {
     if (!container.current || !scrollWrapper.current) return;
@@ -151,7 +166,14 @@ export default function Works() {
             {projects.map((project, i) => (
               <div key={i} className="project-slide w-[85vw] sm:w-[55vw] md:w-[42vw] lg:w-[35vw] px-3 sm:px-4 md:px-6 h-full flex items-center justify-center relative shrink-0">
                 
-                <div className="works-project-card relative group cursor-pointer w-full flex flex-col">
+                <div 
+                  onClick={() => setSelectedProject(project)}
+                  className="works-project-card relative group cursor-pointer w-full flex flex-col transition-transform duration-300 hover:-translate-y-1"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setSelectedProject(project); }}
+                  aria-label={`View details for ${project.title}`}
+                >
                   
                   {/* Card Media Container */}
                   <div className="relative w-full h-[40vh] sm:h-[46vh] md:h-[50vh] max-h-[460px]">
@@ -163,7 +185,7 @@ export default function Works() {
                     </div>
 
                     {/* Image/Video */}
-                    <div className="w-full h-full overflow-hidden shadow-xl border border-gray-200/80 rounded-xl bg-[#08080a] flex items-center justify-center">
+                    <div className="w-full h-full overflow-hidden shadow-xl border border-gray-200/80 rounded-xl bg-[#08080a] flex items-center justify-center relative">
                       {project.image.endsWith('.mp4') ? (
                         <video 
                           src={project.image} 
@@ -180,6 +202,14 @@ export default function Works() {
                           className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 opacity-95 group-hover:opacity-100"
                         />
                       )}
+
+                      {/* Interactive Hover Pill */}
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                        <span className="bg-[#0052ff] text-white text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-1.5">
+                          <span>Inspect Details</span>
+                          <span>↗</span>
+                        </span>
+                      </div>
                     </div>
                     
                     {/* Subtitle */}
@@ -204,6 +234,12 @@ export default function Works() {
         </div>
 
       </div>
+
+      {/* Project Details Popup Modal */}
+      <ProjectModal 
+        project={selectedProject} 
+        onClose={() => setSelectedProject(null)} 
+      />
 
     </section>
   );
