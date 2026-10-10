@@ -1,5 +1,5 @@
 /* =========================================================================
-   REAL PRELOADER - WHITE { } LOADER WITH SMALL TEXT BELOW
+   REAL PRELOADER - WHITE { } LOADER WITH SHUFFLE TEXT BELOW
    ========================================================================= */
 
 .signature-preloader-container {
@@ -56,17 +56,27 @@
   }
 }
 
-/* Small, elegant "Dilantha" text below brackets */
+/* Dynamic Shuffle "DILANTHA" text below brackets */
 .loader-name-below {
   margin: 18px 0 0 0;
   color: rgba(255, 255, 255, 0.7);
-  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, Consolas, sans-serif;
+  font-family: Consolas, 'Space Grotesk', Menlo, Monaco, monospace;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   text-align: center;
   padding-left: 0.32em; /* Centers the letter-spacing */
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+  min-height: 1.2em;
+  transition: color 0.35s ease, text-shadow 0.35s ease;
+}
+
+/* When shuffle resolves completely into DILANTHA */
+.loader-name-below.is-resolved {
+  color: #ffffff;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.55);
 }
 
 @media (max-width: 640px) {

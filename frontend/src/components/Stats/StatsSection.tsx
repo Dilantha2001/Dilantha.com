@@ -102,7 +102,7 @@ export default function StatsSection() {
   }, [isInView]);
 
   return (
-    <section id="stats" ref={sectionRef} className="w-full bg-white py-24 px-4 md:px-8">
+    <section id="stats" ref={sectionRef} className="w-full bg-white pt-4 md:pt-6 pb-16 md:pb-24 px-4 md:px-8">
       <div className="w-full max-w-[1200px] mx-auto flex flex-col items-center">
         
         {/* Top 3 Stats */}

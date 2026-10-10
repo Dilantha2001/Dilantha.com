@@ -81,7 +81,7 @@ export default function LetsChat() {
   };
 
   return (
-    <section id="contact" ref={sectionRef} className="w-full bg-white pt-2 md:pt-4 pb-16 md:pb-24 px-6 md:px-12 flex justify-center items-center">
+    <section id="contact" ref={sectionRef} className="w-full bg-white pt-2 md:pt-4 pb-4 md:pb-6 px-6 md:px-12 flex justify-center items-center">
       <div className="w-full max-w-[1600px] flex flex-col items-center">
         {/* Title */}
         <h1 

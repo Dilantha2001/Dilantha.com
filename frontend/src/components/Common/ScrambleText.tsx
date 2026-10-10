@@ -1,4 +1,4 @@
-import { useState, useRef, type CSSProperties } from 'react';
+import { useState, useRef, useEffect, type CSSProperties } from 'react';
 
 const DIGITS = "0123456789";
 
@@ -11,6 +11,7 @@ interface ScrambleTextProps {
 export default function ScrambleText({ text, className, style }: ScrambleTextProps) {
   const [displayText, setDisplayText] = useState(text);
   const [prevText, setPrevText] = useState(text);
+  const elementRef = useRef<HTMLSpanElement>(null);
   const intervalRef = useRef<number | null>(null);
 
   if (text !== prevText) {
@@ -18,7 +19,7 @@ export default function ScrambleText({ text, className, style }: ScrambleTextPro
     setDisplayText(text);
   }
 
-  const handleMouseEnter = () => {
+  const runScramble = () => {
     let iteration = 0;
     
     if (intervalRef.current) {
@@ -29,7 +30,6 @@ export default function ScrambleText({ text, className, style }: ScrambleTextPro
       setDisplayText(() => 
         text.split("")
           .map((char, index) => {
-            // Never scramble non-numeric characters like '.', '%', '+', 'K', 'M' to avoid layout shifting
             if (!/\d/.test(char) || char === ' ') {
               return char;
             }
@@ -53,17 +53,32 @@ export default function ScrambleText({ text, className, style }: ScrambleTextPro
     }, 40);
   };
 
-  const handleMouseLeave = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    setDisplayText(text);
-  };
+  // Automatic trigger when visible in viewport (No hover required!)
+  useEffect(() => {
+    const el = elementRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          runScramble();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [text]);
 
   return (
     <span 
-      onMouseEnter={handleMouseEnter} 
-      onMouseLeave={handleMouseLeave}
+      ref={elementRef}
+      onMouseEnter={runScramble}
       className={className} 
       style={{ 
         display: 'inline-block', 

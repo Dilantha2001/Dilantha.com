@@ -25,11 +25,11 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { id: 'about', label: 'Home', href: '#about', icon: <FiHome size={15} /> },
-  { id: 'works', label: 'Projects', href: '#works', icon: <FiFolder size={15} /> },
-  { id: 'services', label: 'Services', href: '#services', icon: <FiLayers size={15} /> },
-  { id: 'feedback', label: 'Reviews', href: '#feedback', icon: <FiMessageSquare size={15} /> },
-  { id: 'faq', label: 'FAQ', href: '#faq', icon: <FiHelpCircle size={15} /> },
+  { id: 'about', label: 'Home', href: '#about', icon: <FiHome size={13.5} /> },
+  { id: 'works', label: 'Projects', href: '#works', icon: <FiFolder size={13.5} /> },
+  { id: 'services', label: 'Services', href: '#services', icon: <FiLayers size={13.5} /> },
+  { id: 'feedback', label: 'Reviews', href: '#feedback', icon: <FiMessageSquare size={13.5} /> },
+  { id: 'faq', label: 'FAQ', href: '#faq', icon: <FiHelpCircle size={13.5} /> },
 ];
 
 export default function StickyNavbar() {
@@ -199,8 +199,8 @@ export default function StickyNavbar() {
               <svg 
                 className="cta-hand-svg" 
                 viewBox="0 0 24 24" 
-                width="16" 
-                height="16" 
+                width="14" 
+                height="14" 
                 fill="none" 
                 stroke="currentColor" 
                 strokeWidth="2.2" 
@@ -215,11 +215,11 @@ export default function StickyNavbar() {
             </span>
             <span className="cta-btn-text">Let&apos;s connect</span>
             <span className="cta-btn-dot">
-              <FiArrowUpRight size={15} strokeWidth={2.4} />
+              <FiArrowUpRight size={13} strokeWidth={2.4} />
             </span>
             <span className="cta-btn-chevrons" aria-hidden="true">
-              <FiChevronRight size={13} strokeWidth={2.5} />
-              <FiChevronRight size={13} strokeWidth={2.5} style={{ marginLeft: -8 }} />
+              <FiChevronRight size={11} strokeWidth={2.5} />
+              <FiChevronRight size={11} strokeWidth={2.5} style={{ marginLeft: -6 }} />
             </span>
           </a>
 
@@ -230,7 +230,7 @@ export default function StickyNavbar() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <HiX size={20} /> : <HiMenuAlt3 size={20} />}
+            {mobileMenuOpen ? <HiX size={18} /> : <HiMenuAlt3 size={18} />}
           </button>
         </div>
       </div>

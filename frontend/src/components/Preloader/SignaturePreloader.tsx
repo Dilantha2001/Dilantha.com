@@ -9,6 +9,8 @@ interface SignaturePreloaderProps {
 export default function SignaturePreloader({ onComplete }: SignaturePreloaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDone, setIsDone] = useState(false);
+  const [displayText, setDisplayText] = useState('!9X#K2_L');
+  const [isResolved, setIsResolved] = useState(false);
 
   useEffect(() => {
     // Lock scroll during real preloading
@@ -16,8 +18,37 @@ export default function SignaturePreloader({ onComplete }: SignaturePreloaderPro
     document.body.style.overflow = 'hidden';
 
     let isMounted = true;
+    const target = 'DILANTHA';
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!<>_#%&';
+    let frame = 0;
+    const totalShuffleFrames = 30; // ~960ms auto shuffle
+
+    // 1. AUTOMATIC Character Shuffle (Starts immediately on load, no hover needed)
+    const shuffleInterval = setInterval(() => {
+      frame++;
+      const progress = Math.min(1, frame / totalShuffleFrames);
+      const revealedCount = Math.floor(progress * target.length);
+
+      let output = '';
+      for (let i = 0; i < target.length; i++) {
+        if (i < revealedCount) {
+          output += target[i];
+        } else {
+          output += chars[Math.floor(Math.random() * chars.length)];
+        }
+      }
+
+      setDisplayText(output);
+
+      if (frame >= totalShuffleFrames) {
+        clearInterval(shuffleInterval);
+        setDisplayText(target);
+        setIsResolved(true);
+      }
+    }, 32);
+
     const startTime = Date.now();
-    const minDisplayTime = 900; // minimum duration (ms) to allow smooth viewing
+    const minDisplayTime = 1200; // allows full view of auto shuffle animation
 
     const trackRealAssets = async () => {
       // 1. Wait for Web Fonts
@@ -64,7 +95,7 @@ export default function SignaturePreloader({ onComplete }: SignaturePreloaderPro
 
       await Promise.race([allAssets, timeoutPromise]);
 
-      // Ensure minimum comfortable duration
+      // Ensure minimum comfortable duration for shuffle completion
       const elapsed = Date.now() - startTime;
       if (elapsed < minDisplayTime) {
         await new Promise((resolve) => setTimeout(resolve, minDisplayTime - elapsed));
@@ -96,6 +127,7 @@ export default function SignaturePreloader({ onComplete }: SignaturePreloaderPro
 
     return () => {
       isMounted = false;
+      clearInterval(shuffleInterval);
       document.body.style.overflow = originalOverflow;
     };
   }, [onComplete]);
@@ -110,8 +142,10 @@ export default function SignaturePreloader({ onComplete }: SignaturePreloaderPro
           <span>{'{'}</span>
           <span>{'}'}</span>
         </div>
-        {/* "Dilantha" positioned below brackets in a small, refined style */}
-        <p className="loader-name-below">DILANTHA</p>
+        {/* "DILANTHA" - Automatic character shuffle on load */}
+        <p className={`loader-name-below ${isResolved ? 'is-resolved' : ''}`}>
+          {displayText}
+        </p>
       </div>
     </div>
   );
