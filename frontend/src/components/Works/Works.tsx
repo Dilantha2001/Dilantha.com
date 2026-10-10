@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -38,8 +38,11 @@ const projects: ProjectModalData[] = PORTFOLIO_INFO.projects.map((p, index) => (
   id: String(index + 1).padStart(2, '0'),
   rawId: String(p.id ?? index),
   title: p.title,
-  subtitle: p.tags?.slice(0, 3).join(' · ') || 'FEATURED PROJECT',
+  subtitle: (p as any).category || p.tags?.slice(0, 3).join(' · ') || 'FEATURED PROJECT',
+  category: (p as any).category,
+  role: (p as any).role,
   description: p.description || '',
+  highlights: (p as any).highlights || [],
   tags: p.tags || [],
   image: (p.id && projectImageMap[p.id]) ? projectImageMap[p.id] : fallbackImages[index % fallbackImages.length],
   links: p.links,
@@ -52,11 +55,38 @@ export default function Works() {
   const [activeIndex, setActiveIndex] = useState(1);
   const [selectedProject, setSelectedProject] = useState<ProjectModalData | null>(null);
 
+  useEffect(() => {
+    const handleRefresh = () => {
+      ScrollTrigger.refresh();
+    };
+
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 300);
+
+    window.addEventListener('resize', handleRefresh);
+    window.addEventListener('load', handleRefresh);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', handleRefresh);
+      window.removeEventListener('load', handleRefresh);
+    };
+  }, []);
+
   useGSAP(() => {
     if (!container.current || !scrollWrapper.current) return;
 
-    const getScrollAmount = () => -(scrollWrapper.current!.scrollWidth - container.current!.clientWidth);
-    const scrollEnd = scrollWrapper.current.scrollWidth;
+    const getScrollAmount = () => {
+      if (!scrollWrapper.current || !container.current) return 0;
+      return -(scrollWrapper.current.scrollWidth - container.current.clientWidth);
+    };
+
+    const getScrollDistance = () => {
+      if (!scrollWrapper.current || !container.current) return window.innerHeight * 2.5;
+      const trackDistance = scrollWrapper.current.scrollWidth - container.current.clientWidth;
+      return Math.max(trackDistance, window.innerHeight * 2);
+    };
     
     gsap.to(scrollWrapper.current, {
       x: getScrollAmount,
@@ -66,9 +96,11 @@ export default function Works() {
         start: "top top",
         pin: true,
         scrub: 1,
-        end: `+=${scrollEnd}`,
+        end: () => `+=${getScrollDistance()}`,
+        anticipatePin: 1,
         refreshPriority: 1,
         invalidateOnRefresh: true,
+        pinSpacing: true,
         onUpdate: (self) => {
           const currentIndex = Math.floor(self.progress * (projects.length + 1));
           const displayIndex = currentIndex === 0 ? 1 : currentIndex;
@@ -113,8 +145,31 @@ export default function Works() {
         trigger: container.current,
         start: "top top",
         scrub: 1,
-        end: `+=${scrollEnd}`
+        end: () => `+=${getScrollDistance()}`,
+        invalidateOnRefresh: true,
       }
+    });
+
+    // 3. Continuous smooth GSAP auto-zoom animation (Ken Burns breathing effect)
+    gsap.utils.toArray<HTMLElement>('.works-project-image-autozoom').forEach((imgEl, index) => {
+      gsap.to(imgEl, {
+        scale: 1.07,
+        duration: 3.8 + (index % 3) * 0.4,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    });
+
+    gsap.utils.toArray<HTMLElement>('.works-project-blur-autozoom').forEach((blurEl, index) => {
+      gsap.to(blurEl, {
+        scale: 1.25,
+        opacity: 0.32,
+        duration: 4.2 + (index % 3) * 0.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
     });
 
   }, { scope: container, dependencies: [] });
@@ -164,19 +219,19 @@ export default function Works() {
 
             {/* Projects Horizontal Slider Cards */}
             {projects.map((project, i) => (
-              <div key={i} className="project-slide w-[85vw] sm:w-[55vw] md:w-[42vw] lg:w-[35vw] px-3 sm:px-4 md:px-6 h-full flex items-center justify-center relative shrink-0">
+              <div key={i} className="project-slide w-[88vw] sm:w-[65vw] md:w-[52vw] lg:w-[44vw] max-w-[660px] px-3 sm:px-4 md:px-5 h-full flex items-center justify-center relative shrink-0">
                 
                 <div 
                   onClick={() => setSelectedProject(project)}
-                  className="works-project-card relative group cursor-pointer w-full flex flex-col transition-transform duration-300 hover:-translate-y-1"
+                  className="works-project-card relative group w-full flex flex-col transition-transform duration-300 hover:-translate-y-1"
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setSelectedProject(project); }}
                   aria-label={`View details for ${project.title}`}
                 >
                   
-                  {/* Card Media Container */}
-                  <div className="relative w-full h-[40vh] sm:h-[46vh] md:h-[50vh] max-h-[460px]">
+                  {/* Card Media Container (Widescreen 16:10 matching project mockups perfectly) */}
+                  <div className="relative w-full aspect-[16/10] max-h-[420px]">
                     
                     {/* Badge */}
                     <div className="absolute -top-3.5 -left-3.5 bg-black text-white text-xs font-bold px-3 py-1 flex items-center space-x-2 z-10 rounded-sm shadow-md">
@@ -184,8 +239,9 @@ export default function Works() {
                       <span>{project.id}</span>
                     </div>
 
-                    {/* Image/Video */}
-                    <div className="w-full h-full overflow-hidden shadow-xl border border-gray-200/80 rounded-xl bg-[#08080a] flex items-center justify-center relative">
+                    {/* Image/Video Container */}
+                    <div className="w-full h-full overflow-hidden shadow-xl border border-gray-200/80 rounded-xl bg-[#07070a] flex items-center justify-center relative group-hover:border-[#0052ff]/40 transition-colors duration-300">
+                      {/* Crisp Clean Mockup */}
                       {project.image.endsWith('.mp4') ? (
                         <video 
                           src={project.image} 
@@ -193,18 +249,18 @@ export default function Works() {
                           loop 
                           muted 
                           playsInline
-                          className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                          className="relative z-10 w-full h-full object-contain object-center transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                         />
                       ) : (
                         <img 
                           src={project.image} 
                           alt={project.title} 
-                          className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 opacity-95 group-hover:opacity-100"
+                          className="relative z-10 w-full h-full object-contain object-center transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                         />
                       )}
 
                       {/* Interactive Hover Pill */}
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                      <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20 pointer-events-none">
                         <span className="bg-[#0052ff] text-white text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-1.5">
                           <span>Inspect Details</span>
                           <span>↗</span>
@@ -212,8 +268,8 @@ export default function Works() {
                       </div>
                     </div>
                     
-                    {/* Subtitle */}
-                    <div className="absolute top-4 right-4 text-[9px] md:text-[10px] font-bold tracking-widest uppercase bg-white/90 backdrop-blur-sm px-3 py-1 text-black border border-black/10 rounded-full shadow-sm">
+                    {/* Subtitle Badge */}
+                    <div className="absolute top-3.5 right-3.5 text-[9px] md:text-[10px] font-bold tracking-widest uppercase bg-[#08080c]/85 backdrop-blur-md px-3 py-1 text-white/80 border border-white/10 rounded-full shadow-md z-20">
                       {project.subtitle}
                     </div>
 

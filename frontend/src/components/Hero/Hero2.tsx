@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -22,6 +22,27 @@ const Hero2 = () => {
   const bottomLeftRef = useRef<HTMLDivElement>(null);
   const bottomBarRef = useRef<HTMLDivElement>(null);
   const topChunkRef = useRef<HTMLDivElement>(null);
+
+  const [techFontSize, setTechFontSize] = useState(() => {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth < 480) return 54;
+      if (window.innerWidth < 768) return 76;
+      if (window.innerWidth < 1024) return 105;
+      return 150;
+    }
+    return 150;
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 480) setTechFontSize(54);
+      else if (window.innerWidth < 768) setTechFontSize(76);
+      else if (window.innerWidth < 1024) setTechFontSize(105);
+      else setTechFontSize(150);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // GSAP ScrollTrigger: Split at the two S's (IMPOS <-> SIBLE) & zoom video into fullscreen
   useGSAP(() => {
@@ -291,11 +312,11 @@ const Hero2 = () => {
         <div className="hero2-center-stage">
           <div className="hero2-title-container">
             {/* Top line: "NEXT-GEN" */}
-            <div ref={topChunkRef} className="hero2-title-row-top" style={{ height: 'clamp(80px, 15vw, 200px)' }}>
+            <div ref={topChunkRef} className="hero2-title-row-top" style={{ height: 'clamp(55px, 12vw, 180px)' }}>
               <TechText
                 text="NEXT-GEN"
                 fontWeight={900}
-                fontSize={150}
+                fontSize={techFontSize}
                 reveal="letter"
                 dashLength={4}
                 dashGap={2}

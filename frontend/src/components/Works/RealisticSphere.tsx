@@ -239,7 +239,7 @@ export default function RealisticSphere({ className = '', rotationRef }: Realist
         container.removeChild(renderer.domElement);
       }
     };
-  }, []);
+  }, [rotationRef]);
 
   return (
     <div className={`relative flex items-center justify-center ${className}`}>

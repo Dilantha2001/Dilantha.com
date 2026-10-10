@@ -13,9 +13,22 @@
   will-change: transform;
 }
 
+.works-project-card,
+.works-project-card * {
+  cursor: none !important;
+}
+
 .works-project-card img,
 .works-project-card video {
-  object-fit: cover !important;
+  object-fit: contain !important;
   object-position: center center !important;
   display: block;
+  width: 100%;
+  height: 100%;
 }
+
+.works-project-card:hover img,
+.works-project-card:hover video {
+  transform: scale(1.03);
+}
+

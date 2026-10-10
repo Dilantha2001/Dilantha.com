@@ -86,6 +86,6 @@ describe('ProjectModal Unit Tests', () => {
     expect(screen.getByText('A full-stack streaming platform.')).toBeInTheDocument();
     expect(screen.getByText('React')).toBeInTheDocument();
     expect(screen.getByText('Node.js')).toBeInTheDocument();
-    expect(screen.getByText('View Source Code')).toBeInTheDocument();
+    expect(screen.getByText('Explore Source Code')).toBeInTheDocument();
   });
 });

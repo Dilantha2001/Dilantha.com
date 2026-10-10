@@ -331,3 +331,30 @@
     font-size: 0.55rem;
   }
 }
+
+@media (max-width: 640px) {
+  .custom-footer {
+    padding: 12vw 6vw 0 6vw;
+    min-height: auto;
+  }
+  .custom-footer .footer-logo-area {
+    margin-bottom: 1.5rem;
+  }
+  .custom-footer .footer-right {
+    gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .custom-footer .footer-giant-text {
+    font-size: 22vw;
+    letter-spacing: 0.2vw;
+    margin-bottom: 0;
+  }
+  .custom-footer .back-to-top {
+    width: 58px;
+    height: 58px;
+    bottom: 6vw;
+    right: 5vw;
+    font-size: 0.48rem;
+  }
+}

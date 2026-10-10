@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, type CSSProperties } from 'react';
+import { useState, useRef, type CSSProperties } from 'react';
 
 const DIGITS = "0123456789";
 
@@ -10,11 +10,13 @@ interface ScrambleTextProps {
 
 export default function ScrambleText({ text, className, style }: ScrambleTextProps) {
   const [displayText, setDisplayText] = useState(text);
+  const [prevText, setPrevText] = useState(text);
   const intervalRef = useRef<number | null>(null);
 
-  useEffect(() => {
+  if (text !== prevText) {
+    setPrevText(text);
     setDisplayText(text);
-  }, [text]);
+  }
 
   const handleMouseEnter = () => {
     let iteration = 0;

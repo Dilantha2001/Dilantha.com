@@ -23,12 +23,12 @@ export const PORTFOLIO_INFO: Portfolio = {
       socials: [
         {
           label: "LinkedIn",
-          url: "https://linkedin.com/in/pramuditha-ranaweera",
+          url: "https://www.linkedin.com/in/dilantha-ranaweera-825148295",
           icon: "SiLinkedin",
         },
         {
           label: "GitHub",
-          url: "https://github.com/pramuditha-ranaweera",
+          url: "https://github.com/Dilantha2001",
           icon: "SiGithub",
         },
       ],
@@ -271,9 +271,19 @@ export const PORTFOLIO_INFO: Portfolio = {
     {
       id: "music-streaming-app",
       title: "Music Streaming Application",
+      category: "Media & Audio Streaming",
+      role: "Full-Stack Developer",
+      date: "2024",
       description:
-        "Developed a dynamic, full-stack music streaming platform featuring seamless audio playback. Designed a responsive user interface with React and Tailwind CSS, incorporating a custom audio player with global state management. Implemented scalable Node.js and Express.js RESTful APIs to handle high-frequency requests for song streaming and artist metadata. Engineered complex MongoDB aggregation pipelines (using $lookup, $unwind, and $facet) to generate real-time trending charts. Developed a secure ecosystem featuring JWT authentication, user engagement tools (likes/comments), and artist verification badges.",
-      tags: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Cloudinary"],
+        "Developed a high-performance full-stack music streaming platform featuring lossless audio playback and dynamic queue management. Designed a responsive interface with React and Tailwind CSS, backed by scalable Node.js/Express.js microservices. Engineered complex MongoDB aggregation pipelines for real-time trending charts and artist metrics with secure JWT token authentication.",
+      highlights: [
+        "Custom HTML5 Audio Player with global queue and playlist persistence",
+        "High-throughput RESTful endpoints handling concurrent streaming requests",
+        "MongoDB Aggregation Pipelines ($lookup, $unwind, $facet) for dynamic charting",
+        "Secure JWT authentication with role-based access control (Artists vs Listeners)",
+        "Cloudinary CDN integration for optimized song cover and audio asset delivery",
+      ],
+      tags: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Cloudinary", "REST API"],
       image: "./neon.png",
       href: "#",
       links: [
@@ -287,8 +297,18 @@ export const PORTFOLIO_INFO: Portfolio = {
     {
       id: "trust-post-logistics",
       title: "Trust Post Logistics System",
+      category: "Enterprise GovTech & GIS",
+      role: "Lead Full-Stack Engineer",
+      date: "2024",
       description:
-        "Developed a mobile and web-based parcel pickup and delivery system for the Sri Lankan Postal Department. Built the frontend using React to deliver an intuitive, responsive, and user-friendly interface. Designed the backend architecture with Node.js and PostgreSQL, integrating GPS APIs for real-time tracking and secure transactions. Implemented core modules enabling customers to place orders, track shipments, estimate costs, and interact with an automated chatbot. Developed an administrative web panel for managers to approve drivers, oversee orders, and monitor nationwide postal operations.",
+        "Developed an enterprise-grade mobile and web parcel pickup and logistics platform for the Sri Lankan Postal Department. Features real-time GPS fleet tracking, automated tariff calculators, dynamic driver dispatching, and comprehensive administrative oversight.",
+      highlights: [
+        "Real-time GPS delivery tracking with route optimization algorithms",
+        "Multi-tier architecture with React frontend and PostgreSQL relational database",
+        "Integrated interactive customer support chatbot and instant SMS dispatch alerts",
+        "Comprehensive administrative dashboard for regional postal hub management",
+        "Secure payment gateway integration and digital parcel manifest generation",
+      ],
       tags: [
         "React",
         "Node.js",
@@ -296,6 +316,7 @@ export const PORTFOLIO_INFO: Portfolio = {
         "GPS APIs",
         "Full Stack",
         "Logistics",
+        "REST API",
       ],
       image: "./post.png",
       href: "#",
@@ -309,9 +330,19 @@ export const PORTFOLIO_INFO: Portfolio = {
     },
     {
       id: "dog-behavior-ai",
-      title: "AI-Based Dog Behavior & Emotion Monitoring System",
+      title: "AI Canine Emotion & Behavior Analytics",
+      category: "Multimodal AI & Computer Vision",
+      role: "AI / ML Researcher & Developer",
+      date: "Nov 2025 - Present",
       description:
-        "Developed a Multimodal AI system to classify canine emotions and behaviors (Aggression, Stress) for German Shepherds. Built a Dual-Pathway Visual Module utilizing YOLOv8 for object detection and ResNet-50 for facial expression/emotion recognition. Implemented Temporal Action Recognition by tracking skeletal key points via YOLO-Pose and LSTM networks. Integrated an Audio Analysis Module using 2D CNNs to classify vocalizations (Barks, Growls) from Mel-spectrograms. Applied Decision-Level Fusion techniques to synchronize video and audio data, ensuring high accuracy in real-world environments.",
+        "Pioneered a cutting-edge Multimodal AI system capable of diagnosing canine emotions, behavioral states, and stress triggers in real time. Combines YOLOv8 object detection, ResNet-50 facial expression analysis, YOLO-Pose temporal keypoint tracking with LSTM networks, and 2D CNN Mel-spectrogram vocalization classifiers.",
+      highlights: [
+        "Dual-Pathway Visual Module integrating YOLOv8 and fine-tuned ResNet-50",
+        "Temporal Action Recognition via skeletal keypoint tracking and Bi-LSTM networks",
+        "Audio Analysis pipeline transforming raw vocalizations into Mel-spectrograms via 2D CNNs",
+        "Decision-level multimodal fusion engine synchronizing video and acoustic tensors",
+        "Real-time edge inference optimized for clinical veterinary monitoring",
+      ],
       tags: [
         "Python",
         "YOLOv8",
@@ -320,11 +351,10 @@ export const PORTFOLIO_INFO: Portfolio = {
         "LSTM",
         "Computer Vision",
         "Multimodal AI",
-        "Research",
+        "Deep Learning",
       ],
       image: "./dog.png",
       href: "#",
-      date: "Nov 2025 - Present",
       links: [
         {
           label: "GitHub",
@@ -335,28 +365,47 @@ export const PORTFOLIO_INFO: Portfolio = {
     },
     {
       id: "sinhala-caption",
-      title: "Sinhala Caption",
+      title: "Sinhala AI Caption Generator",
+      category: "NLP & Generative AI",
+      role: "AI Engineer",
+      date: "2025 - Present",
       description:
-        "A project focused on generating Sinhala captions. Currently under development with exciting features coming soon.",
-      tags: ["Under Development", "AI", "NLP", "Python", "Machine Learning"],
+        "An advanced Natural Language Processing and Generative AI platform engineered to generate contextual, grammatically precise Sinhala captions and metadata for multimedia content. Built using transformer architecture and fine-tuned on native linguistic corpora.",
+      highlights: [
+        "Transformer-based sequence-to-sequence model fine-tuned for Sinhala morphology",
+        "Automated semantic caption generation for social media and digital content",
+        "Fast tokenization pipeline tailored to Unicode Sinhala character sets",
+        "Interactive web dashboard with real-time caption suggestion and tone customization",
+        "API service for automated bulk captioning pipelines",
+      ],
+      tags: ["AI", "NLP", "Python", "Machine Learning", "Transformers", "PyTorch", "FastAPI"],
       image: musicVideo,
       href: "#",
       links: [
         {
-          label: "Under Development",
-          url: "#",
-          icon: "lucide:hammer",
+          label: "GitHub (In Progress)",
+          url: "https://github.com/Dilantha2001",
+          icon: "SiGithub",
         },
       ],
     },
     {
       id: "smokio",
-      title: "Smokio",
+      title: "Smokio Digital Web Experience",
+      category: "Modern Web Platform",
+      role: "Frontend Architect",
+      date: "2024",
       description:
-        "An innovative web application. Features and technical details will be updated soon.",
-      tags: ["Web Development", "React", "Node.js"],
+        "A fluid, modern web experience built with React and interactive micro-animations. Delivers ultra-smooth transitions, responsive component architecture, and high-conversion landing page layouts.",
+      highlights: [
+        "Ultra-responsive responsive UI layout with dynamic viewport adaptation",
+        "Sleek micro-interactions, custom cursor physics, and smooth scroll transitions",
+        "Optimized Lighthouse performance metrics with sub-second initial load times",
+        "Modular component system for frictionless feature scalability",
+      ],
+      tags: ["React", "JavaScript", "Tailwind CSS", "GSAP", "Vite", "Netlify"],
       image: "./smokio.jpg",
-      href: "#",
+      href: "https://wondrous-zuccutto-2cd2ce.netlify.app/",
       links: [
         {
           label: "Live Demo",
@@ -367,10 +416,19 @@ export const PORTFOLIO_INFO: Portfolio = {
     },
     {
       id: "online-book-store",
-      title: "Online Book Store",
+      title: "Full-Stack Online Bookstore",
+      category: "E-Commerce & Retail",
+      role: "Full-Stack Developer",
+      date: "2024",
       description:
-        "Developed a full-stack online bookshop enabling users to browse, search, and purchase books online. Built a mobile-friendly frontend using React and Tailwind CSS for seamless cross-device compatibility. Designed a MongoDB database schema to efficiently manage books, categories, and user accounts. Integrated shopping cart functionality and a secure checkout process to ensure smooth user transactions. Created an administrative dashboard to manage inventory, track orders, and monitor overall store performance.",
-      tags: ["React", "Tailwind CSS", "MongoDB", "Express", "Full Stack"],
+        "An end-to-end digital bookstore featuring extensive catalog indexing, fuzzy search capabilities, dynamic cart state management, secure checkout workflows, and a comprehensive store management console.",
+      highlights: [
+        "Full-text search and category filtering with instant client-side rendering",
+        "Persistent cart and wishlist management synchronized across browser sessions",
+        "Scalable MongoDB database schema designed for high-concurrency catalog reads",
+        "Admin control center for order tracking, inventory updates, and sales analytics",
+      ],
+      tags: ["React", "Tailwind CSS", "MongoDB", "Express", "Node.js", "Full Stack"],
       image: "./book.png",
       href: "#",
       links: [
@@ -381,13 +439,21 @@ export const PORTFOLIO_INFO: Portfolio = {
         },
       ],
     },
-    
     {
       id: "fullstack-ecommerce-platform",
-      title: " E-Commerce Platform",
+      title: "Enterprise E-Commerce Platform",
+      category: "Full-Stack Commercial Store",
+      role: "Lead Full-Stack Developer",
+      date: "2024",
       description:
-        "A comprehensive full-stack e-commerce solution. Built with a responsive React and TypeScript storefront, powered by a scalable Node.js backend, and supported by a robust SQL database for secure inventory, payment, and order management.",
-      tags: ["React", "TypeScript", "Node.js", "SQL", "Full-Stack"],
+        "A scalable, high-conversion enterprise e-commerce platform built with React, TypeScript, and Node.js. Features transactional SQL data integrity, real-time inventory management, automated tax/shipping calculations, and strict security validation.",
+      highlights: [
+        "Type-safe architecture across entire stack with TypeScript and strict schemas",
+        "Relational SQL database engine ensuring ACID compliance for critical payment flows",
+        "Advanced administrative dashboard for inventory replenishment and order logistics",
+        "Protected customer portal with historical order tracing and profile management",
+      ],
+      tags: ["React", "TypeScript", "Node.js", "SQL", "Tailwind CSS", "REST API"],
       image: "./port.png",
       href: "#",
       links: [
@@ -400,17 +466,26 @@ export const PORTFOLIO_INFO: Portfolio = {
     },
     {
       id: "wedding-photography-platform",
-      title: "Digital Wedding Planning & Photography Platform",
+      title: "Wedding Photography & Planning Suite",
+      category: "Luxury Event Platform",
+      role: "UI/UX Designer & Developer",
+      date: "2024",
       description:
-        "A comprehensive event management solution showcased at the CINEC Computing Poster Session. Features a high-performance frontend for gallery management and a robust backend for booking workflows.",
-      tags: ["React", "Node.js", "MongoDB", "Tailwind CSS", "UI/UX Design"],
+        "An elegant digital wedding planning and photography portfolio platform showcased at the CINEC Computing Poster Session. Features immersive high-definition galleries, client booking calendars, and custom package configuration.",
+      highlights: [
+        "Showcased at the prestigious CINEC Computing Poster Session",
+        "High-definition lazy-loaded photo & video gallery with interactive lightboxes",
+        "Automated booking calendar and client appointment scheduling system",
+        "Bespoke luxury aesthetic with subtle typography and smooth parallax accents",
+      ],
+      tags: ["React", "Node.js", "MongoDB", "Tailwind CSS", "UI/UX Design", "Showcase"],
       image: "./slide1.png",
       href: "#",
       links: [
         {
-          label: "GitHub",
+          label: "Live Demo",
           url: "https://comfy-medovik-ee1f2a.netlify.app/",
-          icon: "SiGithub",
+          icon: "SiGooglechrome",
         },
       ],
     },

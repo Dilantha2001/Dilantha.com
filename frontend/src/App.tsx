@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -16,12 +16,15 @@ import LetsChat from './components/Contact/LetsChat';
 import StatsSection from './components/Stats/StatsSection';
 import Footer from './components/Footer/Footer';
 import ProjectCursor from './components/Common/ProjectCursor';
+import SignaturePreloader from './components/Preloader/SignaturePreloader';
 
 import './styles/App.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
+  const [isPreloaded, setIsPreloaded] = useState(false);
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -52,6 +55,9 @@ function App() {
 
   return (
     <div className="app-wrapper">
+      {/* Signature Preloader */}
+      {!isPreloaded && <SignaturePreloader onComplete={() => setIsPreloaded(true)} />}
+
       {/* Persistent Floating Navbar (Active from 2nd page / About section onwards) */}
       <StickyNavbar />
 
@@ -89,7 +95,7 @@ function App() {
       <Footer />
 
       {/* Global Interactive Project Cursor (Black circle with 'Explore More' on project hover) */}
-      <ProjectCursor />
+      {isPreloaded && <ProjectCursor />}
     </div>
   );
 }

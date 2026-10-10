@@ -116,13 +116,13 @@ export default function Footer() {
             <h4>SOCIAL</h4>
             <ul>
               <li>
-                <a href="https://linkedin.com/in/pramuditha-ranaweera" target="_blank" rel="noreferrer" className="footer-social-link">
+                <a href="https://www.linkedin.com/in/dilantha-ranaweera-825148295" target="_blank" rel="noreferrer" className="footer-social-link">
                   <FaLinkedin className="footer-social-icon linkedin-icon" />
                   <span>LINKEDIN</span>
                 </a>
               </li>
               <li>
-                <a href="https://github.com/pramuditha-ranaweera" target="_blank" rel="noreferrer" className="footer-social-link">
+                <a href="https://github.com/Dilantha2001" target="_blank" rel="noreferrer" className="footer-social-link">
                   <FaGithub className="footer-social-icon github-icon" />
                   <span>GITHUB</span>
                 </a>

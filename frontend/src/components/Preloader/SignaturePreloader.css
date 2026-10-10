@@ -1,0 +1,82 @@
+/* =========================================================================
+   REAL PRELOADER - WHITE { } LOADER WITH SMALL TEXT BELOW
+   ========================================================================= */
+
+.signature-preloader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999999;
+  background-color: #050508;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  cursor: default;
+}
+
+/* Centered Layout Wrapper */
+.loader-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* White Bracket Loader */
+.loader {
+  color: #ffffff;
+  font-family: Consolas, Menlo, Monaco, monospace;
+  font-weight: bold;
+  font-size: 5em; /* Scalable brackets */
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.4), 0 0 50px rgba(255, 255, 255, 0.15);
+}
+
+.loader span {
+  display: inline-block;
+  animation: pulse 0.6s alternate infinite ease-in-out;
+}
+
+.loader span:nth-child(odd) {
+  animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(0.8);
+    opacity: 0.65;
+  }
+}
+
+/* Small, elegant "Dilantha" text below brackets */
+.loader-name-below {
+  margin: 18px 0 0 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, Consolas, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  text-align: center;
+  padding-left: 0.32em; /* Centers the letter-spacing */
+}
+
+@media (max-width: 640px) {
+  .loader {
+    font-size: 4em;
+  }
+
+  .loader-name-below {
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    margin-top: 14px;
+  }
+}
