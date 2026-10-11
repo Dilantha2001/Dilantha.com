@@ -7,11 +7,17 @@ export default function ProjectCursor() {
   const [isDarkBadge, setIsDarkBadge] = useState(false);
 
   useEffect(() => {
-    // Only run on devices with fine pointer (mouse/trackpad)
-    if (window.matchMedia('(pointer: coarse)').matches) return;
-
     const cursor = cursorRef.current;
     if (!cursor) return;
+
+    // Only run on desktop devices with fine pointer and viewport width > 1024px
+    const isDesktop = () => {
+      return (
+        window.innerWidth > 1024 &&
+        !window.matchMedia('(pointer: coarse)').matches &&
+        !window.matchMedia('(hover: none)').matches
+      );
+    };
 
     // Set initial GSAP properties (perfectly stable, no rotation)
     gsap.set(cursor, {
@@ -30,6 +36,15 @@ export default function ProjectCursor() {
     let isVisible = false;
 
     const handleMouseMove = (e: MouseEvent) => {
+      // Never show on mobile or tablet resolutions or touch devices
+      if (!isDesktop()) {
+        if (isVisible) {
+          isVisible = false;
+          gsap.set(cursor, { scale: 0, opacity: 0 });
+        }
+        return;
+      }
+
       const { clientX, clientY } = e;
 
       // Update position smoothly
@@ -70,6 +85,7 @@ export default function ProjectCursor() {
     };
 
     const handleMouseDown = () => {
+      if (!isDesktop()) return;
       if (isVisible) {
         gsap.to(cursor, {
           scale: 0.88,
@@ -80,6 +96,7 @@ export default function ProjectCursor() {
     };
 
     const handleMouseUp = () => {
+      if (!isDesktop()) return;
       if (isVisible) {
         gsap.to(cursor, {
           scale: 1,
@@ -89,14 +106,23 @@ export default function ProjectCursor() {
       }
     };
 
+    const handleResize = () => {
+      if (!isDesktop() && isVisible) {
+        isVisible = false;
+        gsap.set(cursor, { scale: 0, opacity: 0 });
+      }
+    };
+
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 

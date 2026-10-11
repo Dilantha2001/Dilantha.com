@@ -14,8 +14,33 @@ export default function SignaturePreloader({ onComplete }: SignaturePreloaderPro
 
   useEffect(() => {
     // Lock scroll during real preloading
-    const originalOverflow = document.body.style.overflow;
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+
+    document.documentElement.classList.add('preloader-active');
+    document.body.classList.add('preloader-active');
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
+
+    if ((window as any).lenis) {
+      (window as any).lenis.stop();
+    }
+
+    const preventTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+    };
+    window.addEventListener('touchmove', preventTouchMove, { passive: false });
+
+    const unlockScroll = () => {
+      document.documentElement.classList.remove('preloader-active');
+      document.body.classList.remove('preloader-active');
+      document.documentElement.style.overflow = originalHtmlOverflow;
+      document.body.style.overflow = originalBodyOverflow;
+      window.removeEventListener('touchmove', preventTouchMove);
+      if ((window as any).lenis) {
+        (window as any).lenis.start();
+      }
+    };
 
     let isMounted = true;
     const target = 'DILANTHA';
@@ -111,13 +136,13 @@ export default function SignaturePreloader({ onComplete }: SignaturePreloaderPro
           duration: 0.65,
           ease: 'power2.inOut',
           onComplete: () => {
-            document.body.style.overflow = originalOverflow;
+            unlockScroll();
             setIsDone(true);
             if (onComplete) onComplete();
           },
         });
       } else {
-        document.body.style.overflow = originalOverflow;
+        unlockScroll();
         setIsDone(true);
         if (onComplete) onComplete();
       }
@@ -128,7 +153,7 @@ export default function SignaturePreloader({ onComplete }: SignaturePreloaderPro
     return () => {
       isMounted = false;
       clearInterval(shuffleInterval);
-      document.body.style.overflow = originalOverflow;
+      unlockScroll();
     };
   }, [onComplete]);
 

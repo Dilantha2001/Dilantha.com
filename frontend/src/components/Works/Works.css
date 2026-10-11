@@ -6,6 +6,9 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   position: relative;
   width: 100%;
+  background-color: #ffffff;
+  color: #000000;
+  box-sizing: border-box;
 }
 
 .works-section .project-slide,
@@ -13,9 +16,124 @@
   will-change: transform;
 }
 
-.works-project-card,
-.works-project-card * {
-  cursor: none !important;
+/* Card media container styling */
+.works-card-media-box {
+  width: 100%;
+  position: relative;
+}
+
+/* DESKTOP LAYOUT (> 768px): Pinned 100dvh horizontal scrub */
+@media (min-width: 769px) {
+  .works-section {
+    height: 100dvh;
+    min-height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .works-track-container {
+    overflow: hidden;
+  }
+
+  .works-scroll-wrapper {
+    padding-left: 28vw;
+    padding-right: 10vw;
+  }
+
+  .works-section .project-slide {
+    width: 48vw;
+    max-width: 620px;
+  }
+
+  .works-card-media-box {
+    aspect-ratio: 16 / 10;
+    max-height: 420px;
+  }
+}
+
+/* MOBILE LAYOUT (<= 768px): Native touch-swipe carousel, NO pinning, NO giant gaps! */
+@media (max-width: 768px) {
+  .works-section {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 16px 0 6px !important;
+    overflow: visible !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .works-track-container {
+    width: 100%;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 4px 16px 8px !important;
+    display: flex;
+    scroll-behavior: smooth;
+    touch-action: pan-x pan-y;
+  }
+
+  .works-track-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .works-scroll-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 14px;
+    padding-left: 0 !important;
+    padding-right: 16px !important;
+    width: max-content;
+    height: auto !important;
+    transform: none !important;
+  }
+
+  .works-section .project-slide {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    width: 82vw !important;
+    max-width: 360px !important;
+    flex-shrink: 0;
+    padding: 0 !important;
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .works-card-media-box {
+    aspect-ratio: 16 / 10;
+    height: auto !important;
+    max-height: 240px;
+    border-radius: 16px;
+  }
+
+  .works-indicator-row {
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+  }
+}
+
+/* Pointer & Cursor Handling */
+@media (hover: hover) and (pointer: fine) {
+  .works-project-card,
+  .works-project-card * {
+    cursor: none !important;
+  }
+}
+
+@media (hover: none) or (pointer: coarse) {
+  .works-project-card {
+    cursor: pointer !important;
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 .works-project-card img,
@@ -31,4 +149,3 @@
 .works-project-card:hover video {
   transform: scale(1.03);
 }
-

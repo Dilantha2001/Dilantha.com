@@ -33,7 +33,7 @@ body {
   box-sizing: border-box;
 }
 
-/* Global Electric Blue Scrollbar */
+/* Global Electric Blue Scrollbar (Desktop) */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -58,6 +58,40 @@ body {
 * {
   scrollbar-width: thin;
   scrollbar-color: #0052ff #08080a;
+}
+
+/* Mobile Scrollbar Hide */
+@media (max-width: 768px) {
+  html, body {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  ::-webkit-scrollbar {
+    display: none !important;
+    width: 0px !important;
+    height: 0px !important;
+    background: transparent !important;
+  }
+}
+
+/* Preloader Active - Lock all scrolling and hide scrollbars completely */
+html.preloader-active,
+body.preloader-active {
+  overflow: hidden !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  touch-action: none !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+html.preloader-active::-webkit-scrollbar,
+body.preloader-active::-webkit-scrollbar,
+.preloader-active *::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
 }
 
 /* Custom scrollbar utility */

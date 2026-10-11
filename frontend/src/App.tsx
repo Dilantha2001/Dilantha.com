@@ -37,6 +37,10 @@ function App() {
     
     (window as any).lenis = lenis;
 
+    if (!isPreloaded) {
+      lenis.stop();
+    }
+
     lenis.on('scroll', ScrollTrigger.update);
 
     const updateTicker = (time: number) => {
@@ -52,6 +56,12 @@ function App() {
       delete (window as any).lenis;
     };
   }, []);
+
+  useEffect(() => {
+    if (isPreloaded && (window as any).lenis) {
+      (window as any).lenis.start();
+    }
+  }, [isPreloaded]);
 
   return (
     <div className="app-wrapper">

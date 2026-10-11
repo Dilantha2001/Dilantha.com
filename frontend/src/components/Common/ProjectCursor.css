@@ -123,9 +123,12 @@
   transition: color 0.25s ease, transform 0.2s ease;
 }
 
-/* Touch screens disable */
-@media (pointer: coarse), (hover: none) {
+/* Touch screens, mobile & tablet disable */
+@media (max-width: 1024px), (pointer: coarse), (hover: none) {
   .project-custom-cursor {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 }

@@ -150,11 +150,11 @@ export default function Feedback2() {
     <section 
       id="feedback" 
       ref={sectionRef} 
-      className="w-full bg-[#08080a] text-white py-16 sm:py-20 lg:py-24 overflow-hidden relative border-t border-b border-white/[0.06]"
+      className="w-full bg-[#08080a] text-white pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20 overflow-hidden relative border-t border-b border-white/[0.06]"
     >
       
       {/* Section Header */}
-      <div ref={headerRef} className="text-center mb-10 sm:mb-12 lg:mb-14 px-4 flex flex-col items-center">
+      <div ref={headerRef} className="text-center mb-5 sm:mb-7 lg:mb-8 px-4 flex flex-col items-center">
         <div className="flex items-center gap-2 mb-2.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#0052ff] shadow-[0_0_8px_#0052ff]"></span>
           <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.16em] text-[#0052ff] uppercase">CLIENT TESTIMONIALS</span>

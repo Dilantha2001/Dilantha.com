@@ -25,8 +25,9 @@ const Hero2 = () => {
 
   const [techFontSize, setTechFontSize] = useState(() => {
     if (typeof window !== 'undefined') {
-      if (window.innerWidth < 480) return 54;
-      if (window.innerWidth < 768) return 76;
+      if (window.innerWidth < 380) return 38;
+      if (window.innerWidth < 480) return 46;
+      if (window.innerWidth < 768) return 72;
       if (window.innerWidth < 1024) return 105;
       return 150;
     }
@@ -35,8 +36,9 @@ const Hero2 = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 480) setTechFontSize(54);
-      else if (window.innerWidth < 768) setTechFontSize(76);
+      if (window.innerWidth < 380) setTechFontSize(38);
+      else if (window.innerWidth < 480) setTechFontSize(46);
+      else if (window.innerWidth < 768) setTechFontSize(72);
       else if (window.innerWidth < 1024) setTechFontSize(105);
       else setTechFontSize(150);
     };
@@ -44,233 +46,258 @@ const Hero2 = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // GSAP ScrollTrigger: Split at the two S's (IMPOS <-> SIBLE) & zoom video into fullscreen
+  // GSAP ScrollTrigger: Desktop only split & zoom; Mobile clean natural layout
   useGSAP(() => {
     if (!containerRef.current || !heroRef.current || !videoFrameRef.current) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top top',
-        end: 'bottom top',
-        pin: heroRef.current,
-        pinSpacing: false,
-        scrub: 1.2,
-        anticipatePin: 1,
-      }
-    });
+    const mm = gsap.matchMedia();
 
-    // 1. Text splits & vanishes: "NEXT-GEN" moves upwards out of screen, "DIGITAL" goes left, "SOLUTION" goes right + UI fades
-    tl.to(
-      topChunkRef.current,
-      {
-        yPercent: -160,
-        y: -100,
-        opacity: 0,
-        filter: 'blur(16px)',
-        scale: 0.92,
-        duration: 0.4,
-        ease: 'power2.inOut',
-      },
-      0
-    )
-    .to(
-      leftChunkRef.current,
-      {
-        xPercent: -150,
-        opacity: 0,
-        filter: 'blur(12px)',
-        duration: 0.35,
-        ease: 'power2.inOut',
-      },
-      0
-    )
-    .to(
-      rightChunkRef.current,
-      {
-        xPercent: 150,
-        opacity: 0,
-        filter: 'blur(12px)',
-        duration: 0.35,
-        ease: 'power2.inOut',
-      },
-      0
-    )
-    .to(
-      [bottomLeftRef.current, bottomBarRef.current],
-      {
-        opacity: 0,
-        y: 50,
-        duration: 0.3,
-        ease: 'power2.in',
-      },
-      0
-    )
-    .to(
-      shadowRef.current,
-      {
-        opacity: 0,
-        duration: 0.25,
-        ease: 'power2.out',
-      },
-      0
-    )
-
-    // 2. Background smoothly morphs to dark and wave image floats out
-    .to(
-      [heroRef.current, containerRef.current],
-      {
-        backgroundColor: '#08080a',
-        duration: 0.5,
-        ease: 'power2.inOut',
-      },
-      0.05
-    )
-    .to(
-      ['.hero2-grid-bg', '.hero2-wave-wrap'],
-      {
-        opacity: 0,
-        y: -60,
-        duration: 0.4,
-        ease: 'power2.out',
-      },
-      0.05
-    )
-
-    // 3. Center Video expands & zooms in center
-    .to(
-      videoFrameRef.current,
-      {
-        width: '82vw',
-        height: '78vh',
-        top: '50%',
-        left: '50%',
-        xPercent: -50,
-        yPercent: -50,
-        borderRadius: '24px',
-        duration: 0.45,
-        ease: 'power2.inOut',
-      },
-      0
-    )
-    .to(
-      squareBoxRef.current,
-      {
-        borderRadius: '24px',
-        borderWidth: 0,
-        boxShadow: '0 30px 60px rgba(0, 0, 0, 0.5)',
-        duration: 0.45,
-        ease: 'power2.inOut',
-      },
-      0
-    )
-    .to(
-      videoRef.current,
-      {
-        scale: 1.15,
-        duration: 0.5,
-        ease: 'power1.out',
-      },
-      0
-    )
-
-    // 4. Smooth Exit: Instead of abruptly vanishing, the video smoothly shrinks down, floats up and fades away!
-    .to(
-      videoFrameRef.current,
-      {
-        scale: 0.6,
-        yPercent: -75,
-        opacity: 0,
-        filter: 'blur(20px)',
-        borderRadius: '36px',
-        duration: 0.45,
-        ease: 'power2.inOut',
-      },
-      0.65
-    )
-    .to(
-      squareBoxRef.current,
-      {
-        opacity: 0,
-        boxShadow: '0 10px 30px rgba(0, 0, 0, 0)',
-        duration: 0.4,
-        ease: 'power2.in',
-      },
-      0.68
-    );
-
-    // Clean 2D Card Hover Interaction (No 3D distortion, zero RAM lag)
-    const cardEl = videoFrameRef.current;
-    const handleCardMouseEnter = () => {
-      if (!squareBoxRef.current) return;
-      const progress = tl.progress();
-      if (progress > 0.08) return;
-
-      gsap.to(squareBoxRef.current, {
-        scale: 1.04,
-        boxShadow: '0 20px 45px -10px rgba(0, 82, 255, 0.25), 0 10px 25px rgba(0, 0, 0, 0.35)',
-        borderColor: 'rgba(0, 82, 255, 0.6)',
-        duration: 0.3,
-        ease: 'power2.out',
-        overwrite: 'auto'
+    // Desktop (> 768px): Split text & fullscreen zoom
+    mm.add('(min-width: 769px)', () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          pin: heroRef.current,
+          pinSpacing: false,
+          scrub: 1.2,
+          anticipatePin: 1,
+        }
       });
 
-      if (shadowRef.current) {
-        gsap.to(shadowRef.current, {
-          scale: 1.08,
-          opacity: 0.8,
+      // 1. Text splits & vanishes: "NEXT-GEN" moves upwards out of screen, "DIGITAL" goes left, "SOLUTION" goes right + UI fades
+      tl.to(
+        topChunkRef.current,
+        {
+          yPercent: -160,
+          y: -100,
+          opacity: 0,
+          filter: 'blur(16px)',
+          scale: 0.92,
+          duration: 0.4,
+          ease: 'power2.inOut',
+        },
+        0
+      )
+      .to(
+        leftChunkRef.current,
+        {
+          xPercent: -150,
+          opacity: 0,
+          filter: 'blur(12px)',
+          duration: 0.35,
+          ease: 'power2.inOut',
+        },
+        0
+      )
+      .to(
+        rightChunkRef.current,
+        {
+          xPercent: 150,
+          opacity: 0,
+          filter: 'blur(12px)',
+          duration: 0.35,
+          ease: 'power2.inOut',
+        },
+        0
+      )
+      .to(
+        [bottomLeftRef.current, bottomBarRef.current],
+        {
+          opacity: 0,
+          y: 50,
+          duration: 0.3,
+          ease: 'power2.in',
+        },
+        0
+      )
+      .to(
+        shadowRef.current,
+        {
+          opacity: 0,
+          duration: 0.25,
+          ease: 'power2.out',
+        },
+        0
+      )
+
+      // 2. Background smoothly morphs to dark and wave image floats out
+      .to(
+        [heroRef.current, containerRef.current],
+        {
+          backgroundColor: '#08080a',
+          duration: 0.5,
+          ease: 'power2.inOut',
+        },
+        0.05
+      )
+      .to(
+        ['.hero2-grid-bg', '.hero2-wave-wrap'],
+        {
+          opacity: 0,
+          y: -60,
+          duration: 0.4,
+          ease: 'power2.out',
+        },
+        0.05
+      )
+
+      // 3. Center Video expands & zooms in center
+      .to(
+        videoFrameRef.current,
+        {
+          width: '82vw',
+          height: '78vh',
+          top: '50%',
+          left: '50%',
+          xPercent: -50,
+          yPercent: -50,
+          borderRadius: '24px',
+          duration: 0.45,
+          ease: 'power2.inOut',
+        },
+        0
+      )
+      .to(
+        squareBoxRef.current,
+        {
+          borderRadius: '24px',
+          borderWidth: 0,
+          boxShadow: '0 30px 60px rgba(0, 0, 0, 0.5)',
+          duration: 0.45,
+          ease: 'power2.inOut',
+        },
+        0
+      )
+      .to(
+        videoRef.current,
+        {
+          scale: 1.15,
+          duration: 0.5,
+          ease: 'power1.out',
+        },
+        0
+      )
+
+      // 4. Smooth Exit: Instead of abruptly vanishing, the video smoothly shrinks down, floats up and fades away!
+      .to(
+        videoFrameRef.current,
+        {
+          scale: 0.6,
+          yPercent: -75,
+          opacity: 0,
+          filter: 'blur(20px)',
+          borderRadius: '36px',
+          duration: 0.45,
+          ease: 'power2.inOut',
+        },
+        0.65
+      )
+      .to(
+        squareBoxRef.current,
+        {
+          opacity: 0,
+          boxShadow: '0 10px 30px rgba(0, 0, 0, 0)',
+          duration: 0.4,
+          ease: 'power2.in',
+        },
+        0.68
+      );
+
+      // Clean 2D Card Hover Interaction (No 3D distortion, zero RAM lag)
+      const cardEl = videoFrameRef.current;
+      const handleCardMouseEnter = () => {
+        if (!squareBoxRef.current) return;
+        const progress = tl.progress();
+        if (progress > 0.08) return;
+
+        gsap.to(squareBoxRef.current, {
+          scale: 1.04,
+          boxShadow: '0 20px 45px -10px rgba(0, 82, 255, 0.25), 0 10px 25px rgba(0, 0, 0, 0.35)',
+          borderColor: 'rgba(0, 82, 255, 0.6)',
           duration: 0.3,
           ease: 'power2.out',
           overwrite: 'auto'
         });
-      }
-    };
 
-    const handleCardMouseLeave = () => {
-      if (squareBoxRef.current) {
-        gsap.to(squareBoxRef.current, {
-          scale: 1,
-          boxShadow: '0 20px 45px -10px rgba(0, 0, 0, 0.35)',
-          borderColor: 'rgba(255, 255, 255, 0.22)',
-          duration: 0.4,
-          ease: 'power2.out',
-          overwrite: 'auto'
-        });
-      }
-      if (shadowRef.current) {
-        gsap.to(shadowRef.current, {
-          scale: 1,
-          opacity: 1,
-          duration: 0.4,
-          ease: 'power2.out',
-          overwrite: 'auto'
-        });
-      }
-    };
+        if (shadowRef.current) {
+          gsap.to(shadowRef.current, {
+            scale: 1.08,
+            opacity: 0.8,
+            duration: 0.3,
+            ease: 'power2.out',
+            overwrite: 'auto'
+          });
+        }
+      };
 
-    if (cardEl) {
-      cardEl.addEventListener('mouseenter', handleCardMouseEnter);
-      cardEl.addEventListener('mouseleave', handleCardMouseLeave);
-    }
+      const handleCardMouseLeave = () => {
+        if (squareBoxRef.current) {
+          gsap.to(squareBoxRef.current, {
+            scale: 1,
+            boxShadow: '0 20px 45px -10px rgba(0, 0, 0, 0.35)',
+            borderColor: 'rgba(255, 255, 255, 0.22)',
+            duration: 0.4,
+            ease: 'power2.out',
+            overwrite: 'auto'
+          });
+        }
+        if (shadowRef.current) {
+          gsap.to(shadowRef.current, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.4,
+            ease: 'power2.out',
+            overwrite: 'auto'
+          });
+        }
+      };
 
-    // Smoothly fade out the pinned hero section as AboutMe slides over
-    gsap.to(heroRef.current, {
-      opacity: 0,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'bottom bottom',
-        end: 'bottom top',
-        scrub: true,
+      if (cardEl) {
+        cardEl.addEventListener('mouseenter', handleCardMouseEnter);
+        cardEl.addEventListener('mouseleave', handleCardMouseLeave);
       }
+
+      // Smoothly fade out the pinned hero section as AboutMe slides over
+      gsap.to(heroRef.current, {
+        opacity: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'bottom bottom',
+          end: 'bottom top',
+          scrub: true,
+        }
+      });
+
+      return () => {
+        if (cardEl) {
+          cardEl.removeEventListener('mouseenter', handleCardMouseEnter);
+          cardEl.removeEventListener('mouseleave', handleCardMouseLeave);
+        }
+      };
     });
 
-    return () => {
-      if (cardEl) {
-        cardEl.removeEventListener('mouseenter', handleCardMouseEnter);
-        cardEl.removeEventListener('mouseleave', handleCardMouseLeave);
+    // Mobile (<= 768px): Fullscreen video first, then text below layout
+    mm.add('(max-width: 768px)', () => {
+      gsap.set([heroRef.current, containerRef.current], { backgroundColor: '#ffffff', clearProps: 'transform' });
+      if (videoFrameRef.current) {
+        gsap.set(videoFrameRef.current, { clearProps: 'all' });
       }
-    };
+      if (topChunkRef.current) {
+        gsap.set(topChunkRef.current, { clearProps: 'all', opacity: 1, visibility: 'visible' });
+      }
+      if (leftChunkRef.current) {
+        gsap.set(leftChunkRef.current, { clearProps: 'all', opacity: 1, visibility: 'visible' });
+      }
+      if (rightChunkRef.current) {
+        gsap.set(rightChunkRef.current, { clearProps: 'all', opacity: 1, visibility: 'visible' });
+      }
+      if (bottomLeftRef.current) {
+        gsap.set(bottomLeftRef.current, { clearProps: 'all', opacity: 1, visibility: 'visible' });
+      }
+    });
 
   }, { scope: containerRef });
 
@@ -312,7 +339,7 @@ const Hero2 = () => {
         <div className="hero2-center-stage">
           <div className="hero2-title-container">
             {/* Top line: "NEXT-GEN" */}
-            <div ref={topChunkRef} className="hero2-title-row-top" style={{ height: 'clamp(55px, 12vw, 180px)' }}>
+            <div ref={topChunkRef} className="hero2-title-row-top" style={{ height: 'clamp(40px, 11vw, 180px)' }}>
               <TechText
                 text="NEXT-GEN"
                 fontWeight={900}

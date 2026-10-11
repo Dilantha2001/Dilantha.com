@@ -37,69 +37,78 @@ export default function StickyNavbar() {
   const [activeSection, setActiveSection] = useState<string>('about');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // GSAP ScrollTrigger: Show on scroll UP, Hide on scroll DOWN (Active from 2nd page / About onwards)
+  // GSAP: Always visible on mobile; Desktop: Show on scroll UP, Hide on scroll DOWN
   useGSAP(() => {
     if (!navRef.current) return;
 
-    // Initially hide off-screen
-    gsap.set(navRef.current, { y: -100, opacity: 0, pointerEvents: 'none' });
+    const mm = gsap.matchMedia();
 
-    let isShown = false;
-
-    const showNavbar = () => {
-      if (isShown) return;
-      isShown = true;
-      gsap.to(navRef.current, {
+    // 1. Mobile & Tablet (<= 768px): Navbar is ALWAYS visible & interactive
+    mm.add('(max-width: 768px)', () => {
+      gsap.set(navRef.current, {
         y: 0,
         opacity: 1,
         pointerEvents: 'auto',
-        duration: 0.4,
-        ease: 'power3.out',
-        overwrite: 'auto',
       });
-    };
-
-    const hideNavbar = () => {
-      if (!isShown) return;
-      isShown = false;
-      gsap.to(navRef.current, {
-        y: -100,
-        opacity: 0,
-        pointerEvents: 'none',
-        duration: 0.35,
-        ease: 'power3.in',
-        overwrite: 'auto',
-      });
-      setMobileMenuOpen(false);
-    };
-
-    const st = ScrollTrigger.create({
-      start: 0,
-      end: 'max',
-      onUpdate: (self) => {
-        const threshold = window.innerHeight * 0.75;
-        const currentScroll = self.scroll();
-
-        // 1. Above 2nd page (inside Hero) -> Always hide
-        if (currentScroll < threshold) {
-          hideNavbar();
-          return;
-        }
-
-        // 2. Scrolling UP -> Show navbar with GSAP
-        if (self.direction === -1) {
-          showNavbar();
-        } 
-        // 3. Scrolling DOWN -> Hide navbar with GSAP
-        else if (self.direction === 1) {
-          hideNavbar();
-        }
-      },
     });
 
-    return () => {
-      st.kill();
-    };
+    // 2. Desktop (> 768px): Hide in Hero, Show on scroll UP, Hide on scroll DOWN
+    mm.add('(min-width: 769px)', () => {
+      gsap.set(navRef.current, { y: -100, opacity: 0, pointerEvents: 'none' });
+
+      let isShown = false;
+
+      const showNavbar = () => {
+        if (isShown) return;
+        isShown = true;
+        gsap.to(navRef.current, {
+          y: 0,
+          opacity: 1,
+          pointerEvents: 'auto',
+          duration: 0.4,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        });
+      };
+
+      const hideNavbar = () => {
+        if (!isShown) return;
+        isShown = false;
+        gsap.to(navRef.current, {
+          y: -100,
+          opacity: 0,
+          pointerEvents: 'none',
+          duration: 0.35,
+          ease: 'power3.in',
+          overwrite: 'auto',
+        });
+        setMobileMenuOpen(false);
+      };
+
+      ScrollTrigger.create({
+        start: 0,
+        end: 'max',
+        onUpdate: (self) => {
+          const threshold = window.innerHeight * 0.75;
+          const currentScroll = self.scroll();
+
+          // Above 2nd page (inside Hero) -> Always hide on desktop
+          if (currentScroll < threshold) {
+            hideNavbar();
+            return;
+          }
+
+          // Scrolling UP -> Show navbar with GSAP
+          if (self.direction === -1) {
+            showNavbar();
+          } 
+          // Scrolling DOWN -> Hide navbar with GSAP
+          else if (self.direction === 1) {
+            hideNavbar();
+          }
+        },
+      });
+    });
   }, { scope: navRef });
 
   useEffect(() => {
@@ -191,9 +200,9 @@ export default function StickyNavbar() {
         {/* Right: CTA Button with vector hand & black circle arrow */}
         <div className="sticky-navbar-cta-group">
           <a
-            href="#contact"
-            onClick={(e) => handleNavClick(e, '#contact')}
+            href="mailto:pramudithadilantha89@gmail.com"
             className="sticky-navbar-cta-btn"
+            title="Send Email"
           >
             <span className="cta-hand-wrap" aria-hidden="true">
               <svg 
@@ -250,8 +259,8 @@ export default function StickyNavbar() {
             </a>
           ))}
           <a
-            href="#contact"
-            onClick={(e) => handleNavClick(e, '#contact')}
+            href="mailto:pramudithadilantha89@gmail.com"
+            onClick={() => setMobileMenuOpen(false)}
             className="sticky-navbar-mobile-cta-btn"
           >
             <span className="cta-hand-wrap" aria-hidden="true">

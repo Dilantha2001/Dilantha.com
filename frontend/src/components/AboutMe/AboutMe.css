@@ -456,10 +456,6 @@
   color: #111111;
 }
 
-.meet-about-section .editorial-stat-item:hover .editorial-stat-label-line {
-  color: #e5e7eb;
-}
-
 /* =========================================================================
    LEFT COLUMN STATUS & ACTION CARD
    ========================================================================= */
@@ -853,6 +849,7 @@
 @media (max-width: 1080px) {
   .meet-about-section {
     padding: 40px 32px 60px;
+    box-shadow: none !important;
   }
 
   .meet-about-section .meet-about-statement-banner {
@@ -909,17 +906,73 @@
 @media (max-width: 640px) {
   .meet-about-section {
     padding: 32px 20px 48px;
+    align-items: center;
+    box-shadow: none !important;
   }
 
+  .meet-about-section .meet-about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+    width: 100%;
+  }
+
+  /* Center Portrait Image */
+  .meet-about-section .meet-about-portrait-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .meet-about-section .meet-about-portrait-card {
+    max-width: min(360px, 92vw);
+    margin: 0 auto;
+  }
+
+  /* Center Main Content */
+  .meet-about-section .meet-about-right-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 28px;
+    width: 100%;
+  }
+
+  /* Center Statement Headline */
   .meet-about-section .meet-about-statement-banner {
-    margin-bottom: 32px;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    text-align: center;
+    width: 100%;
   }
 
   .meet-about-section .meet-about-statement-title {
-    font-size: clamp(2rem, 8.5vw, 2.8rem);
-    line-height: 1.12;
+    font-size: clamp(1.85rem, 7.5vw, 2.6rem);
+    line-height: 1.15;
     letter-spacing: -0.03em;
+    text-align: center;
+  }
+
+  /* Center Bio Block */
+  .meet-about-section .meet-about-bio-banner {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .meet-about-section .meet-about-bio-banner .meet-about-subtag {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .meet-about-section .meet-about-mono-desc {
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.65;
+    margin: 0 auto;
+    max-width: 520px;
   }
 
   .meet-about-section .meet-about-marquee-wrapper {
@@ -929,20 +982,140 @@
 
   .meet-about-section .meet-about-hero-title {
     font-size: 2.2rem;
+    text-align: center;
+  }
+
+  /* Center Header Row (Meet Dilantha + Exp) */
+  .meet-about-section .meet-about-right-col {
+    align-items: center;
+    width: 100%;
+  }
+
+  .meet-about-section .meet-about-right-header-row {
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .meet-about-section .meet-about-big-title-col {
+    justify-content: center;
+    width: 100%;
   }
 
   .meet-about-section .meet-about-big-title {
-    font-size: 2.6rem;
+    font-size: clamp(2rem, 7.5vw, 2.6rem);
+    text-align: center;
+  }
+
+  .meet-about-section .exp-header-block {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .meet-about-section .exp-header-block .meet-about-subtag {
+    text-align: center;
+  }
+
+  .meet-about-section .exp-header-block .meet-about-secondary-title {
+    font-size: clamp(1.3rem, 5.2vw, 1.75rem);
+    white-space: normal;
+    text-align: center;
+  }
+
+  .meet-about-section .exp-header-block .meet-about-mono-subtext {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 480px;
+  }
+
+  /* Center Stats Deck */
+  .meet-about-section .meet-about-stats-deck {
+    align-items: center;
+    width: 100%;
+  }
+
+  .meet-about-section .editorial-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .meet-about-section .editorial-stat-item {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 16px 14px;
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+
+  .meet-about-section .stat-num-wrap {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .meet-about-section .editorial-stat-number {
+    font-size: clamp(1.9rem, 6.8vw, 2.4rem);
+  }
+
+  .meet-about-section .stat-blue-suffix {
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+  }
+
+  .meet-about-section .stat-label-wrap {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .meet-about-section .editorial-stat-label-line {
+    font-size: clamp(9.5px, 2.6vw, 10.5px);
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .meet-about-section {
+    padding: 28px 16px 40px;
+  }
+
+  .meet-about-section .meet-about-portrait-card {
+    max-width: min(320px, 88vw);
+  }
+
+  .meet-about-section .meet-about-marquee-wrapper {
+    width: calc(100% + 32px);
+    margin: 32px -16px -40px -16px;
   }
 
   .meet-about-section .editorial-stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+    max-width: 100%;
   }
-}
 
-@media (max-width: 480px) {
-  .meet-about-section .editorial-stats-grid {
-    grid-template-columns: 1fr;
+  .meet-about-section .editorial-stat-item {
+    padding: 14px 10px;
+    border-radius: 10px;
+  }
+
+  .meet-about-section .editorial-stat-number {
+    font-size: clamp(1.65rem, 6.5vw, 2rem);
+  }
+
+  .meet-about-section .stat-blue-suffix {
+    font-size: clamp(1.2rem, 4.5vw, 1.5rem);
+  }
+
+  .meet-about-section .editorial-stat-label-line {
+    font-size: 9px;
+    letter-spacing: 0.06em;
   }
 }

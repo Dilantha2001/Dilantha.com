@@ -41,18 +41,22 @@ export default function Footer() {
     }
 
     if (giantTextRef.current) {
-      tl.fromTo(
+      gsap.fromTo(
         giantTextRef.current,
-        { opacity: 0, y: 50, scale: 0.94 },
+        { opacity: 0.4, y: 30, scale: 0.96 },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 1.0,
+          duration: 0.9,
           ease: 'power3.out',
           force3D: true,
-        },
-        '-=0.5'
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: 'top 95%',
+            toggleActions: 'play none none none',
+          },
+        }
       );
     }
   }, { scope: footerRef });
