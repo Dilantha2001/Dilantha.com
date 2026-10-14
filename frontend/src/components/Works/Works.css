@@ -44,12 +44,34 @@
 
   .works-section .project-slide {
     width: 48vw;
-    max-width: 620px;
+    max-width: 640px;
   }
 
   .works-card-media-box {
     aspect-ratio: 16 / 10;
-    max-height: 420px;
+    max-height: 440px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .works-section .project-slide {
+    width: 46vw;
+    max-width: 780px;
+  }
+
+  .works-card-media-box {
+    max-height: 520px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .works-section .project-slide {
+    width: 44vw;
+    max-width: 920px;
+  }
+
+  .works-card-media-box {
+    max-height: 600px;
   }
 }
 

@@ -144,67 +144,63 @@ export default function StatsSection() {
         </div>
 
         {/* Github Snake Graph with Dates & Controls */}
-        <div ref={graphRef} className="flex flex-col items-center mt-8 sm:mt-12 w-full max-w-5xl mx-auto pb-4">
+        <div ref={graphRef} className="flex flex-col items-center mt-6 sm:mt-8 w-full max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto pb-2">
           
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#0052ff] animate-pulse"></span>
-            <h3 className="text-black text-xs sm:text-sm md:text-base font-bold tracking-widest uppercase font-sans text-center">
+          <div className="flex items-center gap-1.5 mb-1">
+            <span className="w-1.5 h-1.5 xl:w-2 xl:h-2 rounded-full bg-[#0052ff] animate-pulse"></span>
+            <h3 className="text-black text-xs sm:text-sm xl:text-base font-bold tracking-widest uppercase font-sans text-center">
               PERSONAL GITHUB ACTIVITY
             </h3>
           </div>
           
-          <p className="text-black/50 text-[11px] sm:text-xs mb-6 sm:mb-8 italic text-center px-4">
+          <p className="text-black/50 text-[10px] sm:text-[11px] xl:text-xs mb-3 sm:mb-4 xl:mb-5 italic text-center px-4">
             (Work commits are stored securely in internal repositories)
           </p>
           
-          <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 items-center lg:items-start w-full">
+          {/* Year Selector Pills - Centered & Responsive */}
+          <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 xl:gap-2 mb-3 sm:mb-4 xl:mb-5">
+            {['2026', '2025', '2024', '2023'].map((year) => {
+              const isActive = selectedYear === year;
+              return (
+                <button 
+                  key={year} 
+                  type="button"
+                  onClick={() => setSelectedYear(year)}
+                  className={`px-3 py-1 xl:px-4 xl:py-1.5 rounded-full text-[11px] xl:text-xs transition-all duration-200 cursor-pointer font-medium ${
+                    isActive 
+                      ? 'bg-[#0052ff] text-white shadow-xs font-bold' 
+                      : 'text-black/60 hover:text-[#0052ff] hover:bg-black/5 bg-black/[0.03] border border-black/5'
+                  }`}
+                >
+                  {year}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Graph Card Wrapper - Centered & Scales on Big Screens */}
+          <div className="w-full overflow-hidden rounded-xl xl:rounded-2xl border border-black/8 bg-neutral-50/70 p-2 sm:p-3 md:p-3.5 xl:p-5 shadow-xs">
             
-            {/* Graph Card Wrapper - Fits 100% full screen width on mobile, no horizontal scroll */}
-            <div className="w-full overflow-hidden rounded-2xl border border-black/8 bg-neutral-50/70 p-2 sm:p-4 md:p-5 shadow-xs">
-              
-              {/* Months Header - Distributed across full width */}
-              <div className="flex text-black/45 text-[7px] sm:text-[9.5px] md:text-xs mb-1 sm:mb-2 w-full justify-between pl-3 sm:pl-6 md:pl-8 pr-1 sm:pr-2 select-none">
-                {['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'].map((m, i) => (
-                  <span key={i} className="flex-1 text-center font-medium">{m}</span>
-                ))}
-              </div>
-              
-              {/* Snake SVG Container - Scales completely to fit mobile screen */}
-              <div className="w-full overflow-hidden flex flex-col items-center">
-                {svgContent ? (
-                  <div 
-                    className="w-full flex justify-center [&>svg]:w-full [&>svg]:h-auto [&>svg]:block [&_.u]:hidden -mt-1 sm:-mt-2"
-                    dangerouslySetInnerHTML={{ __html: svgContent }} 
-                  />
-                ) : (
-                  <div className="w-full h-20 sm:h-32 flex items-center justify-center text-black/40 text-xs gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#0052ff] animate-ping"></span>
-                    Loading GitHub Activity...
-                  </div>
-                )}
-              </div>
-
+            {/* Months Header - Distributed evenly & scales with screen */}
+            <div className="flex text-black/45 text-[6.5px] sm:text-[8px] md:text-[9.5px] xl:text-[11px] mb-1 sm:mb-1.5 xl:mb-2 w-full justify-between px-1.5 sm:px-2.5 xl:px-3 select-none">
+              {['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'].map((m, i) => (
+                <span key={i} className="flex-1 text-center font-medium">{m}</span>
+              ))}
             </div>
-
-            {/* Year Selector */}
-            <div className="flex flex-wrap items-center justify-center lg:flex-col gap-1.5 sm:gap-2 w-full lg:w-24 shrink-0 lg:mt-2">
-              {['2026', '2025', '2024', '2023'].map((year) => {
-                const isActive = selectedYear === year;
-                return (
-                  <button 
-                    key={year} 
-                    type="button"
-                    onClick={() => setSelectedYear(year)}
-                    className={`px-3.5 py-1.5 rounded-lg lg:rounded text-xs transition-all duration-200 cursor-pointer font-medium ${
-                      isActive 
-                        ? 'bg-[#0052ff]/10 text-[#0052ff] border border-[#0052ff]/30 font-bold shadow-xs' 
-                        : 'text-black/50 hover:text-[#0052ff] hover:bg-black/5 border border-transparent'
-                    }`}
-                  >
-                    {year}
-                  </button>
-                );
-              })}
+            
+            {/* Snake SVG Container - Scales cleanly */}
+            <div className="w-full overflow-hidden flex flex-col items-center">
+              {svgContent ? (
+                <div 
+                  className="w-full flex justify-center [&>svg]:w-full [&>svg]:h-auto [&>svg]:block [&_.u]:hidden -mt-0.5 sm:-mt-1"
+                  dangerouslySetInnerHTML={{ __html: svgContent }} 
+                />
+              ) : (
+                <div className="w-full h-16 sm:h-24 xl:h-32 flex items-center justify-center text-black/40 text-xs gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#0052ff] animate-ping"></span>
+                  Loading GitHub Activity...
+                </div>
+              )}
             </div>
 
           </div>

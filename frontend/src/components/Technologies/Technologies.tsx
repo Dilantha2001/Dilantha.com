@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 const getTechIcon = (iconName?: string, color?: string) => {
   if (iconName && (SiIcons as any)[iconName]) {
     const IconComp = (SiIcons as any)[iconName];
-    return <IconComp size={24} style={{ color: color || 'inherit' }} />;
+    return <IconComp size={21} style={{ color: color || 'inherit' }} />;
   }
   return null;
 };
@@ -82,6 +82,7 @@ export default function Technologies() {
         {/* Left Column: Heading & Summary */}
         <div ref={leftColRef} className="technologies-left">
           <div className="tech-tag-row">
+            <span className="tech-dot"></span>
             <span className="tech-tag-text">STACK & TOOLING</span>
           </div>
           <h2 className="tech-heading">

@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import smokioVideo from '../../assets/1003.mp4';
+import musicAppVideo from '../../assets/1003.mp4';
 import './RecentWorks.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,7 +16,7 @@ const featuredProjects = [
     date: "@2026",
     tags: ["UI / UX DESIGN", "REACT · NODE"],
     isWide: true,
-    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80",
+    image: musicAppVideo,
     url: "https://github.com/Dilantha2001/MusicApplication",
   },
   {
@@ -46,18 +46,18 @@ const featuredProjects = [
     date: "@2025",
     tags: ["WEB DEVELOPMENT", "GSAP · THREE.JS"],
     isWide: true,
-    image: smokioVideo,
+    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80",
     url: "https://wondrous-zuccutto-2cd2ce.netlify.app/",
   },
   {
     id: "05",
-    title: "E-Commerce Luxury Store",
-    subtitle: "Scalable Storefront, Cart & Secure Payments",
+    title: "Pirl Travels Experience",
+    subtitle: "Interactive Travel Platform with Fluid GSAP Animations",
     date: "@2025",
-    tags: ["ECOMMERCE", "TYPESCRIPT · SQL"],
+    tags: ["TRAVEL & HOSPITALITY", "GSAP · REACT"],
     isWide: true,
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
-    url: "https://github.com/Dilantha2001/Private-Store",
+    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80",
+    url: "https://github.com/Dilantha2001/Traveling-Agency-Gsap",
   },
   {
     id: "06",
@@ -152,41 +152,46 @@ export default function RecentWorks() {
               className={`recent-work-card ${project.isWide ? 'card-wide' : 'card-compact'}`}
             >
               {/* Media Container */}
-              <div className="card-media-wrapper">
-                {project.image.includes('.mp4') ? (
-                  <video
-                    src={project.image}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                    className="card-media-img"
-                  />
-                ) : (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="card-media-img"
-                  />
-                )}
-                
-                {/* Floating Tags Pills */}
-                <div className="card-floating-tags">
-                  {project.tags.map((tag, tIdx) => (
-                    <span key={tIdx} className="tag-pill">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+              {(() => {
+                const isVideo = project.image.includes('.mp4');
+                return (
+                  <div className={`card-media-wrapper ${isVideo ? 'has-video' : ''}`}>
+                    {isVideo ? (
+                      <video
+                        src={project.image}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="metadata"
+                        className="card-media-img card-media-video"
+                      />
+                    ) : (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="card-media-img"
+                      />
+                    )}
+                    
+                    {/* Floating Tags Pills */}
+                    <div className="card-floating-tags">
+                      {project.tags.map((tag, tIdx) => (
+                        <span key={tIdx} className="tag-pill">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
 
-                {/* Corner Hover Indicator Icon */}
-                <div className="card-hover-arrow">
-                  <span>↗</span>
-                </div>
-              </div>
+                    {/* Corner Hover Indicator Icon */}
+                    <div className="card-hover-arrow">
+                      <span>↗</span>
+                    </div>
+                  </div>
+                );
+              })()}
 
               {/* Bottom Metadata */}
               <div className="card-info-row">

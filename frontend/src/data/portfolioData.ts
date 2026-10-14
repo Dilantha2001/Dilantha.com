@@ -284,7 +284,8 @@ export const PORTFOLIO_INFO: Portfolio = {
         "Cloudinary CDN integration for optimized song cover and audio asset delivery",
       ],
       tags: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Cloudinary", "REST API"],
-      image: "./neon.png",
+      image: musicVideo,
+      video: musicVideo,
       href: "#",
       links: [
         {
@@ -404,7 +405,7 @@ export const PORTFOLIO_INFO: Portfolio = {
         "Modular component system for frictionless feature scalability",
       ],
       tags: ["React", "JavaScript", "Tailwind CSS", "GSAP", "Vite", "Netlify"],
-      image: "./smokio.jpg",
+      image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80",
       href: "https://wondrous-zuccutto-2cd2ce.netlify.app/",
       links: [
         {
@@ -538,13 +539,13 @@ export const tagColors: TagColors = {
 
 // ---------- TECHNOLOGIES SECTION DATA ----------
 export const TECH_STACK = [
-  { name: "Next.js", iconName: "SiNextdotjs", color: "#FFFFFF", font: "font-sans font-bold text-[1.45rem] tracking-tight" },
-  { name: "React", iconName: "SiReact", color: "#61DAFB", font: "font-sans font-normal text-[1.45rem] tracking-tight" },
-  { name: "Spring Boot", iconName: "SiSpringboot", color: "#6DB33F", font: "font-sans font-semibold text-[1.45rem] tracking-tight" },
-  { name: "Node.js", iconName: "SiNodedotjs", color: "#5FA04E", font: "font-sans font-bold text-[1.45rem] tracking-tight" },
-  { name: "TypeScript", iconName: "SiTypescript", color: "#3178C6", font: "font-sans font-normal text-[1.45rem] tracking-tight" },
-  { name: "Express.js", iconName: "SiExpress", color: "#FFFFFF", font: "font-sans font-normal text-[1.45rem] tracking-tight" },
-  { name: "Tailwind CSS", iconName: "SiTailwindcss", color: "#38BDF8", font: "font-sans font-medium text-[1.45rem] tracking-tight" },
-  { name: "MongoDB", iconName: "SiMongodb", color: "#47A248", font: "font-sans font-semibold text-[1.45rem] tracking-tight" },
+  { name: "Next.js", iconName: "SiNextdotjs", color: "#FFFFFF", font: "font-sans font-bold tracking-tight" },
+  { name: "React", iconName: "SiReact", color: "#61DAFB", font: "font-sans font-normal tracking-tight" },
+  { name: "Spring Boot", iconName: "SiSpringboot", color: "#6DB33F", font: "font-sans font-semibold tracking-tight" },
+  { name: "Node.js", iconName: "SiNodedotjs", color: "#5FA04E", font: "font-sans font-bold tracking-tight" },
+  { name: "TypeScript", iconName: "SiTypescript", color: "#3178C6", font: "font-sans font-normal tracking-tight" },
+  { name: "Express.js", iconName: "SiExpress", color: "#FFFFFF", font: "font-sans font-normal tracking-tight" },
+  { name: "Tailwind CSS", iconName: "SiTailwindcss", color: "#38BDF8", font: "font-sans font-medium tracking-tight" },
+  { name: "MongoDB", iconName: "SiMongodb", color: "#47A248", font: "font-sans font-semibold tracking-tight" },
 ];
 

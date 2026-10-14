@@ -159,7 +159,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         {/* Media Showcase Banner */}
         <div className="project-modal-media-wrap">
           {/* Ambient Backdrop Blur */}
-          {project.image.endsWith('.mp4') ? (
+          {(project.image.includes('.mp4') || project.image.endsWith('.mp4')) ? (
             <video 
               src={project.image} 
               autoPlay 
@@ -183,7 +183,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <span>PROJECT {project.id}</span>
           </div>
 
-          {project.image.endsWith('.mp4') ? (
+          {(project.image.includes('.mp4') || project.image.endsWith('.mp4')) ? (
             <video 
               src={project.image} 
               autoPlay 

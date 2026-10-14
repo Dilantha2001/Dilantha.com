@@ -34,6 +34,9 @@ export interface ProjectItem {
   href?: string;
   liveUrl?: string;
   githubUrl?: string;
+  category?: string;
+  role?: string;
+  highlights?: string[];
   tags?: string[];
   featured?: boolean;
   date?: string;

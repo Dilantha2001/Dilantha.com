@@ -24,6 +24,7 @@ const projectImageMap: Record<string, string> = {
   'trust-post-logistics': postImg,
   'fullstack-ecommerce-platform': ecommerceImg,
   'sinhala-caption': sinhalaImg,
+  'smokio': 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80',
 };
 
 const fallbackImages = [
@@ -44,7 +45,7 @@ const projects: ProjectModalData[] = PORTFOLIO_INFO.projects.map((p, index) => (
   description: p.description || '',
   highlights: (p as any).highlights || [],
   tags: p.tags || [],
-  image: (p.id && projectImageMap[p.id]) ? projectImageMap[p.id] : fallbackImages[index % fallbackImages.length],
+  image: (p.id && projectImageMap[p.id]) ? projectImageMap[p.id] : (p.image || fallbackImages[index % fallbackImages.length]),
   links: p.links,
   date: p.date,
 }));
@@ -299,7 +300,7 @@ export default function Works() {
           {projects.map((project, i) => (
             <div 
               key={i} 
-              className="project-slide w-[82vw] sm:w-[62vw] md:w-[48vw] lg:w-[42vw] max-w-[620px] px-2.5 sm:px-4 shrink-0 flex flex-col justify-center h-full relative"
+              className="project-slide w-[82vw] sm:w-[62vw] md:w-[48vw] lg:w-[44vw] xl:w-[42vw] max-w-[620px] xl:max-w-[780px] 2xl:max-w-[920px] px-2.5 sm:px-4 shrink-0 flex flex-col justify-center h-full relative"
             >
               
               <div 
@@ -327,7 +328,7 @@ export default function Works() {
 
                   {/* Main Media Preview */}
                   <div className="w-full h-full flex items-center justify-center relative p-2 sm:p-3">
-                    {project.image.endsWith('.mp4') ? (
+                    {(project.image.includes('.mp4') || project.image.endsWith('.mp4')) ? (
                       <video 
                         src={project.image} 
                         autoPlay 
