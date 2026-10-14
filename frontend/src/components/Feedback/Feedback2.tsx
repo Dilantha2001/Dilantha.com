@@ -29,6 +29,7 @@ const feedbacks = [
     quote: "After the deployment the platform allowed us to get more than one thousand users in a month with a retention rate of more than 70%. The subscription distribution and set of rather unique features together with clear UX make our users stay with us for longer.",
     name: "Alex Perkins",
     role: "Managing Director, Real Estate Registry",
+    rating: 5.0,
     image: img1,
     avatar: avatar1
   },
@@ -38,6 +39,7 @@ const feedbacks = [
     quote: "I love working with Dilantha and his process. He is fun, nice, reliable, and able to work quickly—he finished in three months what should've taken nine. He views issues and difficult tasks as challenges, remaining constantly available and working all night to solve certain issues.",
     name: "Jordan Lee",
     role: "Founder, Digital Agency",
+    rating: 4.9,
     image: img2,
     avatar: avatar2
   },
@@ -47,6 +49,7 @@ const feedbacks = [
     quote: "We received a stable web platform allowing us to bring our business to new heights, provide high-quality services to our clients and make them confident in their retirement. Dilantha made his assumptions for improvement always based on the numbers and reports, without vague theories, which impressed our team.",
     name: "Taylor Öberg",
     role: "Business Development Officer, SaaS Co",
+    rating: 5.0,
     image: img3,
     avatar: avatar3
   },
@@ -56,6 +59,7 @@ const feedbacks = [
     quote: "He completely transformed our online presence. His attention to detail and creative vision brought our brand to life in ways we didn't think were possible. The animations, color schemes, and layout are absolutely world-class and perfectly aligned with our goals.",
     name: "Casey Jenkins",
     role: "Marketing Director, TechStart",
+    rating: 4.8,
     image: img4,
     avatar: avatar4
   },
@@ -65,6 +69,7 @@ const feedbacks = [
     quote: "From the very first meeting to the final hand-off, the communication was clear and highly professional. We always knew exactly where the project stood, and every single deadline was met ahead of schedule. A true pleasure to work with.",
     name: "Riley Chen",
     role: "CEO, Innovate Solutions",
+    rating: 5.0,
     image: img5,
     avatar: avatar5
   },
@@ -74,6 +79,7 @@ const feedbacks = [
     quote: "We had a really complicated backend integration that two previous developers couldn't figure out. Dilantha came in and not only solved it within a week, but also optimized the entire flow to make it run 3x faster.",
     name: "Morgan Rodriguez",
     role: "Product Manager, E-Commerce Pro",
+    rating: 4.9,
     image: img6,
     avatar: avatar6
   },
@@ -83,6 +89,7 @@ const feedbacks = [
     quote: "The new UI/UX design is so intuitive that our user engagement metrics shot up immediately after launch. Customers keep telling us how much easier it is to navigate the new platform compared to our old legacy system.",
     name: "Jamie Thompson",
     role: "Co-Founder, SaaS Cloud",
+    rating: 5.0,
     image: img7,
     avatar: avatar7
   },
@@ -92,6 +99,7 @@ const feedbacks = [
     quote: "I've never experienced a launch as smooth as this one. The code quality is exceptional, fully responsive across all devices, and we literally had zero bug reports in the first month of going live. Highly recommended!",
     name: "Avery Wu",
     role: "Operations Head, FinTech Plus",
+    rating: 4.9,
     image: img8,
     avatar: avatar8
   }
@@ -168,6 +176,20 @@ export default function Feedback2() {
         <p className="text-gray-400 text-xs sm:text-sm md:text-base font-normal max-w-xl mx-auto px-4">
           See for yourself what founders and product teams have to say about working together.
         </p>
+
+        {/* Dynamic Rating Summary Badge */}
+        <div className="inline-flex items-center gap-2 mt-4 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm text-xs text-gray-300">
+          <div className="flex items-center gap-0.5 text-[#FBBF24]">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} className="w-3.5 h-3.5 fill-[#FBBF24]" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+          </div>
+          <span className="font-semibold text-white">4.94 / 5.0</span>
+          <span className="text-gray-500">•</span>
+          <span className="text-gray-400">Verified Client Reviews</span>
+        </div>
       </div>
 
       {/* Infinite Horizontal Marquee Container */}
@@ -208,6 +230,54 @@ export default function Feedback2() {
   );
 }
 
+function StarRating({ rating }: { rating: number }) {
+  return (
+    <div className="flex items-center gap-1.5 mb-2.5 sm:mb-3">
+      <div className="flex items-center gap-1" aria-label={`Rating: ${rating} out of 5 stars`}>
+        {[1, 2, 3, 4, 5].map((starNum) => {
+          const fillPercent = Math.max(0, Math.min(100, Math.round((rating - (starNum - 1)) * 100)));
+
+          return (
+            <div key={starNum} className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0">
+              {/* Dim / empty background star */}
+              <svg 
+                className="w-full h-full text-white/20 fill-white/15" 
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+
+              {/* Gold filled foreground star with width clip */}
+              {fillPercent > 0 && (
+                <div 
+                  className="absolute top-0 left-0 h-full overflow-hidden" 
+                  style={{ width: `${fillPercent}%` }}
+                >
+                  <svg 
+                    className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FBBF24] fill-[#FBBF24] drop-shadow-[0_0_6px_rgba(251,191,36,0.4)] shrink-0" 
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <span className="text-[11px] sm:text-xs font-bold text-[#FBBF24] ml-0.5 tracking-wide">
+        {rating.toFixed(1)}
+      </span>
+      <span className="text-[10px] text-gray-500 font-medium ml-auto flex items-center gap-1">
+        <svg className="w-3 h-3 text-[#10B981]" fill="currentColor" viewBox="0 0 20 20">
+          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+        </svg>
+        Verified
+      </span>
+    </div>
+  );
+}
+
 function FeedbackCard({ item, index }: { item: typeof feedbacks[0], index: number }) {
   return (
     <div className="w-[280px] sm:w-[320px] md:w-[350px] lg:w-[380px] xl:w-[410px] flex-shrink-0 mx-2 sm:mx-2.5 md:mx-3 lg:mx-3.5 xl:mx-4 flex flex-col whitespace-normal bg-[#111216] border border-white/[0.12] rounded-xl lg:rounded-2xl p-4 sm:p-5 lg:p-6 xl:p-7 shadow-[0_16px_36px_rgba(0,0,0,0.7)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0052ff]/50 hover:shadow-[0_20px_45px_rgba(0,82,255,0.18)]">
@@ -233,19 +303,8 @@ function FeedbackCard({ item, index }: { item: typeof feedbacks[0], index: numbe
         </span>
       </div>
 
-      {/* Yellow / Gold 5-Star Rating Row */}
-      <div className="flex items-center gap-1 mb-2.5 sm:mb-3">
-        {[...Array(5)].map((_, sIdx) => (
-          <svg 
-            key={sIdx} 
-            className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FBBF24] fill-[#FBBF24] drop-shadow-[0_0_5px_rgba(251,191,36,0.35)]" 
-            viewBox="0 0 20 20"
-          >
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
-        ))}
-        <span className="text-[11px] sm:text-xs font-bold text-[#FBBF24] ml-1 tracking-wide">5.0</span>
-      </div>
+      {/* Realistic Dynamic Star Rating Row */}
+      <StarRating rating={item.rating} />
 
       {/* Title */}
       <h3 

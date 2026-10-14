@@ -24,7 +24,7 @@ const projectImageMap: Record<string, string> = {
   'trust-post-logistics': postImg,
   'fullstack-ecommerce-platform': ecommerceImg,
   'sinhala-caption': sinhalaImg,
-  'smokio': 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80',
+  'smokio': 'https://res.cloudinary.com/dymkikwdc/video/upload/f_auto,q_auto/v1791980287/1014_1_nnsvxf.mp4',
 };
 
 const fallbackImages = [

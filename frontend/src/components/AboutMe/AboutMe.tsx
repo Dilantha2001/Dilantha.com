@@ -69,39 +69,39 @@ export default function AboutMe() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: 'top 82%',
-        toggleActions: 'play none none reverse',
+        start: 'top 85%',
+        once: true,
       }
     });
 
     tl.fromTo(
       statementRef.current,
-      { opacity: 0, y: 35 },
-      { opacity: 1, y: 0, duration: 0.85, ease: 'power3.out' }
+      { opacity: 0, y: 22 },
+      { opacity: 1, y: 0, duration: 0.75, ease: 'power2.out' }
     )
     .fromTo(
       portraitRef.current,
-      { opacity: 0, y: 30, scale: 0.96 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: 'power3.out' },
-      '-=0.65'
+      { opacity: 0, y: 20, scale: 0.98 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power2.out' },
+      '-=0.55'
     )
     .fromTo(
       contentRef.current,
-      { opacity: 0, y: 25 },
-      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
-      '-=0.6'
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
+      '-=0.5'
     )
     .fromTo(
       bigTitleRef.current,
-      { opacity: 0, y: 25 },
-      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
-      '-=0.6'
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
+      '-=0.5'
     )
     .fromTo(
       '.meet-about-section .editorial-stat-item',
-      { opacity: 0, y: 20, scale: 0.98 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.65, stagger: 0.08, ease: 'power3.out' },
-      '-=0.5'
+      { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.6, stagger: 0.06, ease: 'power2.out' },
+      '-=0.4'
     );
 
     // Modern GSAP Number Counter Animations with ScrollTrigger on statsDeckRef
@@ -112,12 +112,12 @@ export default function AboutMe() {
       
       gsap.to(obj, {
         count: stat.target,
-        duration: 1.8,
+        duration: 1.6,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: statsDeckRef.current || containerRef.current,
-          start: 'top 85%',
-          toggleActions: 'restart none none reset',
+          start: 'top 90%',
+          once: true,
         },
         onUpdate: () => {
           if (stat.isDecimal) {

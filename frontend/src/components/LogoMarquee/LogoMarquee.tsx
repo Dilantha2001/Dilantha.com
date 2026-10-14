@@ -109,8 +109,13 @@ export default function LogoMarquee() {
           }
         }
         .animate-company-marquee {
-          animation: companyMarqueeAnimation 28s linear infinite;
+          animation: companyMarqueeAnimation 16s linear infinite;
           width: max-content;
+        }
+        @media (max-width: 768px) {
+          .animate-company-marquee {
+            animation-duration: 13s;
+          }
         }
       `}</style>
     </section>

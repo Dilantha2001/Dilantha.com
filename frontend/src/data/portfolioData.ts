@@ -1,5 +1,6 @@
 import type { Portfolio, TagColors } from "../types/portfolio";
-import musicVideo from '../assets/1003.mp4';
+
+const musicVideo = "https://res.cloudinary.com/dymkikwdc/video/upload/f_auto,q_auto/v1791980462/1003_1_cscbnx.mp4";
 
 export const PORTFOLIO_INFO: Portfolio = {
   meta: {
@@ -405,7 +406,8 @@ export const PORTFOLIO_INFO: Portfolio = {
         "Modular component system for frictionless feature scalability",
       ],
       tags: ["React", "JavaScript", "Tailwind CSS", "GSAP", "Vite", "Netlify"],
-      image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80",
+      image: "https://res.cloudinary.com/dymkikwdc/video/upload/f_auto,q_auto/v1791980287/1014_1_nnsvxf.mp4",
+      video: "https://res.cloudinary.com/dymkikwdc/video/upload/f_auto,q_auto/v1791980287/1014_1_nnsvxf.mp4",
       href: "https://wondrous-zuccutto-2cd2ce.netlify.app/",
       links: [
         {

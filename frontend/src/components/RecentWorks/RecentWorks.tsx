@@ -2,7 +2,6 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import musicAppVideo from '../../assets/1003.mp4';
 import './RecentWorks.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,7 +15,7 @@ const featuredProjects = [
     date: "@2026",
     tags: ["UI / UX DESIGN", "REACT · NODE"],
     isWide: true,
-    image: musicAppVideo,
+    image: "https://res.cloudinary.com/dymkikwdc/video/upload/f_auto,q_auto/v1791980462/1003_1_cscbnx.mp4",
     url: "https://github.com/Dilantha2001/MusicApplication",
   },
   {
@@ -46,7 +45,7 @@ const featuredProjects = [
     date: "@2025",
     tags: ["WEB DEVELOPMENT", "GSAP · THREE.JS"],
     isWide: true,
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80",
+    image: "https://res.cloudinary.com/dymkikwdc/video/upload/v1791985711/1014_4_s36zn6.mp4",
     url: "https://wondrous-zuccutto-2cd2ce.netlify.app/",
   },
   {
@@ -56,8 +55,8 @@ const featuredProjects = [
     date: "@2025",
     tags: ["TRAVEL & HOSPITALITY", "GSAP · REACT"],
     isWide: true,
-    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80",
-    url: "https://github.com/Dilantha2001/Traveling-Agency-Gsap",
+    image: "https://res.cloudinary.com/dymkikwdc/video/upload/v1791983355/1014_3_bdxhxj.mp4",
+    url: "https://ornate-monstera-997a7d.netlify.app/",
   },
   {
     id: "06",
