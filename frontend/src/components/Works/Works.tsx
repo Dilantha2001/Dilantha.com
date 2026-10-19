@@ -6,7 +6,6 @@ import { PORTFOLIO_INFO } from '../../data/portfolioData';
 import GlossyRedBall from './GlossyRedBall';
 import musicAppImg from '../../assets/projects/music aoo.jpg';
 import bookstoreImg from '../../assets/projects/bookstore.jpg';
-import weddingImg from '../../assets/projects/wedding.jpg';
 import aiDogImg from '../../assets/projects/aidog.jpg';
 import postImg from '../../assets/projects/post.jpg';
 import ecommerceImg from '../../assets/projects/ecommerce.jpg';
@@ -19,7 +18,7 @@ gsap.registerPlugin(ScrollTrigger);
 const projectImageMap: Record<string, string> = {
   'music-streaming-app': musicAppImg,
   'online-book-store': bookstoreImg,
-  'wedding-photography-platform': weddingImg,
+  'wedding-photography-platform': 'https://res.cloudinary.com/dymkikwdc/video/upload/v1792428533/1019_2_xjb2ul.mp4',
   'dog-behavior-ai': aiDogImg,
   'trust-post-logistics': postImg,
   'fullstack-ecommerce-platform': ecommerceImg,
@@ -165,7 +164,7 @@ export default function Works() {
           scrub: 0.8,
           end: () => `+=${getScrollDistance()}`,
           anticipatePin: 1,
-          refreshPriority: 1,
+          refreshPriority: 5,
           invalidateOnRefresh: true,
           pinSpacing: true,
           onUpdate: (self) => {

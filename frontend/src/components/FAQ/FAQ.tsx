@@ -50,6 +50,7 @@ export default function FAQ() {
             trigger: headerRef.current,
             start: 'top 85%',
             toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true,
           },
         }
       );
@@ -72,6 +73,7 @@ export default function FAQ() {
             trigger: containerRef.current,
             start: "top 80%",
             toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true,
           }
         }
       );

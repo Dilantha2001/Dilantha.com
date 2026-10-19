@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 
-import Hero2 from './components/Hero/Hero2';
+import HeroCover from './components/Hero/HeroCover';
 import StickyNavbar from './components/Common/StickyNavbar';
 import AboutMe from './components/AboutMe/AboutMe';
 import RecentWorks from './components/RecentWorks/RecentWorks';
@@ -24,8 +24,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const [isPreloaded, setIsPreloaded] = useState(false);
+  const [heroEntered, setHeroEntered] = useState(false);
 
   useEffect(() => {
+    // Force browser to always start at top on reload (prevents scroll jumps)
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -39,6 +46,7 @@ function App() {
 
     if (!isPreloaded) {
       lenis.stop();
+      lenis.scrollTo(0, { immediate: true });
     }
 
     lenis.on('scroll', ScrollTrigger.update);
@@ -58,21 +66,54 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (isPreloaded && (window as any).lenis) {
-      (window as any).lenis.start();
+    if (isPreloaded) {
+      if ((window as any).lenis) {
+        (window as any).lenis.start();
+      }
+
+      // Re-sort and recalculate all ScrollTriggers across all sections
+      const refreshScroll = () => {
+        ScrollTrigger.sort();
+        ScrollTrigger.refresh();
+      };
+
+      const rafId = requestAnimationFrame(refreshScroll);
+      const t1 = setTimeout(refreshScroll, 120);
+      const t2 = setTimeout(refreshScroll, 500);
+      const t3 = setTimeout(refreshScroll, 1200);
+
+      window.addEventListener('resize', refreshScroll);
+
+      return () => {
+        cancelAnimationFrame(rafId);
+        clearTimeout(t1);
+        clearTimeout(t2);
+        clearTimeout(t3);
+        window.removeEventListener('resize', refreshScroll);
+      };
     }
   }, [isPreloaded]);
 
   return (
     <div className="app-wrapper">
       {/* Signature Preloader */}
-      {!isPreloaded && <SignaturePreloader onComplete={() => setIsPreloaded(true)} />}
+      {!isPreloaded && (
+        <SignaturePreloader
+          onComplete={() => {
+            setIsPreloaded(true);
+            setHeroEntered(true);
+          }}
+        />
+      )}
 
       {/* Persistent Floating Navbar (Active from 2nd page / About section onwards) */}
       <StickyNavbar />
 
-      {/* 1st Section: Hero */}
-      <Hero2 />
+      {/* 1st Section: Cinematic Cover Hero (heroa.jpg) */}
+      <HeroCover isEntered={heroEntered} />
+
+      {/* 2nd Section: Next-Gen Digital Solution Interactive Showcase */}
+      {/* <Hero2 /> */}
 
       {/* 2nd Section: About Me with Editorial Counter Grid & Bottom Logo Marquee */}
       <AboutMe />

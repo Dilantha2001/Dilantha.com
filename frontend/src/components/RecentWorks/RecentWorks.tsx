@@ -6,7 +6,8 @@ import './RecentWorks.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Curated featured projects with layout proportions (wide = 60%, compact = 40%)
+// Curated featured projects (4 projects in uniform 2x2 grid)
+// All 4 projects feature smooth auto-playing showcase videos
 const featuredProjects = [
   {
     id: "01",
@@ -14,59 +15,35 @@ const featuredProjects = [
     subtitle: "Full-Stack Audio Platform & Aggregation Engine",
     date: "@2026",
     tags: ["UI / UX DESIGN", "REACT · NODE"],
-    isWide: true,
     image: "https://res.cloudinary.com/dymkikwdc/video/upload/f_auto,q_auto/v1791980462/1003_1_cscbnx.mp4",
     url: "https://github.com/Dilantha2001/MusicApplication",
   },
   {
     id: "02",
-    title: "AI Canine Emotion Monitor",
-    subtitle: "Multimodal Computer Vision & Audio AI",
-    date: "@2026",
-    tags: ["AI / RESEARCH", "PYTHON · YOLO"],
-    isWide: false,
-    image: "https://images.unsplash.com/photo-1534361960057-19889db98a1e?auto=format&fit=crop&w=800&q=80",
-    url: "https://github.com/Dilantha2001/dogsense-analytics",
-  },
-  {
-    id: "03",
-    title: "Trust Post Logistics Platform",
-    subtitle: "Real-Time Tracking & Nationwide Fleet System",
-    date: "@2025",
-    tags: ["FULL STACK", "POSTGRESQL"],
-    isWide: false,
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
-    url: "https://github.com/Dilantha2001/PostOffice",
-  },
-  {
-    id: "04",
     title: "Smokio Digital Experience",
     subtitle: "High-Performance Interactive Web Application",
     date: "@2025",
     tags: ["WEB DEVELOPMENT", "GSAP · THREE.JS"],
-    isWide: true,
     image: "https://res.cloudinary.com/dymkikwdc/video/upload/v1791985711/1014_4_s36zn6.mp4",
     url: "https://wondrous-zuccutto-2cd2ce.netlify.app/",
   },
   {
-    id: "05",
+    id: "03",
     title: "Pirl Travels Experience",
     subtitle: "Interactive Travel Platform with Fluid GSAP Animations",
     date: "@2025",
     tags: ["TRAVEL & HOSPITALITY", "GSAP · REACT"],
-    isWide: true,
     image: "https://res.cloudinary.com/dymkikwdc/video/upload/v1791983355/1014_3_bdxhxj.mp4",
     url: "https://ornate-monstera-997a7d.netlify.app/",
   },
   {
-    id: "06",
-    title: "Wedding Planning & Gallery Portal",
-    subtitle: "High-Resolution Gallery & Event Booking",
-    date: "@2024",
-    tags: ["UI / UX DESIGN", "REACT · MONGO"],
-    isWide: false,
-    image: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
-    url: "https://comfy-medovik-ee1f2a.netlify.app/",
+    id: "04",
+    title: "Wedding Photography & Planning Suite",
+    subtitle: "High-Resolution Gallery & Event Booking Platform",
+    date: "@2025",
+    tags: ["UI / UX DESIGN", "REACT · TAILWIND"],
+    image: "https://res.cloudinary.com/dymkikwdc/video/upload/v1792428533/1019_2_xjb2ul.mp4",
+    url: "https://my-project-pied-gamma-94.vercel.app/",
   },
 ];
 
@@ -92,6 +69,7 @@ export default function RecentWorks() {
             trigger: headerRef.current,
             start: 'top 85%',
             toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true,
           },
         }
       );
@@ -119,6 +97,7 @@ export default function RecentWorks() {
             trigger: card,
             start: 'top 88%',
             toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true,
           },
         }
       );
@@ -140,7 +119,7 @@ export default function RecentWorks() {
           </h2>
         </div>
 
-        {/* Asymmetric 2-Column Responsive Grid */}
+        {/* Uniform 2x2 Grid for All 4 Projects */}
         <div ref={gridRef} className="recent-works-grid">
           {featuredProjects.map((project) => (
             <a
@@ -148,7 +127,7 @@ export default function RecentWorks() {
               href={project.url}
               target="_blank"
               rel="noreferrer"
-              className={`recent-work-card ${project.isWide ? 'card-wide' : 'card-compact'}`}
+              className="recent-work-card"
             >
               {/* Media Container */}
               {(() => {

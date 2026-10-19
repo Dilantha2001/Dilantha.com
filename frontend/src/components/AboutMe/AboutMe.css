@@ -14,9 +14,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow: hidden;
+  overflow: visible;
   z-index: 50;
-  /* border-radius removed */
   box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.4);
 }
 
@@ -81,39 +80,67 @@
 
 .meet-about-section .meet-about-container {
   position: relative;
-  z-index: 10;
+  z-index: 30;
   display: grid;
-  grid-template-columns: clamp(380px, 32vw, 500px) 1fr;
-  gap: 56px;
-  align-items: start;
+  grid-template-columns: clamp(320px, 31vw, 440px) 1fr;
+  gap: clamp(40px, 4.5vw, 72px);
+  align-items: stretch;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* Left Column: Titles on Top + Small Rectangle Video on Bottom */
+.meet-about-section .meet-about-left-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 36px;
   width: 100%;
 }
 
-/* Left Column: Portrait */
-.meet-about-section .meet-about-portrait-wrapper {
-  width: 100%;
-  will-change: transform, opacity;
+.meet-about-section .meet-about-left-top {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.meet-about-section .meet-about-portrait-card {
+.meet-about-section .meet-about-video-wrapper {
+  width: 100%;
+  max-width: 100%;
+  margin-top: auto;
+  padding-top: 16px;
+  position: relative;
+  z-index: 40;
+}
+
+.meet-about-section .meet-about-video-card {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1.32;
-  border-radius: 14px;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
   overflow: hidden;
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.18);
-  box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.15);
-  transition: box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.5s ease;
+  border: none;
+  outline: none;
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.12);
+  transform-origin: center center;
+  will-change: transform, border-radius;
   cursor: pointer;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  will-change: transform;
 }
 
-.meet-about-section .meet-about-portrait-card:hover {
-  border-color: rgba(0, 82, 255, 0.4);
-  box-shadow: 0 35px 85px -10px rgba(0, 82, 255, 0.2);
+.meet-about-section .meet-about-video-card:hover {
+  border: none;
+  box-shadow: 0 20px 45px -8px rgba(0, 82, 255, 0.22);
+}
+
+.meet-about-section .meet-about-video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border: none;
+  outline: none;
 }
 
 .meet-about-section .meet-about-portrait-img {
@@ -165,27 +192,47 @@
   z-index: 10;
   width: 100%;
   margin-bottom: 0;
-  padding-bottom: 28px;
+  padding-bottom: 32px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   will-change: transform, opacity;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
-.meet-about-section .meet-about-statement-title {
+.meet-about-section .meet-about-statement-title,
+.meet-about-section .meet-about-statement-para {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(2.2rem, 3.8vw, 4.4rem);
-  font-weight: 800;
-  line-height: 1.06;
-  letter-spacing: -0.04em;
-  color: #111111;
+  font-size: clamp(1.2rem, 1.75vw, 1.95rem);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  color: #111116;
   margin: 0;
   text-transform: none;
 }
 
 .meet-about-section .statement-highlight-blue {
   color: #0052ff;
-  font-weight: 800;
+  font-weight: 500;
   display: inline-block;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.015em;
+}
+
+.meet-about-section .statement-word {
+  display: inline-block;
+  opacity: 0;
+  will-change: opacity, transform, filter;
+}
+
+.meet-about-section .statement-word-blue {
+  color: #0052ff;
+  font-weight: 500;
+}
+
+.meet-about-section .statement-word-dark {
+  color: #111116;
+  font-weight: 400;
 }
 
 /* 2. Sub-Columns Grid (Underneath Headline) */
@@ -852,7 +899,7 @@
   width: calc(100% + 128px);
   margin: 64px -64px -80px -64px;
   position: relative;
-  z-index: 10;
+  z-index: 5;
 }
 
 @media (max-width: 1080px) {

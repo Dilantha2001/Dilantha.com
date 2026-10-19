@@ -128,6 +128,7 @@ export default function Feedback2() {
             trigger: headerRef.current,
             start: 'top 85%',
             toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true,
           },
         }
       );
@@ -148,6 +149,7 @@ export default function Feedback2() {
             trigger: marqueeRef.current,
             start: 'top 90%',
             toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true,
           },
         }
       );

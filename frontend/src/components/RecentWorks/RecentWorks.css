@@ -80,13 +80,13 @@
 }
 
 /* =========================================================================
-   ASYMMETRIC 2-COLUMN GRID (60% / 40% PROPORTIONS)
+   UNIFORM 2-COLUMN GRID (EQUAL 2x2 GRID FOR ALL 4 PROJECTS)
    ========================================================================= */
 
 .recent-works-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px 32px;
   width: 100%;
 }
 
@@ -94,6 +94,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -103,46 +104,20 @@
   backface-visibility: hidden;
 }
 
-/* 60% Width Card */
-.recent-work-card.card-wide {
-  flex: 1 1 calc(58% - 16px);
-  min-width: 320px;
-}
-
-/* 40% Width Card */
-.recent-work-card.card-compact {
-  flex: 1 1 calc(42% - 16px);
-  min-width: 300px;
-}
-
-/* Card Media Container */
+/* Card Media Container - Uniform 16:9 for all 4 project cards */
 .card-media-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   border-radius: 18px;
   overflow: hidden;
-  background-color: #111216;
+  background-color: #0d0e14;
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.8);
   transition: border-color 0.4s ease, box-shadow 0.4s ease;
   transform: translateZ(0);
   backface-visibility: hidden;
   cursor: none;
-}
-
-/* Widescreen 16:9 ratio for video cards so screen recordings fit without cropping */
-.card-media-wrapper.has-video {
-  aspect-ratio: 16 / 9;
-  background-color: #06070a;
-}
-
-.recent-work-card.card-compact .card-media-wrapper {
-  aspect-ratio: 4 / 3;
-}
-
-.recent-work-card.card-compact .card-media-wrapper.has-video {
-  aspect-ratio: 16 / 9;
 }
 
 .recent-work-card:hover .card-media-wrapper {
@@ -328,23 +303,14 @@ video.card-media-img {
    RESPONSIVENESS
    ========================================================================= */
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .recent-works-section {
     padding: 60px 28px 80px;
   }
 
-  .recent-work-card.card-wide,
-  .recent-work-card.card-compact {
-    flex: 1 1 100%;
-  }
-
-  .recent-work-card.card-compact .card-media-wrapper {
-    aspect-ratio: 16 / 10;
-  }
-
-  .card-media-wrapper.has-video,
-  .recent-work-card.card-compact .card-media-wrapper.has-video {
-    aspect-ratio: 16 / 9;
+  .recent-works-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 }
 

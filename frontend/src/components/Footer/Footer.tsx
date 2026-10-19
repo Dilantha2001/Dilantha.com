@@ -22,6 +22,7 @@ export default function Footer() {
         trigger: footerRef.current,
         start: 'top 85%',
         toggleActions: 'play none none reverse',
+        invalidateOnRefresh: true,
       }
     });
 
@@ -55,6 +56,7 @@ export default function Footer() {
             trigger: footerRef.current,
             start: 'top 95%',
             toggleActions: 'play none none none',
+            invalidateOnRefresh: true,
           },
         }
       );

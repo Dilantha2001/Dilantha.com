@@ -482,12 +482,13 @@ export const PORTFOLIO_INFO: Portfolio = {
         "Bespoke luxury aesthetic with subtle typography and smooth parallax accents",
       ],
       tags: ["React", "Node.js", "MongoDB", "Tailwind CSS", "UI/UX Design", "Showcase"],
-      image: "./slide1.png",
-      href: "#",
+      image: "https://res.cloudinary.com/dymkikwdc/video/upload/v1792428533/1019_2_xjb2ul.mp4",
+      video: "https://res.cloudinary.com/dymkikwdc/video/upload/v1792428533/1019_2_xjb2ul.mp4",
+      href: "https://my-project-pied-gamma-94.vercel.app/",
       links: [
         {
           label: "Live Demo",
-          url: "https://comfy-medovik-ee1f2a.netlify.app/",
+          url: "https://my-project-pied-gamma-94.vercel.app/",
           icon: "SiGooglechrome",
         },
       ],

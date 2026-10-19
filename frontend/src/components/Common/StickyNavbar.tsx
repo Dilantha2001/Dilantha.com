@@ -52,11 +52,12 @@ export default function StickyNavbar() {
       });
     });
 
-    // 2. Desktop (> 768px): Hide in Hero, Show on scroll UP, Hide on scroll DOWN
+    // 2. Desktop (> 768px): Visible at top of page, Hide on scroll DOWN, Show on scroll UP
     mm.add('(min-width: 769px)', () => {
-      gsap.set(navRef.current, { y: -100, opacity: 0, pointerEvents: 'none' });
+      let isShown = true;
 
-      let isShown = false;
+      // Initially visible at top of page
+      gsap.set(navRef.current, { y: 0, opacity: 1, pointerEvents: 'auto' });
 
       const showNavbar = () => {
         if (isShown) return;
@@ -89,12 +90,11 @@ export default function StickyNavbar() {
         start: 0,
         end: 'max',
         onUpdate: (self) => {
-          const threshold = window.innerHeight * 0.75;
           const currentScroll = self.scroll();
 
-          // Above 2nd page (inside Hero) -> Always hide on desktop
-          if (currentScroll < threshold) {
-            hideNavbar();
+          // At top of page (Hero section) -> Always show navbar
+          if (currentScroll <= 60) {
+            showNavbar();
             return;
           }
 

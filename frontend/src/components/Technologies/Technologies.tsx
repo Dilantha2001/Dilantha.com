@@ -41,6 +41,7 @@ export default function Technologies() {
             trigger: leftColRef.current,
             start: 'top 85%',
             toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true,
           },
         }
       );
@@ -69,6 +70,7 @@ export default function Technologies() {
             trigger: rightColRef.current,
             start: 'top 85%',
             toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true,
           },
         }
       );

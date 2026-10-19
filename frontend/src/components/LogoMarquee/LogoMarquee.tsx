@@ -67,7 +67,7 @@ export default function LogoMarquee() {
   ];
 
   return (
-    <section className="w-full bg-white py-10 md:py-12 border-b border-black/[0.08] relative overflow-hidden select-none z-20">
+    <section className="w-full bg-white py-10 md:py-12 border-b border-black/[0.08] relative overflow-hidden select-none z-0">
       {/* Infinite Horizontal Company Logo Marquee */}
       <div className="relative w-full flex overflow-x-hidden group">
         

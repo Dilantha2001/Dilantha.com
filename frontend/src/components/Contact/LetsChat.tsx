@@ -26,6 +26,7 @@ export default function LetsChat() {
         trigger: sectionRef.current,
         start: 'top 80%',
         toggleActions: 'play none none reverse',
+        invalidateOnRefresh: true,
       }
     });
 

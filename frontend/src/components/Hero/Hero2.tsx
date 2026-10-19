@@ -312,7 +312,7 @@ const Hero2 = () => {
   };
 
   return (
-    <div ref={containerRef} className="hero2-scroll-container">
+    <div ref={containerRef} id="hero-showcase" className="hero2-scroll-container">
       <section ref={heroRef} className="hero2-wrapper">
         {/* Flowing 2D Strand Image */}
         <div className="hero2-wave-wrap" id="wave">

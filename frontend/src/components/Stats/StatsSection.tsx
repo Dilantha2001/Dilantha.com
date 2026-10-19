@@ -34,6 +34,7 @@ export default function StatsSection() {
             trigger: statsRowRef.current,
             start: 'top 85%',
             toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true,
           },
         }
       );
@@ -54,6 +55,7 @@ export default function StatsSection() {
             trigger: graphRef.current,
             start: 'top 85%',
             toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true,
           },
         }
       );
@@ -95,6 +97,9 @@ export default function StatsSection() {
           )
           .replace(/<rect[^>]*class="[^"]*\bu\b[^"]*"[^>]*\/?>/gi, '');
         setSvgContent(blueThemedSvg);
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 120);
       })
       .catch((err) => {
         console.error('Failed to load GitHub activity SVG', err);

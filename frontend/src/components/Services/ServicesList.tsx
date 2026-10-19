@@ -68,6 +68,7 @@ export default function ServicesList() {
             trigger: header,
             start: 'top 85%',
             toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true,
           },
         }
       );
@@ -90,6 +91,7 @@ export default function ServicesList() {
             trigger: row,
             start: 'top 88%',
             toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true,
           },
         }
       );
